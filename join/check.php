@@ -1,3 +1,7 @@
+<?php
+session_start();
+var_dump($_SESSION['form']);
+?>
 
 
 
@@ -13,8 +17,10 @@
 <body>
 <?php
 $db = new mysqli('localhost:8889', 'root', 'root', 'recipenpj');
-$db->query
-    
-    
+
+
+?>
+
+
 </body>
 </html>

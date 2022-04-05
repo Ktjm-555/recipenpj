@@ -1,8 +1,17 @@
 
 <?php
-$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+session_start();
+$form = [
+    // 'name' =>''
+    // 'email' =>''
+    // 'password' =>''
+];
+
+
+$form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+
+$form['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+$form['password'] = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
 $db = new mysqli('localhost:8889', 'root', 'root', 'recipenpj');
 
@@ -16,7 +25,9 @@ VALUES
 
 $res = $db->query($sql);
 if ($res){
-    echo '登録できました';
+    $_SESSION['form'] = $form;
+    header('Location: check.php');
+    exit();
 }else{
     echo 'できていませんよ！何かがおかしいよ！';
 }
