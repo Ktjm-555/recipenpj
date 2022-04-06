@@ -10,47 +10,68 @@ $form = [
 ];
 $error = [];
 
+echo 'ddd';
+// echo $_SERVER['REQUEST_METHOD'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
- 
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+  echo 'ccc';
+
   $form['recipename'] = filter_input(INPUT_POST, 'recipename', FILTER_SANITIZE_STRING);
-  if ($form['recipename'] === ''){
+  if ($form['recipename'] == ''){
     $error['recipename'] = 'blank';
   }
   
   $form['foodstuffs'] = filter_input(INPUT_POST, 'foodstuffs', FILTER_SANITIZE_STRING);
-  if ($form['foodstuffs'] === ''){
+  if ($form['foodstuffs'] == ''){
     $error['foodstuffs'] = 'blank';
   }
 
   $form['recipe'] = filter_input(INPUT_POST, 'recipe', FILTER_SANITIZE_STRING);
-  if ($form['recipe'] === ''){
+  if ($form['recipe'] == ''){
     $error['recipe'] = 'blank';
   }
+  // var_dump($_FILES['image']['name']);
   
   // がそうのチェック
-  $image = $_FILES['image'];
-  
-  if ($image['name'] !== '' && $image['error'] === 0){
-    $type = mime_content_type($image['tmp_name']);
-    if ($type !== 'image/png' && $type !== 'image/jpeg'){
-      $error['image'] = 'type';
-    }
-  } 
+  $image = array();
+  if ($_FILES['image']['name'] != ''){
+    echo 'bbb';
 
+    $image = $_FILES['image'];
+  } else {
+    echo 'aaa';
+    $error['image'] = 'blank';
+  }
+  // var_dump($error);
+  if(!empty($image)){
+    // 画像があるとき からじゃないから
+    if($image['error']){
+      // エラーがあるとき　type
+      $type = mime_content_type($image['tmp_name']);
+      if ($type !== 'image/png' && $type !== 'image/jpeg'){
+        $error['image'] = 'type';
+      }
+    }
+  }
+  // if ($_FILES['image']['name'] !== '' && $image['error'] === 0){
+  //   $type = mime_content_type($image['tmp_name']);
+  //   if ($type !== 'image/png' && $type !== 'image/jpeg'){
+  //     $error['image'] = 'type';
+  //   }
+  // } 
+var_dump($error);
     if (empty($error)){
       $_SESSION['form']  = $form;
       // 画像のアップロード
-      if ($image['image'] !== ''){
+      if (isset($image['image'])){
         $filename = date('YmdHis') . '_' . $image['name'];
+    
         if (!move_uploaded_file($image['tmp_name'], '../recipe_picture/' . $filename)){
           die('ファイルのアップロードに失敗しました');
+        } else {
+          $_SESSION['form']['image'] = $filename;
         }
-        $_SESSION['form']['image'] = $filename;
-      } else {
-        $_SESSION['form']['image'] = '';
-
-      }
+      } 
       
       header('Location: check.php');
       exit();
@@ -85,13 +106,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
   <p class="toukou">完成写真</P>
   <input type="file" name="image" size="35" value=""/>
-  <?php if (isset($error['image']) && $error['image'] === 'type'): ?>
+  <?php if (isset($error['image']) && $error['image'] == 'type'): ?>
   <p class="error">写真は「.png」または「.jpg」の画像を指定してください。</p>
   <?php endif; ?>
+  <?php if (isset($error['image']) && $error['image'] == 'blank'): ?>
+  <p class="error">写真を投稿してください。</p>
+  <?php endif; ?>
+
 
   <p class="toukou">材料</P>
   <textarea name="foodstuffs" cols="50" rows="5"><?php echo h($form['foodstuffs']); ?></textarea>
-  <?php if (isset($error['foodstuffs']) && $error['foodstuffs'] === 'blank'): ?>
+  <?php if (isset($error['foodstuffs']) && $error['foodstuffs'] == 'blank'): ?>
   <p class="error">材料を入力してください。</p>
   <?php endif; ?>
 

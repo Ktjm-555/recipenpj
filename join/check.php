@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <dd>【表示はしないので、ご安心ください】</dd>
     </dl>
 
- <br><button type="submit">登録する</button> 
+ <div><button type="submit">登録する</button> </div>
 </form>
 
 

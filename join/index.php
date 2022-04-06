@@ -60,16 +60,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         <?php if (isset($error['name']) && $error['name'] === 'blank'): ?>
             <p class="error">*ニックネームを入力してくださいね。</p>
         <?php endif; ?>
+
         <p class="input">メールアドレス</p>
         <input type="text" name="email" size="35" maxlength="255" value="<?php echo h($form['email']); ?>"/>
         <?php if (isset($error['email']) && $error['email'] === 'blank'): ?>
             <p class="error">*メールアドレスを入力してくださいね。</p>
         <?php endif; ?>
+
         <p class="input">パスワード</p>
         <input type="password" name="password" size="10" maxlength="20" value="<?php echo h($form['password']); ?>"/>
         <?php if (isset($error['password']) && $error['password'] === 'blank'): ?>
         <p class="error">*パスワードを入力してくださいね。</p>
         <?php endif; ?>
+        
         <?php if (isset($error['password']) && $error['password'] === 'length'): ?>
         <p class="error">*パスワードは4文字以上で入力してくださいね。</p>
         <?php endif; ?>
