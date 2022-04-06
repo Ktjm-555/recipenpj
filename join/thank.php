@@ -7,6 +7,6 @@
     <title>登録完了画面</title>
 </head>
 <body>
-    
+    登録完了！！
 </body>
 </html>

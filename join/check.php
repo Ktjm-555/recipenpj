@@ -1,8 +1,39 @@
 <?php
-session_start();
-var_dump($_SESSION['form']);
-?>
 
+session_start();
+require('../library.php');
+
+if (isset($_SESSION['form'])){
+    $form = $_SESSION['form'];
+} else {
+ header('Location: index.php');
+ exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+   $db = new mysqli('localhost:8889', 'root', 'root', 'recipenpj'); 
+   if (!$db){
+       die($db->error);
+   }
+   $password = password_hash($form['password'], PASSWORD_DEFAULT);
+   $sql = "INSERT INTO 
+   member
+    (name, email, password) 
+    VALUES 
+    ('".$form['name']."','".$form['email']."','".$password."')";
+    $res = $db->query($sql);
+    // パスワードを表示しないようにするためには？
+    if ($res){
+    unset($_SESSION['form']);
+    header('Location: thank.php');
+    exit();
+    }else{
+    echo 'できていませんよ！何かがおかしいよ！'; 
+
+    }
+
+}
+?>
 
 
 
@@ -15,11 +46,19 @@ var_dump($_SESSION['form']);
     <title>登録確認画面</title>
 </head>
 <body>
-<?php
-$db = new mysqli('localhost:8889', 'root', 'root', 'recipenpj');
 
+<form action="" method="post">
+    <dl>
+    <dt>ニックネーム</dt>
+    <dd><?php echo h($form['name']); ?></dd>
+    <dt>アドレス</dt>
+    <dd><?php echo h($form['email']); ?></dd>
+    <dt>パスワード</dt>
+    <dd>【表示はしないので、ご安心ください】</dd>
+    </dl>
 
-?>
+ <br><button type="submit">登録する</button> 
+</form>
 
 
 </body>
