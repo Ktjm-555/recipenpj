@@ -55,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <div><h1>会員登録</h1></div>
     <form action="" method="post">
         <p class="input">ニックネーム</p>
+        
         <input type="text" name="name" size="35" maxlength="255" value="<?php echo h($form['name']); ?>"/>
         <?php if (isset($error['name']) && $error['name'] === 'blank'): ?>
             <p class="error">*ニックネームを入力してくださいね。</p>
