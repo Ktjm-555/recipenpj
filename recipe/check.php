@@ -2,6 +2,8 @@
 session_start();
 require('../library.php');
 
+// var_dump($_SESSION['image']);
+
 if (isset($_SESSION['form'])){
     $form = $_SESSION['form'];
 } else {

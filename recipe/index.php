@@ -10,12 +10,11 @@ $form = [
 ];
 $error = [];
 
-echo 'ddd';
+// echo 'ddd';
 // echo $_SERVER['REQUEST_METHOD'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-  echo 'ccc';
-
+  // echo 'ccc';
   $form['recipename'] = filter_input(INPUT_POST, 'recipename', FILTER_SANITIZE_STRING);
   if ($form['recipename'] == ''){
     $error['recipename'] = 'blank';
@@ -35,43 +34,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   // がそうのチェック
   $image = array();
   if ($_FILES['image']['name'] != ''){
-    echo 'bbb';
+    // echo 'bbb';
 
     $image = $_FILES['image'];
   } else {
-    echo 'aaa';
+    // echo 'aaa';
     $error['image'] = 'blank';
   }
   // var_dump($error);
   if(!empty($image)){
-    // 画像があるとき からじゃないから
-    if($image['error']){
-      // エラーがあるとき　type
+    // 画像があるとき からじゃないから　
+    if($image['error'] == 0){
+      // エラーがなければtype
       $type = mime_content_type($image['tmp_name']);
+      
       if ($type !== 'image/png' && $type !== 'image/jpeg'){
         $error['image'] = 'type';
       }
     }
   }
-  // if ($_FILES['image']['name'] !== '' && $image['error'] === 0){
-  //   $type = mime_content_type($image['tmp_name']);
-  //   if ($type !== 'image/png' && $type !== 'image/jpeg'){
-  //     $error['image'] = 'type';
-  //   }
-  // } 
-var_dump($error);
+// var_dump($error);
     if (empty($error)){
+      // エラーがからの時
       $_SESSION['form']  = $form;
+
       // 画像のアップロード
-      if (isset($image['image'])){
+      // if (isset($image['image'])){
         $filename = date('YmdHis') . '_' . $image['name'];
-    
+       
+        // move_uploaded_file($image['tmp_name'], '../recipe_picture/' . $filename);
+        // $_SESSION['form']['image'] = $filename;
+        // 62,63を追加
         if (!move_uploaded_file($image['tmp_name'], '../recipe_picture/' . $filename)){
           die('ファイルのアップロードに失敗しました');
         } else {
           $_SESSION['form']['image'] = $filename;
         }
-      } 
+      // } 
       
       header('Location: check.php');
       exit();
