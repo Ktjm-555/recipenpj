@@ -125,7 +125,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   <p class="error">作り方を入力してください。</p>
   <?php endif; ?>
 
-  <br><button type="submit">入力内容を確認する</button> 
+  <div><button type="submit">入力内容を確認する</button></div>
+
 </form>
 
 </body>
