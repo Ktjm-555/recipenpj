@@ -16,11 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if (!$db){
         die($db->error);   
     }
-    $sql = "INSERT INTO
-    recipen
-    (recipename, foodstuffs, recipe, image)
-    VALUES
-    ('".$form['recipename']."','".$form['foodstuffs']."','".$form['recipe']."','".$form['image']."')";
+    
 
     $res = $db->query($sql);
     if ($res){

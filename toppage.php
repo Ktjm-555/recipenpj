@@ -1,3 +1,13 @@
+<?php
+require('library.php');
+$db = dbconnect();
+
+$recipen = $db->query('select * from recipen order by id desc');
+if (!$recipen){
+    die($db->error);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,12 +17,30 @@
     <title>トップページ</title>
 </head>
 <body>
-    投稿一覧
-    <div>マイページへ</div>
-    <div>投稿ページへ</div>
-    <div class="re-top">
-        <a href="recipe/index.php" class="re-topA">投稿する</a>
+    <div><h1>トップページ</h1></div>
+    <div><h2>投稿一覧</h2></div>
+    <hr>
+    <?php while ($recipes = $recipen->fetch_assoc()): ?>
+        <!-- 好きな変数とテーブル名？ -->
+        <div>
+        <a href="recipe.php"><?php echo h($recipes['recipename']); ?></a>
+        <time><?php echo h($recipes['created']); ?></time><br>
+        <!-- $recipes（上で設定した変数）['recipenname'（カラム名）] -->
+        <a href="recipe.php"><img src="recipe_picture/<?php echo h($recipes['image']); ?>"></a><br>
+        </div>
+        <hr>
+    <?php endwhile; ?>
+    
+    <div>
+        <a href="#">マイページへ</a>
     </div>
-    ログインボタン
+    <div>
+        <a href="#">ログイン</a>
+    </div>
+    <div class="re-top">
+        <a href="recipe/index.php">投稿する</a>
+    </div>
+    
+
 </body>
 </html>
