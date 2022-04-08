@@ -15,14 +15,14 @@
     if (!$stmt){
         die($db->error);
     }
-    $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+    $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT );
     $stmt->bind_param('i', $id);
     $stmt->execute();
 
     $stmt->bind_result($id, $recipename, $image, $foodstuffs, $recipe, $created, $modifind);
     $stmt->fetch();
-    ?>
 
+    ?>
     <div><?php echo h($recipename); ?></div>
     <time><?php echo h($created); ?></time><br>
     <img src="recipe_picture/<?php echo h($image); ?>">
@@ -30,6 +30,13 @@
     <div><?php echo h($foodstuffs); ?></div>
     <div>作り方</div>
     <div><?php echo h($recipe); ?></div>
+
+
+    
+  
+  
+    
+
     
 </body>
 </html>
