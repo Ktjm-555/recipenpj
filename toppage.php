@@ -23,7 +23,7 @@ if (!$recipen){
     <?php while ($recipes = $recipen->fetch_assoc()): ?>
         <!-- 好きな変数とテーブル名？ -->
         <div>
-        <a href="recipe.php"><?php echo h($recipes['recipename']); ?></a>
+        <a href="recipe.php?id=<?php echo $recipes['id']; ?>"><?php echo h($recipes['recipename']); ?></a>
         <time><?php echo h($recipes['created']); ?></time><br>
         <!-- $recipes（上で設定した変数）['recipenname'（カラム名）] -->
         <a href="recipe.php"><img src="recipe_picture/<?php echo h($recipes['image']); ?>"></a><br>
