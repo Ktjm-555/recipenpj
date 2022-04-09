@@ -27,16 +27,19 @@
     <time><?php echo h($created); ?></time><br>
     <img src="recipe_picture/<?php echo h($image); ?>">
     <div>材料</div>
-    <div><?php echo h($foodstuffs); ?></div>
+    <div><pre><?php echo h($foodstuffs); ?></pre></div>
     <div>作り方</div>
-    <div><?php echo h($recipe); ?></div>
+    <div><pre><?php echo h($recipe); ?><pre></div>
+
+    <p><a href="update.php?id=<?php echo $id; ?>">編集する</a>|
+    <a href="delete.php">削除する</a>|
+    <a href="toppage.php">トップページに戻る</a></p>
+
 
 
     
   
   
-    
-
     
 </body>
 </html>

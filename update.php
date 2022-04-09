@@ -33,7 +33,8 @@ if (!$res){
 
 <body>
 <div><h1>レシピ編集</h1></div>
-<form action="" method="post" enctype="multipart/form-data">
+<form action="update_do.php" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="<?php echo $id; ?>">
   <div><p class="toukou">レシピ名</P>
   <div><input type="text" name="recipename" size="35" maxlength="255" 
   value="<?php echo h($recipename); ?>"/></div>
