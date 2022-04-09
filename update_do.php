@@ -20,7 +20,6 @@ $recipe = filter_input(INPUT_POST, 'recipe', FILTER_SANITIZE_STRING);
 $stmt= $db->prepare($sql);
 $stmt->bind_param("sssi", $recipename, $foodstuffs, $recipe, $id);
 
-
 $success = $stmt->execute();
 
 if (!$success){
@@ -33,12 +32,5 @@ header('Location: recipe.php?id=' . $id);
 ?>
 
 
-<!-- $stmt = $db->prepare('update  set recipename=?, foodstuffs=?, recipe=?, where id=?');
-
-
-$stmt->bind_param('sssi', $recipename, $foodstuffs, $recipe, $id);
-$success = $stmt->execute(); -->
-
-データを更新しました。
 
 

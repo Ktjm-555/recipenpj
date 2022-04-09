@@ -31,9 +31,11 @@
     <div>作り方</div>
     <div><pre><?php echo h($recipe); ?><pre></div>
 
-    <p><a href="update.php?id=<?php echo $id; ?>">編集する</a>|
-    <a href="delete.php">削除する</a>|
-    <a href="toppage.php">トップページに戻る</a></p>
+    <p>
+        <a href="update.php?id=<?php echo $id; ?>">編集する</a>|
+        <a href="delete.php?id=<?php echo $id; ?>">削除する</a>|
+        <a href="toppage.php">TOPページに戻る</a>
+    </p>
 
 
 
