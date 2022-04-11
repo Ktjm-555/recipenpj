@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,5 +9,6 @@
 </head>
 <body>
     登録完了！！
+    <a href="../toppage.php">TOPページへ</a>
 </body>
 </html>

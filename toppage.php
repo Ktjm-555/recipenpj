@@ -1,5 +1,15 @@
 <?php
+
+session_start();
+
 require('library.php');
+
+if (isset($_SESSION['id']) && isset($_SESSION['name'])){
+    $name = $_SESSION['name'];
+} else {
+    header('Location: login.php');
+    exit();
+}
 $db = dbconnect();
 
 // 最大ページを求める
@@ -33,9 +43,10 @@ $result = $stmt->execute();
 <body>
     <div><h1>トップページ</h1></div>
     <div><h2>投稿一覧</h2></div>
+    <div><?php echo h($name); ?>さん、ようこそ！</div>
     <hr>
     
-    <?php $stmt->bind_result($id, $recipename, $image, $foodstuffs, $recipe, $created, $modifind); ?>
+    <?php $stmt->bind_result($id, $recipename, $member_id, $image, $foodstuffs, $recipe, $created, $modifind); ?>
     <?php $count =0; ?>
     <?php while ($stmt->fetch()): ?>
 
@@ -70,7 +81,7 @@ $result = $stmt->execute();
         <a href="#">マイページへ</a>
     </div>
     <div>
-        <a href="#">ログイン</a>
+        <a href="logout.php">ログアウト</a>
     </div>
     <div class="re-top">
         <a href="recipe/index.php">投稿する</a>

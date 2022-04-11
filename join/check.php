@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     VALUES 
     ('".$form['name']."','".$form['email']."','".$password."')";
     $res = $db->query($sql);
-    // パスワードを表示しないようにするためには？
+
     if ($res){
     unset($_SESSION['form']);
     header('Location: thank.php');

@@ -18,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
     $sql = "INSERT INTO
     recipen
-    (recipename, foodstuffs, recipe, image)
+    (recipename, member_id, foodstuffs, recipe, image)
     VALUES
-    ('".$form['recipename']."','".$form['foodstuffs']."','".$form['recipe']."','".$form['image']."')";
+    ('".$form['recipename']."', '".$form['member_id']."','".$form['foodstuffs']."','".$form['recipe']."','".$form['image']."')";
 
-    
+
 
     $res = $db->query($sql);
     if ($res){

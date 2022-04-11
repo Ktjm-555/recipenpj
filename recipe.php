@@ -19,10 +19,11 @@
     $stmt->bind_param('i', $id);
     $stmt->execute();
 
-    $stmt->bind_result($id, $recipename, $image, $foodstuffs, $recipe, $created, $modifind);
+    $stmt->bind_result($id, $recipename, $member_id, $image, $foodstuffs, $recipe, $created, $modifind);
     $stmt->fetch();
 
     ?>
+    
     <div><?php echo h($recipename); ?></div>
     <time><?php echo h($created); ?></time><br>
     <img src="recipe_picture/<?php echo h($image); ?>">
@@ -31,16 +32,11 @@
     <div>作り方</div>
     <div><pre><?php echo h($recipe); ?><pre></div>
 
-    <p>
+    <div>
         <a href="update.php?id=<?php echo $id; ?>">編集する</a>|
         <a href="delete.php?id=<?php echo $id; ?>">削除する</a>|
         <a href="toppage.php">TOPページに戻る</a>
-    </p>
-
-
-
-    
-  
+    </div>
   
     
 </body>

@@ -7,6 +7,8 @@ $form = [
   'recipename' => '',
   'foodstuffs' => '',
   'recipe' => '',
+  'member_id'=>'',
+  //⏫増やしたところ
 ];
 $error = [];
 
@@ -29,6 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   if ($form['recipe'] == ''){
     $error['recipe'] = 'blank';
   }
+
+  $form['member_id'] = filter_input(INPUT_POST, 'member_id', FILTER_SANITIZE_STRING);
+  // INPUT_POST, 'id', FILTER_SANITIZE_STRINGにしたけどダメ。
+  // memberテーブルのidを持ってくる記述がいりそう。
+
   // var_dump($_FILES['image']['name']);
   
   // がそうのチェック
@@ -97,6 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <div><h1>レシピ投稿</h1></div>
 <form action="" method="post" enctype="multipart/form-data">
   <p class="toukou">レシピ名</P>
+
+  <input type="hidden" name="member_id" value="<?php echo $_SESSION['id']; ?>">
 
   <input type="text" name="recipename" size="35" maxlength="255" value="<?php echo h($form['recipename']); ?>"/>
   <?php if (isset($error['recipename']) && $error['recipename'] === 'blank'): ?>
