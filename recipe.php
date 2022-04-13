@@ -37,15 +37,16 @@
     <div><pre><?php echo h($recipe); ?><pre></div>
 
     <div>
-            <a href="toppage.php">TOPページに戻る</a>
+      <a href="toppage.php">TOPページに戻る</a>
     </div>
 
     <?php 
         $clear = '';
-        if (isset($_SESSION['id']) && isset($_SESSION['name'])){
+        if (isset($_SESSION['id']) && isset($_SESSION['name']) && $_SESSION['id'] == $member_id){
             $clear = 'clear'; 
-        }
+        }  
     ?>
+    
   <?php if ($clear == 'clear'): ?>
     <a href="update.php?id=<?php echo $id; ?>">編集する</a>|
     <a href="delete.php?id=<?php echo $id; ?>">削除する</a>|

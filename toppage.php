@@ -61,7 +61,6 @@ $result = $stmt->execute();
     <?php endif; ?>
     <hr>
 
-
     <?php $stmt->bind_result($id, $recipename, $member_id, $image, $foodstuffs, $recipe, $created, $modified, $name); ?>
     <?php $count =0; ?>
     <?php while ($stmt->fetch()): ?>
