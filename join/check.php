@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-// require('../library.php');
+require('../library.php');
 
 if (isset($_SESSION['form'])){
     $form = $_SESSION['form'];
@@ -11,7 +11,7 @@ if (isset($_SESSION['form'])){
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-   $db = new mysqli('localhost:8889', 'root', 'root', 'recipenpj'); 
+   $db = dbconnect();
    if (!$db){
        die($db->error);
    }
@@ -50,13 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 <form action="" method="post">
     <dl>
     <dt>ニックネーム</dt>
-    <dd><?php echo $form['name']; ?></dd>
+    <dd><?php echo h($form['name']); ?></dd>
     <dt>アドレス</dt>
-    <dd><?php echo $form['email']; ?></dd>
+    <dd><?php echo h($form['email']); ?></dd>
     <dt>パスワード</dt>
     <dd>【表示はしないので、ご安心ください】</dd>
     </dl>
-
+ <div><a href="index.php?action=rewrite">&laquo;&nbsp;書き直す</a>
  <div><button type="submit">登録する</button> </div>
 </form>
 

@@ -4,14 +4,17 @@ session_start();
 
 require('../library.php');
 
-$form = [
+if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['form'])){
+    $form = $_SESSION['form'];
+} else {
+    $form = [
      'name' =>'',
      'email' =>'',
      'password' =>''
-];
-
-$error = [];
-// フォームの内容をチェック
+    ];
+}
+  $error = [];
+ // フォームの内容をチェック
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
     if ($form['name'] === ''){
@@ -24,8 +27,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
          $error['email'] = 'blank';
     } else  if (!preg_match($pattern, $form['email'])){
         $error['email'] = 'failed';
-    
+    } else {
+        $db = dbconnect();
+        $stmt = $db->prepare('select count(*) from member where email=?');
+            if (!$stmt){
+                die($db->error);
+            }
+        $stmt->bind_param('s', $form['email']);
+        $success = $stmt->execute();
+            if (!$success){
+                die($db->error);
+            } 
+        $stmt->bind_result($cnt);
+        $stmt->fetch();
+        
+            if($cnt > 0){
+                $error['email'] = 'juhuku';
+            }
     }
+
+    
+    
 
     $form['password'] = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
     if ($form['password'] === ''){
@@ -73,6 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         <?php if (isset($error['email']) && $error['email'] == 'failed'): ?> 
             <p class="error">*メールアドレスを正しい形式で入力してくださいね。</p>
          <?php endif; ?>
+         <?php if (isset($error['email']) && $error['email'] == 'juhuku'): ?>
+            <p class="error">*指定されたメールアドレスは既に登録してあります。</p>
+        <?php endif; ?>
 
 
         <p class="input">パスワード</p>
@@ -84,7 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         <?php if (isset($error['password']) && $error['password'] == 'length'): ?>
         <p class="error">*パスワードは4文字以上で入力してくださいね。</p>
         <?php endif; ?>
-
 
         <br><button type="submit">入力内容を確認する</button> 
     </form>

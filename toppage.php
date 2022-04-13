@@ -1,17 +1,9 @@
 <?php
 require('library.php');
-// require('join/check.php');
 
 
 session_start();
 
-
-// if (isset($_SESSION['id']) && isset($_SESSION['name'])){
-//     $name = $_SESSION['name'];
-// } else {
-//     header('Location: login.php');
-//     exit();
-// }
 $db = dbconnect();
 
 // 最大ページを求める
@@ -45,14 +37,25 @@ $result = $stmt->execute();
 <body>
     <div><h1>トップページ</h1></div>
     <div><h2>投稿一覧</h2></div>
+    <?php 
+        $error = '';
+        if (isset($_SESSION['id']) && isset($_SESSION['name'])){
+            $name = $_SESSION['name'];
+            echo $name .'さん、ようこそ';
+        } else {
+            $error = 'blank';
+            echo 'ログインすれば、あなたもレシピを公開できます！';
+            echo '会員登録まだの方は会員登録をお願いします！';
+        }
+    ?>
     
+              
     <hr>
     
     <?php $stmt->bind_result($id, $recipename, $member_id, $image, $foodstuffs, $recipe, $created, $modifind); ?>
     <?php $count =0; ?>
     <?php while ($stmt->fetch()): ?>
 
-        <!-- 好きな変数とテーブル名？ -->
         <div>
         <a href="recipe.php?id=<?php echo $id; ?>"><?php echo h($recipename); ?></a>
         <time><?php echo h($created); ?></time><br>
@@ -82,12 +85,25 @@ $result = $stmt->execute();
     <div>
         <a href="#">マイページへ</a>
     </div>
+    <?php if (!$error == 'blank'): ?>
     <div>
         <a href="logout.php">ログアウト</a>
     </div>
+    <?php endif; ?>
+
     <div class="re-top">
         <a href="recipe/index.php">投稿する</a>
     </div>
+    <?php if ($error == 'blank'): ?>
+        <div>
+        <a href="login.php">ログイン</a>
+        </div>
+        <div>
+        <a href="join/index.php">会員登録する</a>
+        </div>
+    <?php endif; ?>
+
+
     
 
 </body>
