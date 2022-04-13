@@ -10,11 +10,13 @@ if (isset($_SESSION['form'])){
     exit();
 }
 
+
+ 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $db = new mysqli('localhost:8889', 'root', 'root', 'recipenpj'); 
     if (!$db){
-        die($db->error);   
+        die($db->error); 
     }
     $sql = "INSERT INTO
     recipen
@@ -22,11 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     VALUES
     ('".$form['recipename']."', '".$form['member_id']."','".$form['foodstuffs']."','".$form['recipe']."','".$form['image']."')";
 
-
-
     $res = $db->query($sql);
     if ($res){
-        unset($_SESSION['form']);
+        // unset($_SESSION['form']);
         header('Location: thank.php');
         exit();
         }else{

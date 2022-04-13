@@ -48,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $image = array();
   if ($_FILES['image']['name'] != ''){
     // echo 'bbb';
-
     $image = $_FILES['image'];
   } else {
     // echo 'aaa';

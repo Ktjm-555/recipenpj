@@ -1,17 +1,12 @@
 <?php
 require('library.php');
-
 session_start();
 $db = dbconnect();
-
 // 最大ページを求める
 $counts = $db->query('select count(*) as cnt from recipen');
 $count = $counts->fetch_assoc();
 $max_page = floor(($count['cnt']-1)/5+1);
-
-
-$stmt = $db->prepare('select r.id, r.recipename, r.member_id, r.image, r.foodstuffs, r.recipe, r.created,  
-r.modified, m.name from recipen r, member m where m.id=r.member_id order by id desc limit ?, 5');
+$stmt = $db->prepare('select * from recipen order by id desc limit ?, 5');
 if (!$stmt){
     die($db->error);
 }
@@ -20,9 +15,7 @@ $page = ($page ?: 1);
 $start = ($page - 1) * 5;
 $stmt->bind_param('i', $start);
 $result = $stmt->execute();
-
 ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -46,37 +39,16 @@ $result = $stmt->execute();
         }
     ?>
     
-    <?php if ($error == 'blank'): ?>
-        <div>
-        <a href="login.php">ログイン</a>
-        </div>
-        <div>
-        <a href="join/index.php">会員登録する</a>
-        </div>
-    <?php endif; ?>
-    <?php if (!$error == 'blank'): ?>
-        <div class="re-top">
-        <a href="recipe/index.php">投稿する</a>
-        </div>
-    <?php endif; ?>
+              
     <hr>
-
-
-    <?php $stmt->bind_result($id, $recipename, $member_id, $image, $foodstuffs, $recipe, $created, $modified, $name); ?>
+    
+    <?php $stmt->bind_result($id, $recipename, $member_id, $image, $foodstuffs, $recipe, $created, $modifind); ?>
     <?php $count =0; ?>
     <?php while ($stmt->fetch()): ?>
-  
-    
- 
-
- 
         <div>
-        <div><?php echo h($name) . 'さんのレシピん♪'; ?></div>
         <a href="recipe.php?id=<?php echo $id; ?>"><?php echo h($recipename); ?></a>
         <time><?php echo h($created); ?></time><br>
         <a href="recipe.php?id=<?php echo $id; ?>"><img src="recipe_picture/<?php echo h($image); ?>"></a>
-    <hr>
-
         <?php $count+=1; ?>
          </div>
         <?php endwhile; ?>
@@ -86,9 +58,7 @@ $result = $stmt->execute();
         <?php if($page < $max_page): ?>
             <a href="?page=<?php echo $page+1;?>"><?php echo $page+1;?>ページ目へ</a>
         <?php endif;?>
-
         
-
         <?php if ($count == 0): ?>
             <p>
                 表示するデータはありません。
@@ -96,18 +66,19 @@ $result = $stmt->execute();
         <?php endif; ?>
        
        
-
-        
-    <!-- <div>
+        <hr>
+    
+    <div>
         <a href="#">マイページへ</a>
-    </div> -->
+    </div>
     <?php if (!$error == 'blank'): ?>
     <div>
         <a href="logout.php">ログアウト</a>
     </div>
     <?php endif; ?>
-
-   
+    <div class="re-top">
+        <a href="recipe/index.php">投稿する</a>
+    </div>
     <?php if ($error == 'blank'): ?>
         <div>
         <a href="login.php">ログイン</a>
@@ -116,9 +87,6 @@ $result = $stmt->execute();
         <a href="join/index.php">会員登録する</a>
         </div>
     <?php endif; ?>
-
-
     
-
 </body>
 </html>

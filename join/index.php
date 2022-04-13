@@ -8,6 +8,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
     $form = $_SESSION['form'];
 } else {
     $form = [
+     'id'=>'',
      'name' =>'',
      'email' =>'',
      'password' =>''
@@ -16,6 +17,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
   $error = [];
  // フォームの内容をチェック
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $form['id'] = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+
     $form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
     if ($form['name'] === ''){
          $error['name'] = 'blank';
@@ -80,6 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 <body>
     <div><h1>会員登録</h1></div>
     <form action="" method="post">
+
+        <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
+
         <p class="input">ニックネーム</p>
         
         <input type="text" name="name" size="35" maxlength="255" value="<?php echo h($form['name']); ?>"/>

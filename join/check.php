@@ -24,7 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $res = $db->query($sql);
 
     if ($res){
-    unset($_SESSION['form']);
+        $_SESSION['id'] = $form['id'];
+        $_SESSION['name'] = $form['name'];
+        header('Location: toppage.php');
     header('Location: thank.php');
     exit();
     }else{

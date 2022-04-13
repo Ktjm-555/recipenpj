@@ -1,6 +1,15 @@
 
 <?php
-require('library.php');
+
+session_start();
+require('../library.php');
+
+if (isset($_SESSION['id']) && isset($_SESSION['name'])){
+    $name = $_SESSION['name'];
+} else {
+    header('Location: ../login.php');
+    exit();
+}
 $db = dbconnect();
 
 $stmt = $db->prepare('select * from recipen where id=?');
@@ -11,7 +20,7 @@ $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $stmt->bind_param('i', $id);
 $stmt->execute();
 
-$stmt->bind_result($id, $recipename, $image, $foodstuffs, $recipe, $created, $modifind); 
+$stmt->bind_result($id, $recipename, $member_id, $image, $foodstuffs, $recipe, $created, $modifind); 
 $res = $stmt->fetch();
 if (!$res){
   die('正しい値を指定してください。');
