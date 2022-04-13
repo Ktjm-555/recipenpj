@@ -1,15 +1,17 @@
 <?php
+require('library.php');
+// require('join/check.php');
+
 
 session_start();
 
-require('library.php');
 
-if (isset($_SESSION['id']) && isset($_SESSION['name'])){
-    $name = $_SESSION['name'];
-} else {
-    header('Location: login.php');
-    exit();
-}
+// if (isset($_SESSION['id']) && isset($_SESSION['name'])){
+//     $name = $_SESSION['name'];
+// } else {
+//     header('Location: login.php');
+//     exit();
+// }
 $db = dbconnect();
 
 // 最大ページを求める
@@ -43,7 +45,7 @@ $result = $stmt->execute();
 <body>
     <div><h1>トップページ</h1></div>
     <div><h2>投稿一覧</h2></div>
-    <div><?php echo h($name); ?>さん、ようこそ！</div>
+    
     <hr>
     
     <?php $stmt->bind_result($id, $recipename, $member_id, $image, $foodstuffs, $recipe, $created, $modifind); ?>

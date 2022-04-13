@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['name'])){
+    $name = $_SESSION['name'];
+} else {
+    header('Location: ../login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,8 +19,8 @@
 </head>
 <body>
     <div>投稿完了しました</div>
-    <div class="re-top">
-        <a href="../toppage.php" class="re-topA">TOPページへ</a>
+    <div class="gopage">
+        <a href="../toppage.php" class="gopage">TOPページへ</a>
     </div>
 </body>
 </html>

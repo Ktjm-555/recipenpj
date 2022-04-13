@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require('../library.php');
+// require('../library.php');
 
 if (isset($_SESSION['form'])){
     $form = $_SESSION['form'];
@@ -50,9 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 <form action="" method="post">
     <dl>
     <dt>ニックネーム</dt>
-    <dd><?php echo h($form['name']); ?></dd>
+    <dd><?php echo $form['name']; ?></dd>
     <dt>アドレス</dt>
-    <dd><?php echo h($form['email']); ?></dd>
+    <dd><?php echo $form['email']; ?></dd>
     <dt>パスワード</dt>
     <dd>【表示はしないので、ご安心ください】</dd>
     </dl>

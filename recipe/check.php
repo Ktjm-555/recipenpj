@@ -6,7 +6,7 @@ require('../library.php');
 if (isset($_SESSION['form'])){
     $form = $_SESSION['form'];
 } else {
-    header('Location: index.php');
+    header('Location: ../login.php');
     exit();
 }
 

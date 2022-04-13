@@ -57,7 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     </div>
     <div>
         <p>会員登録まだの方はこちらへ</p>
-        <a href="join/index.php">会員登録へ</a>
+    </div>
+    <div class="gopage">
+        <a href="join/index.php" class="gopage">会員登録へ</a>
     </div>
 
     <form action="" method="post">

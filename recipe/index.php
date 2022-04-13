@@ -2,13 +2,20 @@
 session_start();
 require('../library.php');
 
+if (isset($_SESSION['id']) && isset($_SESSION['name'])){
+    $name = $_SESSION['name'];
+} else {
+    header('Location: ../login.php');
+    exit();
+}
+
 // フォームが送信されたとき
 $form = [
   'recipename' => '',
   'foodstuffs' => '',
   'recipe' => '',
   'member_id'=>'',
-  //⏫増やしたところ
+  
 ];
 $error = [];
 
@@ -33,8 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   }
 
   $form['member_id'] = filter_input(INPUT_POST, 'member_id', FILTER_SANITIZE_STRING);
-  // INPUT_POST, 'id', FILTER_SANITIZE_STRINGにしたけどダメ。
-  // memberテーブルのidを持ってくる記述がいりそう。
+ 
 
   // var_dump($_FILES['image']['name']);
   
@@ -78,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
           $_SESSION['form']['image'] = $filename;
         }
       // } 
-      
+     
       header('Location: check.php');
       exit();
   }
@@ -102,6 +108,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 <body>
 <div><h1>レシピ投稿</h1></div>
+
+<div><?php echo h($name); ?>さん、今日もレシピ投稿ありがとうございます！</div>
+
+
 <form action="" method="post" enctype="multipart/form-data">
   <p class="toukou">レシピ名</P>
 
@@ -135,6 +145,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   <?php endif; ?>
 
   <div><button type="submit">入力内容を確認する</button></div>
+
+  <div class="gopage">
+        <a href="../toppage.php" class="gopage">TOPページに戻る</a>
+    </div>
 
 </form>
 
