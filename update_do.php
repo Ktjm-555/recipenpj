@@ -11,9 +11,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['name'])){
 }
 
 $db = dbconnect();
+$member_id = filter_input(INPUT_POST, 'member_id', FILTER_SANITIZE_NUMBER_INT);
 
 $clear = '';
-if (isset($_SESSION['id']) && isset($_SESSION['name']) && $_SESSION['id'] == $member_id){
+if ($id == $member_id){
     $clear = 'clear'; 
 }  
 
@@ -27,7 +28,6 @@ WHERE
 id=?";
 
 $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-// $member_id = filter_input(INPUT_POST, 'member_id', FILTER_SANITIZE_NUMBER_INT);
 $recipename = filter_input(INPUT_POST, 'recipename', FILTER_SANITIZE_STRING);
 $foodstuffs = filter_input(INPUT_POST, 'foodstuffs', FILTER_SANITIZE_STRING);
 $recipe = filter_input(INPUT_POST, 'recipe', FILTER_SANITIZE_STRING);

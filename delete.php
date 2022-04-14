@@ -2,7 +2,7 @@
 session_start();
 require('library.php');
 
-if (isset($_SESSION['id']) && isset($_SESSION['name'])){
+if (isset($_SESSION['id']) && isset($_SESSION['name']) && isset($_SESSION['id'])){
     $id = $_SESSION['id'];
     $name = $_SESSION['name'];
 } else {
@@ -12,22 +12,23 @@ if (isset($_SESSION['id']) && isset($_SESSION['name'])){
 
 $db = dbconnect();
 
-$clear = '';
-if (isset($_SESSION['id']) && isset($_SESSION['name']) && $_SESSION['id'] == $member_id){
-    $clear = 'clear'; 
-}  
 
-if ($clear == 'clear'){
 $sql = "DELETE 
 FROM 
 recipen 
 WHERE  
 id=? and member_id=? ";
 
-$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$recipen_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
 
-$stmt= $db->prepare($sql);
+$stmt = $db->prepare($sql);
+
+if (!$stmt){
+    echo '消せないよ！';
+    exit();
+}
+
 $stmt->bind_param("ii", $recipen_id, $id);
 
 $success = $stmt->execute();
@@ -37,9 +38,7 @@ if (!$success){
     die($db->error);
 }
 
-header('Location: deletegoal.php');
+header('Location: toppage.php');
 
-} else {
-    header('Location: nondelete.php');
-}
+
 ?>

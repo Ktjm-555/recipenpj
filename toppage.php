@@ -59,22 +59,22 @@ $result = $stmt->execute();
         <a href="recipe/index.php">投稿する</a>
         </div>
     <?php endif; ?>
-    <hr>
-
+<hr>
     <?php $stmt->bind_result($id, $recipename, $member_id, $image, $foodstuffs, $recipe, $created, $modified, $name); ?>
     <?php $count =0; ?>
     <?php while ($stmt->fetch()): ?>
   
+    <?php if (!$error == 'blank'): ?>
+        <a href="myrecipen.php?id=<?php echo $member_id; ?>">マイページへ</a>
+    <?php endif; ?>
     
- 
-
  
         <div>
         <div><?php echo h($name) . 'さんのレシピん♪'; ?></div>
         <a href="recipe.php?id=<?php echo $id; ?>"><?php echo h($recipename); ?></a>
         <time><?php echo h($created); ?></time><br>
         <a href="recipe.php?id=<?php echo $id; ?>"><img src="recipe_picture/<?php echo h($image); ?>"></a>
-    <hr>
+<hr>
 
         <?php $count+=1; ?>
          </div>
