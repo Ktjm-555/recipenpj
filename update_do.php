@@ -1,7 +1,10 @@
 <?php 
 session_start();
-require('library.php');
 
+// var_dump($_SESSION['form']['image']);
+// exit();
+
+require('library.php');
 if (isset($_SESSION['id']) && isset($_SESSION['name'])){
     $id = $_SESSION['id'];
     $name = $_SESSION['name'];
@@ -10,47 +13,56 @@ if (isset($_SESSION['id']) && isset($_SESSION['name'])){
     exit();
 }
 
-$db = dbconnect();
-$member_id = filter_input(INPUT_POST, 'member_id', FILTER_SANITIZE_NUMBER_INT);
 
+
+if (isset($_SESSION['form'])){
+    $form = $_SESSION['form'];
+} else {
+    header('Location: login.php');
+    exit();
+}
+
+
+$db = dbconnect();
+// $id = filter_input(INPUT_POST, 'member_id', FILTER_SANITIZE_NUMBER_INT);
 $clear = '';
-if ($id == $member_id){
+if ($id == $_SESSION['id']){
     $clear = 'clear'; 
 }  
+// ここおかしい　削除のボタンのやつ
 
 if ($clear == 'clear'){
+    $sql = "UPDATE 
+    recipen 
+    SET 
+    recipename=?, foodstuffs=?, recipe=?, image=?
+    WHERE 
+    id=?";
 
-$sql = "UPDATE 
-recipen 
-SET 
-recipename=?, foodstuffs=?, recipe=?
-WHERE 
-id=?";
+    // $recipename = '';
+    
+    $id = $form['id'];
+    $recipename = $form['recipename'];
+    $foodstuffs = $form['foodstuffs'];
+    $recipe = $form['recipe'];
+    $image = $form['image'];
 
-$id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-$recipename = filter_input(INPUT_POST, 'recipename', FILTER_SANITIZE_STRING);
-$foodstuffs = filter_input(INPUT_POST, 'foodstuffs', FILTER_SANITIZE_STRING);
-$recipe = filter_input(INPUT_POST, 'recipe', FILTER_SANITIZE_STRING);
+    // var_dump($image);
+    // exit();
 
-$stmt= $db->prepare($sql);
-$stmt->bind_param("sssi", $recipename, $foodstuffs, $recipe, $id);
+    $stmt= $db->prepare($sql);
 
-$success = $stmt->execute();
-
-
-if (!$success){
-    echo '何か問題あったよ！';
-    die($db->error);
-}
-
-header('Location: recipe.php?id=' . $id);
-
-} else {
-    header('Location: toppage.php');
-}
+    $stmt->bind_param("ssssi", $recipename, $foodstuffs, $recipe, $image, $id);
+    $success = $stmt->execute();
+        if (!$success){
+            echo '何か問題あったよ！';
+            die($db->error);
+        }
+        // echo $recipename;
+    // exit();
+        header('Location: recipe.php?id=' . $id);
+} 
+    // echo $id;
+    // exit();
 
 ?>
-
-
-
-

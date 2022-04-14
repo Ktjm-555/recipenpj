@@ -7,7 +7,12 @@
     <title>Document</title>
 </head>
 <body>
+    <?php if ($_GET['result'] == 1) { ?>
     <div>削除しました！</div>
+    <?php } else { ?>
+    <div>他の人は削除できないよ！</div>
+    <?php } ?>
+
     <div><a href="toppage.php">TOPページに戻る</a></div>
 </body>
 </html>

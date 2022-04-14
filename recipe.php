@@ -49,7 +49,17 @@
     
   <?php if ($clear == 'clear'): ?>
     <a href="update.php?id=<?php echo $id; ?>">編集する</a>|
+
     <a href="delete.php?id=<?php echo $id; ?>">削除する</a>|
+
+    <form action="delete.php" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="recipe_member_id" value="<?php echo $member_id; ?>">
+      <input type="hidden" name="recipe_id" value="<?php echo $id; ?>">
+      <button type="submit"> 
+          削除する
+        </button>
+      </form>
+
   <?php endif; ?>
 </body>
 </html>
