@@ -36,7 +36,7 @@ $result = $stmt->execute();
     <div><h2>投稿一覧</h2></div>
     <?php 
         $error = '';
-        if (isset($_SESSION['id']) && isset($_SESSION['name'])){
+        if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
             $name = $_SESSION['name'];
             echo $name .'さん、ようこそ';
         } else {
@@ -60,20 +60,21 @@ $result = $stmt->execute();
         </div>
     <?php endif; ?>
 <hr>
-    <?php $stmt->bind_result($id, $recipename, $member_id, $image, $foodstuffs, $recipe, $created, $modified, $name); ?>
+    <?php $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified, $name); ?>
     <?php $count =0; ?>
     <?php while ($stmt->fetch()): ?>
   
     <?php if (!$error == 'blank'): ?>
-        <a href="myrecipen.php?id=<?php echo $member_id; ?>">マイページへ</a>
+        <a href="myrecipen.php?id=<?php echo $recipe_member_id; ?>">マイページへ</a>
     <?php endif; ?>
+    
     
  
         <div>
         <div><?php echo h($name) . 'さんのレシピん♪'; ?></div>
-        <a href="recipe.php?id=<?php echo $id; ?>"><?php echo h($recipename); ?></a>
+        <a href="recipe.php?id=<?php echo $recipe_id; ?>"><?php echo h($recipename); ?></a>
         <time><?php echo h($created); ?></time><br>
-        <a href="recipe.php?id=<?php echo $id; ?>"><img src="recipe_picture/<?php echo h($image); ?>"></a>
+        <a href="recipe.php?id=<?php echo $recipe_id; ?>"><img src="recipe_picture/<?php echo h($image); ?>"></a>
 <hr>
 
         <?php $count+=1; ?>

@@ -2,8 +2,9 @@
 session_start();
 require('../library.php');
 
-if (isset($_SESSION['id']) && isset($_SESSION['name'])){
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
     $name = $_SESSION['name'];
+    $user_id = $_SESSION['user_id'];
 } else {
     header('Location: ../login.php');
     exit();
@@ -14,7 +15,7 @@ $form = [
   'recipename' => '',
   'foodstuffs' => '',
   'recipe' => '',
-  'member_id'=>'',
+  'recipe_member_id'=>'',
   
 ];
 $error = [];
@@ -39,11 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $error['recipe'] = 'blank';
   }
 
-  $form['member_id'] = filter_input(INPUT_POST, 'member_id', FILTER_SANITIZE_STRING);
+  $form['recipe_member_id'] = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_STRING);
  
 
   // var_dump($_FILES['image']['name']);
-  
+  // exit();
+
   // がそうのチェック
   $image = array();
   if ($_FILES['image']['name'] != ''){
@@ -84,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
       // } 
      
+      // var_dump($user_id);
       header('Location: check.php');
       exit();
   }
@@ -114,7 +117,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <form action="" method="post" enctype="multipart/form-data">
   <p class="toukou">レシピ名</P>
 
-  <input type="hidden" name="member_id" value="<?php echo $_SESSION['id']; ?>">
+  <input type="hidden" name="recipe_member_id" value="<?php echo $user_id; ?>">
+  
 
   <input type="text" name="recipename" size="35" maxlength="255" value="<?php echo h($form['recipename']); ?>"/>
   <?php if (isset($error['recipename']) && $error['recipename'] === 'blank'): ?>

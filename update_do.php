@@ -5,8 +5,8 @@ session_start();
 // exit();
 
 require('library.php');
-if (isset($_SESSION['id']) && isset($_SESSION['name'])){
-    $id = $_SESSION['id'];
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
+    $user_id = $_SESSION['user_id'];
     $name = $_SESSION['name'];
 } else {
     header('Location: login.php');
@@ -25,13 +25,11 @@ if (isset($_SESSION['form'])){
 
 $db = dbconnect();
 // $id = filter_input(INPUT_POST, 'member_id', FILTER_SANITIZE_NUMBER_INT);
-$clear = '';
-if ($id == $_SESSION['id']){
-    $clear = 'clear'; 
-}  
-// ここおかしい　削除のボタンのやつ
 
-if ($clear == 'clear'){
+
+
+
+
     $sql = "UPDATE 
     recipen 
     SET 
@@ -61,7 +59,7 @@ if ($clear == 'clear'){
         // echo $recipename;
     // exit();
         header('Location: recipe.php?id=' . $id);
-} 
+ 
     // echo $id;
     // exit();
 

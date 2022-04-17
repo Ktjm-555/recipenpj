@@ -2,7 +2,7 @@
 
 session_start();
 
-if (isset($_SESSION['id']) && isset($_SESSION['name'])){
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
     $name = $_SESSION['name'];
 } else {
     header('Location: ../login.php');

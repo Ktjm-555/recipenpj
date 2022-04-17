@@ -8,6 +8,7 @@ $password = '';
 require('library.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
     if ($email == '' || $password == ''){
@@ -24,14 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         if (!$success){
             die($db->error);
         }
-        $stmt->bind_result($id, $name, $hash);
+        $stmt->bind_result($user_id, $name, $hash);
         $stmt->fetch();
         
         if (password_verify($password, $hash)){
             // ログイン成功
             session_regenerate_id();
             // idを再形成
-            $_SESSION['id'] = $id;
+            $_SESSION['user_id'] = $user_id;
             $_SESSION['name'] = $name;
             header('Location: toppage.php');
         } else {

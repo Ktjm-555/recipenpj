@@ -8,7 +8,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
     $form = $_SESSION['form'];
 } else {
     $form = [
-     'id'=>'',
+     'user_id'=>'',
      'name' =>'',
      'email' =>'',
      'password' =>''
@@ -16,8 +16,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
 }
   $error = [];
  // フォームの内容をチェック
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $form['id'] = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 
     $form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
     if ($form['name'] === ''){
@@ -25,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
 
     $form['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    // var_dump($form['email']);
+    // exit();
     $pattern = "/^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/";
     if ($form['email'] === ''){
          $error['email'] = 'blank';
@@ -61,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     if (empty($error)){
         $_SESSION['form'] = $form;
+        // var_dump($_SESSION['form']);
         header('Location: check.php');
         exit();
     }
@@ -83,8 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 <body>
     <div><h1>会員登録</h1></div>
     <form action="" method="post">
-
-        <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
+        
+        <input type="hidden" name="action" value="submit">
 
         <p class="input">ニックネーム</p>
         

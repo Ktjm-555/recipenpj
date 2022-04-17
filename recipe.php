@@ -18,11 +18,13 @@
     die($db->error);
     }
    
-    $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT );
-    $stmt->bind_param('i', $id);
+    // URLパラメータで指定されたidを受け取る。
+    $recipe_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT );
+    // なぜここ’id’なんだ？カラム名が入る？　hiddenだとnameだけど。。。
+    $stmt->bind_param('i', $recipe_id);
     $stmt->execute();
 
-    $stmt->bind_result($id, $recipename, $member_id, $image, $foodstuffs, $recipe, $created, $modified, $name);
+    $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified, $name);
     $stmt->fetch();
 
     ?>
@@ -42,7 +44,7 @@
 
     <?php 
         $clear = '';
-        if (isset($_SESSION['id']) && isset($_SESSION['name']) && $_SESSION['id'] == $member_id){
+        if (isset($_SESSION['user_id']) && isset($_SESSION['name']) && $_SESSION['user_id'] == $recipe_member_id){
             $clear = 'clear'; 
         }  
     ?>
@@ -51,10 +53,17 @@
     <a href="update.php?id=<?php echo $id; ?>">編集する</a>|
 
     <a href="delete.php?id=<?php echo $id; ?>">削除する</a>|
+    <form action="update.php" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="type" value="2">
+      <input type="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
+      <input type="hidden" name="recipe_id" value="<?php echo $recipe_id; ?>">
+      <button type="submit"> 
+          編集する
+        </button>
 
     <form action="delete.php" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="recipe_member_id" value="<?php echo $member_id; ?>">
-      <input type="hidden" name="recipe_id" value="<?php echo $id; ?>">
+      <input type="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
+      <input type="hidden" name="recipe_id" value="<?php echo $recipe_id; ?>">
       <button type="submit"> 
           削除する
         </button>

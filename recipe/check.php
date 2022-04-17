@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     recipen
     (recipename, member_id, foodstuffs, recipe, image)
     VALUES
-    ('".$form['recipename']."', '".$form['member_id']."','".$form['foodstuffs']."','".$form['recipe']."','".$form['image']."')";
+    ('".$form['recipename']."', '".$form['recipe_member_id']."','".$form['foodstuffs']."','".$form['recipe']."','".$form['image']."')";
 
     $res = $db->query($sql);
     if ($res){
@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         exit();
         }else{
         echo 'できていませんよ！何かがおかしいよ！'; 
+        // var_dump($form['recipename']);
+        // exit();
     }
     
 
