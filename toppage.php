@@ -47,17 +47,25 @@ $result = $stmt->execute();
     ?>
     
     <?php if ($error == 'blank'): ?>
-        <div>
-        <a href="login.php">ログイン</a>
-        </div>
-        <div>
-        <a href="join/index.php">会員登録する</a>
-        </div>
+        <form action="login.php" method="post" >
+            <button type="submit"> 
+            ログイン
+            </button>
+        </form>
+        <form action="join/index.php" method="post" >
+            <button type="submit"> 
+            会員登録する
+            </button>
+        </form>
     <?php endif; ?>
     <?php if (!$error == 'blank'): ?>
-        <div class="re-top">
-        <a href="recipe/index.php">投稿する</a>
-        </div>
+        
+    <form action="recipe/index.php" method="post" >
+        <input type="hidden" name="type" value="2">
+        <button type="submit"> 
+        投稿する
+        </button>
+    </form>
     <?php endif; ?>
 <hr>
     <?php $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified, $name); ?>
@@ -65,7 +73,12 @@ $result = $stmt->execute();
     <?php while ($stmt->fetch()): ?>
   
     <?php if (!$error == 'blank'): ?>
-        <a href="myrecipen.php?id=<?php echo $recipe_member_id; ?>">マイページへ</a>
+        <form action="myrecipen.php" method="post" >
+        <input type="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
+            <button type="submit"> 
+            マイページ
+            </button>
+        </form>
     <?php endif; ?>
     
     
@@ -102,22 +115,26 @@ $result = $stmt->execute();
         <a href="#">マイページへ</a>
     </div> -->
     <?php if (!$error == 'blank'): ?>
-    <div>
-        <a href="logout.php">ログアウト</a>
-    </div>
+        <form action="logout.php" method="post" >
+            <button type="submit"> 
+            ログアウト
+            </button>
+        </form>
     <?php endif; ?>
 
    
     <?php if ($error == 'blank'): ?>
-        <div>
-        <a href="login.php">ログイン</a>
-        </div>
-        <div>
-        <a href="join/index.php">会員登録する</a>
-        </div>
+        <form action="login.php" method="post" >
+            <button type="submit"> 
+            ログイン
+            </button>
+        </form>
+        <form action="join/index.php" method="post" >
+            <button type="submit"> 
+            会員登録する
+            </button>
+        </form>
     <?php endif; ?>
-
-
     
 
 </body>

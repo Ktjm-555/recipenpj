@@ -9,6 +9,11 @@
 </head>
 <body>
     登録完了！！
-    <a href="../toppage.php">TOPページへ</a>
+    <form action="../toppage.php" method="post" >
+        <button type="submit"> 
+        TOPページへ
+        </button>
+    </form>
+    
 </body>
 </html>

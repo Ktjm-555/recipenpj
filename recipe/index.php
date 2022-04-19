@@ -23,7 +23,7 @@ $error = [];
 // echo 'ddd';
 // echo $_SERVER['REQUEST_METHOD'];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
   // echo 'ccc';
   $form['recipename'] = filter_input(INPUT_POST, 'recipename', FILTER_SANITIZE_STRING);
   if ($form['recipename'] == ''){
@@ -116,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 <form action="" method="post" enctype="multipart/form-data">
   <p class="toukou">レシピ名</P>
+  <input type="hidden" name="type" value="1">
 
   <input type="hidden" name="recipe_member_id" value="<?php echo $user_id; ?>">
   

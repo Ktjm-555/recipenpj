@@ -38,9 +38,12 @@
     <div>作り方</div>
     <div><pre><?php echo h($recipe); ?><pre></div>
 
-    <div>
-      <a href="toppage.php">TOPページに戻る</a>
-    </div>
+    <form action="toppage.php" method="post" >
+        <button type="submit"> 
+        TOPページに戻る
+        </button>
+    </form>
+    
 
     <?php 
         $clear = '';
@@ -50,9 +53,7 @@
     ?>
     
   <?php if ($clear == 'clear'): ?>
-    <a href="update.php?id=<?php echo $id; ?>">編集する</a>|
 
-    <a href="delete.php?id=<?php echo $id; ?>">削除する</a>|
     <form action="update.php" method="post" enctype="multipart/form-data">
       <input type="hidden" name="type" value="2">
       <input type="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">

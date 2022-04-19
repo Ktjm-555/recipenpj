@@ -19,8 +19,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
 </head>
 <body>
     <div>投稿完了しました</div>
-    <div class="gopage">
-        <a href="../toppage.php" class="gopage">TOPページへ</a>
-    </div>
+    <form action="../toppage.php" method="post" >
+        <button type="submit"> 
+        TOPページに戻る
+        </button>
+    </form>
 </body>
 </html>

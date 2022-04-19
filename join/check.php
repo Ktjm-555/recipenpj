@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     ('".$form['name']."','".$form['email']."','".$password."')";
     $res = $db->query($sql);
 
-    var_dump($form['email']);
-    exit();
+    // var_dump($form['email']);
+    // exit();
 
     $sql = "SELECT id
     from

@@ -59,9 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <div>
         <p>会員登録まだの方はこちらへ</p>
     </div>
-    <div class="gopage">
-        <a href="join/index.php" class="gopage">会員登録へ</a>
-    </div>
+    <form action="join/index.php" method="post" >
+            <button type="submit"> 
+            会員登録する
+            </button>
+    </form>
+    
+    
 
     <form action="" method="post">
         <dl>
@@ -85,6 +89,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         <div>
             <input type="submit" value="ログイン">
         </div>
+     </form>
+
+     <form action="toppage.php" method="post" >
+        <button type="submit"> 
+        TOPページに戻る
+        </button>
+    </form>
 
 </body>
 </html>

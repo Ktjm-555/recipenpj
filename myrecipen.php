@@ -12,10 +12,15 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
     echo 'あれ？';
     exit();
 }
-$counts = $db->query('select count(*) as cnt from recipen');
 
-$count = $counts->fetch_assoc();
-$max_page = floor(($count['cnt']-1)/5+1);
+$recipe_member_id = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_NUMBER_INT);
+// echo $recipe_member_id;
+// exit();
+// $counts = $db->prepare('select count (*) as cnt from recipen where member_id=?');
+// $counts->bind_param('i', $recipe_member_id);
+
+// $count = $counts->fetch_assoc();
+// $max_page = floor(($count['cnt']-1)/5+1);
 
 
 
@@ -48,9 +53,12 @@ $result = $stmt->execute();
     <div><?php $name .'さん、ようこそ'; ?></div>
     <?php } ?>
 
-    <div>
-      <a href="toppage.php">TOPページに戻る</a>
-    </div>
+    <form action="toppage.php" method="post" >
+        <button type="submit"> 
+        TOPページに戻る
+        </button>
+    </form>
+    
 
 <hr>
     <?php $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified); ?>
@@ -70,14 +78,14 @@ $result = $stmt->execute();
         <?php $count+=1; ?>
          </div>
         <?php endwhile; ?>
-        <?php if ($page > 1): ?>
+        <?php if ($page > 1){ ?>
             <a href="?page=<?php echo $page-1;?>"><?php echo $page-1;?>ページ目へ</a>|
-        <?php endif;?>
-        <?php if($page < $max_page && $page != 1): ?>
+        <?php } ?>
+        <?php if($page < $max_page && $count > 5){ ?>
             <a href="?page=<?php echo $page+1;?>"><?php echo $page+1;?>ページ目へ</a>
-        <?php endif;?>
+        <?php }  ?>
 
-        
+           
 
         <?php if ($count == 0): ?>
             <p>
