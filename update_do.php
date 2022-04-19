@@ -17,7 +17,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
 
 if (isset($_SESSION['form'])){
     $form = $_SESSION['form'];
-} else {
+} else {4
     header('Location: login.php');
     exit();
 }

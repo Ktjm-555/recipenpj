@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
 <body>
     <div class="login_page">
 
-        <div class=join>
+        <div class=page_title>
             <h1>ログイン画面</h1>
         </div>
 
@@ -74,8 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
             </form>
         </div>
 
-        
-        
         
 
         <form action="" method="post">
@@ -107,12 +105,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
                 </div>
 
             </dl>
-            <div>
+            <div class="error">
                 <?php if (isset($error['login']) && $error['login'] == 'blank'): ?>
-                <p>メールアドレスとパスワードを両方記入してログインしましょう！</p>
+                <p>*メールアドレスとパスワードを両方記入してログインしましょう！</p>
                 <?php endif; ?>
+            </div>
+            <div class="error">
                 <?php if (isset($error['login']) && $error['login'] == 'failed'): ?>
-                <p>ログインに失敗しました。正しく入力しまししょう！</p>
+                <p>*ログインに失敗しました。正しく入力しまししょう！</p>
                 <?php endif; ?>
             </div>
 
@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
                 <button type="submit">ログイン</button> 
             </div>
         </form>
-            <div class="form2">
+            <div class="form3">
                 <form action="toppage.php" method="post" >
                     <button type="submit">TOPページに戻る</button>
                 </form>

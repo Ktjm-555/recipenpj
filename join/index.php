@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -87,90 +86,87 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
     
 </header>
 <body>
-<div class="background">
-    <div class="join_page">
+<div class="join_page">
 
-        <div class=join>
-            <h1>会員登録</h1>
-        </div>
-        <div class="join_form">
+    <div class=page_title>
+        <h1>会員登録</h1>
+    </div>
+    <div class="join_form">
+        <form action="" method="post">
+            <input type="hidden" name="action" value="submit">
+            <input type="hidden" name="type" value="1">
             
-            <form action="" method="post">
-            
-                
-                <input type="hidden" name="action" value="submit">
-                <input type="hidden" name="type" value="1">
-            
+            <div class="form_title">               
+                <p class="input">ニックネーム</p>       
+            </div>
 
-                <div class="form_title">
-                    <p class="input">ニックネーム</p>
-                </div>
+            <div class="form_contents">
+                <label class="ef">
+                <input type="text" name="name" size="35" maxlength="255" value="<?php echo h($form['name']); ?>"/>
+                </label>
+            </div>
 
-                <div class="form_contents">
-                    <label class="ef">
-                    <input type="text" name="name" size="35" maxlength="255" value="<?php echo h($form['name']); ?>"/>
-                    </label>
-                </div>
-
-                <div class="error">
+            <div class="error">
                 <?php if (isset($error['name']) && $error['name'] == 'blank'): ?>
-                    <p class="error">*ニックネームを入力してくださいね。</p>
+                <p>*ニックネームを入力してくださいね。</p>
                 <?php endif; ?>
-                </div>
+            </div>
            
-                <div class="form_title">
-                    <p class="input">メールアドレス</p>
-                </div>
+            <div class="form_title">
+                <p class="input">メールアドレス</p>
+            </div>
 
-                <div class="form_contents">
-                    <label class="ef">
-                        <input type="text" name="email" size="35" maxlength="255" value="<?php echo h($form['email']); ?>"/>
-                    </label>
-                </div>
+            <div class="form_contents">
+                 <label class="ef">
+                    <input type="text" name="email" size="35" maxlength="255" value="<?php echo h($form['email']); ?>"/>
+                </label>
+            </div>
                 
-                <div class="error">
+            <div class="error">
                 <label class="ef">
                     <?php if (isset($error['email']) && $error['email'] == 'blank'): ?>
-                        <p class="error">*メールアドレスを入力してくださいね。</p>
+                        <p>*メールアドレスを入力してくださいね。</p>
                     <?php endif; ?>        
                     <?php if (isset($error['email']) && $error['email'] == 'failed'): ?> 
-                        <p class="error">*メールアドレスを正しい形式で入力してくださいね。</p>
+                        <p>*メールアドレスを正しい形式で入力してくださいね。</p>
                     <?php endif; ?>
                     <?php if (isset($error['email']) && $error['email'] == 'juhuku'): ?>
-                        <p class="error">*指定されたメールアドレスは既に登録してあります。</p>
-                    <?php endif; ?>              
-                </div>
+                        <p>*指定されたメールアドレスは既に登録してあります。</p>
+                    <?php endif; ?>         
+                </label>     
+            </div>
 
-                <div class="form_title">
-                    <p class="input">パスワード</p>
-                </div>
+            <div class="form_title">
+                <p class="input">パスワード</p>
+            </div>
 
-                <div class="form_contents">
-                    <label class="ef">
-                        <input type="password" name="password" size="35" maxlength="255" value="<?php echo h($form['password']); ?>"/>
-                    </label>
-                </div>
+            <div class="form_contents">
+                <label class="ef">
+                    <input type="password" name="password" size="35" maxlength="255" value="<?php echo h($form['password']); ?>"/>
+                </label>
+            </div>
 
-                <div class="error">
-                    <?php if (isset($error['password']) && $error['password'] == 'blank'): ?>
-                    <p class="error">*パスワードを入力してくださいね。</p>
-                    <?php endif; ?>
+            <div class="error">
+                <?php if (isset($error['password']) && $error['password'] == 'blank'): ?>
+                <p">*パスワードを入力してくださいね。</p>
+                <?php endif; ?>
                     
-                    <?php if (isset($error['password']) && $error['password'] == 'length'): ?>
-                    <p class="error">*パスワードは4文字以上で入力してくださいね。</p>
-                    <?php endif; ?>
-                </div>
+                <?php if (isset($error['password']) && $error['password'] == 'length'): ?>
+                <p>*パスワードは4文字以上で入力してくださいね。</p>
+                <?php endif; ?>
+            </div>
 
-                <div class="form2">
-                    <button type="submit">入力内容を確認する</button> 
-                </div>
+            <div class="form2">
+                <button type="submit">入力内容を確認する</button> 
+            </div>
             
             
-            </form>
-        </div>
+        </form>
+   
         <div class=login>すでに登録済みの方は<a href="../login.php">こちら</a></div>
-    </diV>
-</div>
+    </div>
+    
+
 </body>
 </html>
 

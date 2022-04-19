@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 </head>
 <body>
 <div class="join_check_page">
-    <div class=join>
+    <div class=page_title>
         <h1>確認画面</h1>
     </div>
     <form action="" method="post">

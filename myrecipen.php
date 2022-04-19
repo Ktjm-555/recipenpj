@@ -16,23 +16,24 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
 $recipe_member_id = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_NUMBER_INT);
 // echo $recipe_member_id;
 // exit();
-// $counts = $db->prepare('select count (*) as cnt from recipen where member_id=?');
-// $counts->bind_param('i', $recipe_member_id);
+$counts = $db->query("select count(*) as cnt from recipen where member_id='".$recipe_member_id."'");
 
-// $count = $counts->fetch_assoc();
-// $max_page = floor(($count['cnt']-1)/5+1);
-
-
+$count = $counts->fetch_assoc();
+$max_page = floor(($count['cnt']-1)/5+1);
+// echo $recipe_member_id;
 
 $stmt = $db->prepare('select * from recipen where member_id=? order by id desc limit ?, 5');
 if (!$stmt){
     die($db->error);
 }
 
-$page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT );
+$page = filter_input(INPUT_POST, 'page', FILTER_SANITIZE_NUMBER_INT );
+// echo $page;
+
 $page = ($page ?: 1);
+// echo $page;
 // 上のはページはURLでid指定されなかった時1頁目を開くということ
-$page = ($page ?: 1);
+
 $start = ($page - 1) * 5;
 $stmt->bind_param('ii', $user_id, $start);
 $result = $stmt->execute();
@@ -78,14 +79,25 @@ $result = $stmt->execute();
         <?php $count+=1; ?>
          </div>
         <?php endwhile; ?>
-        <?php if ($page > 1){ ?>
-            <a href="?page=<?php echo $page-1;?>"><?php echo $page-1;?>ページ目へ</a>|
-        <?php } ?>
-        <?php if($page < $max_page && $count > 5){ ?>
-            <a href="?page=<?php echo $page+1;?>"><?php echo $page+1;?>ページ目へ</a>
-        <?php }  ?>
+        <?php if ($page > 1): ?>
+            <form action="" method="post" >
+                <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
+                <input type ="hidden" name="page" value="<?php echo $page-1; ?>">
+                <button type="submit"> 
+                    <?php echo $page-1;?>ページ目へ
+                </button>
+            </form>
+        <?php endif;?>
+        <?php if($page < $max_page): ?>
+            <form action="" method="post" >
+                <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
+                <input type ="hidden" name="page" value="<?php echo $page+1; ?>">
+                <button type="submit"> 
+                    <?php echo $page+1;?>ページ目へ
+                </button>
+            </form>
+        <?php endif;?>
 
-           
 
         <?php if ($count == 0): ?>
             <p>

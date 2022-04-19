@@ -76,7 +76,7 @@ $result = $stmt->execute();
   
     <?php if (!$error == 'blank'): ?>
         <form action="myrecipen.php" method="post" >
-        <input type="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
+            <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
             <button type="submit"> 
             マイページ
             </button>

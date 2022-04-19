@@ -64,6 +64,138 @@ width /***/:auto;
 }
 
 /* コードCSSスタート */
-p.error {
+html {
+    box-sizing: border-box;
+  }
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+
+.error {
+    display: flex;
+    justify-content: center;
     color:red;
 }
+
+.join_page {
+    margin:70px auto 100px auto;
+    background-color: rgb(247, 244, 244);
+    width: 50%;
+    height: 140%;
+
+}
+
+body {
+    background: linear-gradient(to right, #0295f7, #F8FFAE);
+    width: 100vw;
+    height: auto;
+}
+
+.page_title {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(247, 244, 244);
+    color:#0295f7;
+    margin-bottom: 20px;
+    padding-top: 20px;
+
+
+
+
+
+.form_title, .form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.form_contents{
+    display: flex;
+    justify-content: center;
+
+}
+
+.form_contents input[type='text'],input[type='password'] {
+    
+    font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.3em;
+	/* transition: 0.3s; */
+	letter-spacing: 1px;
+	color: #1b2538;
+	border: 1px solid #1b2538;
+	border-radius: 4px;   
+}
+
+.ef input[type='text']:focus {
+	border: 1px solid #02bef7de;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
+}
+
+.ef input[type='password']:focus {
+	border: 1px solid #02bef7de;
+	outline: none;
+	box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
+}
+
+.ef input[type='password']{
+}
+
+.error{
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+
+.join_check_page{
+    margin:100px auto 100px auto;
+    background-color: rgb(247, 244, 244);
+    width: 50%;
+    height: 80%;
+}
+
+button {
+    color: #1b2538;
+    background: #acfcf1;
+    padding: 10px 30px;
+    display: inline-block;
+    justify-content: center;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.end{
+    display: flex;
+    justify-content: center;
+    padding-top:65px ;
+}
+
+.join_thank_page {
+    margin:100px auto 100px auto;
+    background-color: rgb(247, 244, 244);
+    width: 50%;
+    height: 50%;
+}
+
+.form2{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.hallow{
+
+}
+
+.form3{
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    background-color: rgb(247, 244, 244);
+    padding-bottom: 20px;
+}
+

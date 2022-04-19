@@ -64,13 +64,7 @@ width /***/:auto;
 }
 
 /* コードCSSスタート */
-p.error {
-    color:red;
-}
 
- :hover{
-     tukaitai
- }
 
  html {
     box-sizing: border-box;
@@ -89,7 +83,7 @@ p.error {
     margin:70px auto 100px auto;
     background-color: rgb(247, 244, 244);
     width: 50%;
-    height: 50%;
+    height: 100%;
 
 }
 
@@ -99,7 +93,7 @@ body {
     height: 70vh;
 }
 
-.join {
+.page_title {
     display: flex;
     justify-content: center;
     background-color: rgb(247, 244, 244);
@@ -126,7 +120,7 @@ body {
 
 }
 
-.form_title, .form {
+.form_title, .form2 {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
@@ -180,7 +174,7 @@ body {
     margin:100px auto 100px auto;
     background-color: rgb(247, 244, 244);
     width: 50%;
-    height: 95%;
+    height: 100%;
 }
 
 button {
@@ -197,7 +191,17 @@ button {
 .form2{
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
-    margin-top: 10px;
+    margin: 20px auto;
+    background-color: rgb(247, 244, 244);
+
+
+}
+
+.form3{
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    background-color: rgb(247, 244, 244);
+    padding-bottom: 20px;
 }
 
