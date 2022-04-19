@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     ('".$form['name']."','".$form['email']."','".$password."')";
     $res = $db->query($sql);
 
-    // var_dump($form['email']);
-    // exit();
+    
+
 
     $sql = "SELECT id
     from
@@ -62,24 +62,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="join_style.css">
     <title>登録確認画面</title>
 </head>
 <body>
+<div class="join_check_page">
+    <div class=join>
+        <h1>確認画面</h1>
+    </div>
+    <form action="" method="post">
+        <dl>
+        <div class="form_title">
+            <dt>ニックネーム</dt>
+        </div>
+        <div class="form">
+            <dd><?php echo h($form['name']); ?></dd>
+            <dd><?php echo h($form['user_id']); ?></dd>
+        </div>
+        <div class="form_title">
+            <dt>アドレス</dt>
+        </div>
+        <div class="form">
+            <dd><?php echo h($form['email']); ?></dd>
+        </div>
 
-<form action="" method="post">
-    <dl>
-    <dt>ニックネーム</dt>
-    <dd><?php echo h($form['name']); ?></dd>
-    <dd><?php echo h($form['user_id']); ?></dd>
-    <dt>アドレス</dt>
-    <dd><?php echo h($form['email']); ?></dd>
-    <dt>パスワード</dt>
-    <dd>【表示はしないので、ご安心ください】</dd>
-    </dl>
- <div><a href="index.php?action=rewrite">&laquo;&nbsp;書き直す</a>
- <div><button type="submit">登録する</button> </div>
-</form>
+        <div class="form_title">
+        <dt>パスワード</dt>
+        </div>
+        <div class="form_title">
+        <dd>【表示はしないので、ご安心ください】</dd>
+        </div>
 
+        </dl>
+        <div class="form">
+            
+            <a href="index.php?action=rewrite">&laquo;&nbsp;書き直す</a>
+        
+        </div>
+        <div class="form">
+            <button type="submit">登録する</button>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

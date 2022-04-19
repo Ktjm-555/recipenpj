@@ -48,11 +48,13 @@ $result = $stmt->execute();
     
     <?php if ($error == 'blank'): ?>
         <form action="login.php" method="post" >
+        <input type="hidden" name="type" value="2">
             <button type="submit"> 
             ログイン
             </button>
         </form>
         <form action="join/index.php" method="post" >
+        <input type="hidden" name="type" value="2">
             <button type="submit"> 
             会員登録する
             </button>
@@ -125,6 +127,7 @@ $result = $stmt->execute();
    
     <?php if ($error == 'blank'): ?>
         <form action="login.php" method="post" >
+        <input type="hidden" name="type" value="2">
             <button type="submit"> 
             ログイン
             </button>

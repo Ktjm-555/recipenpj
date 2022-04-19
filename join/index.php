@@ -18,7 +18,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
  // フォームの内容をチェック
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
 
     $form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
     if ($form['name'] === ''){
@@ -79,50 +79,98 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="join_style.css">
+    
     <title>会員登録画面</title>
 </head>
 <header>
     
 </header>
 <body>
-    <div><h1>会員登録</h1></div>
-    <form action="" method="post">
-        
-        <input type="hidden" name="action" value="submit">
+<div class="background">
+    <div class="join_page">
 
-        <p class="input">ニックネーム</p>
-        
-        <input type="text" name="name" size="35" maxlength="255" value="<?php echo h($form['name']); ?>"/>
-        <?php if (isset($error['name']) && $error['name'] == 'blank'): ?>
-            <p class="error">*ニックネームを入力してくださいね。</p>
-        <?php endif; ?>
+        <div class=join>
+            <h1>会員登録</h1>
+        </div>
+        <div class="join_form">
+            
+            <form action="" method="post">
+            
+                
+                <input type="hidden" name="action" value="submit">
+                <input type="hidden" name="type" value="1">
+            
 
-        <p class="input">メールアドレス</p>
-        <input type="text" name="email" size="35" maxlength="255" value="<?php echo h($form['email']); ?>"/>
-        <?php if (isset($error['email']) && $error['email'] == 'blank'): ?>
-            <p class="error">*メールアドレスを入力してくださいね。</p>
-        <?php endif; ?>
-        <?php if (isset($error['email']) && $error['email'] == 'failed'): ?> 
-            <p class="error">*メールアドレスを正しい形式で入力してくださいね。</p>
-         <?php endif; ?>
-         <?php if (isset($error['email']) && $error['email'] == 'juhuku'): ?>
-            <p class="error">*指定されたメールアドレスは既に登録してあります。</p>
-        <?php endif; ?>
+                <div class="form_title">
+                    <p class="input">ニックネーム</p>
+                </div>
 
+                <div class="form_contents">
+                    <label class="ef">
+                    <input type="text" name="name" size="35" maxlength="255" value="<?php echo h($form['name']); ?>"/>
+                    </label>
+                </div>
 
-        <p class="input">パスワード</p>
-        <input type="password" name="password" size="10" maxlength="20" value="<?php echo h($form['password']); ?>"/>
-        <?php if (isset($error['password']) && $error['password'] == 'blank'): ?>
-        <p class="error">*パスワードを入力してくださいね。</p>
-        <?php endif; ?>
-        
-        <?php if (isset($error['password']) && $error['password'] == 'length'): ?>
-        <p class="error">*パスワードは4文字以上で入力してくださいね。</p>
-        <?php endif; ?>
+                <div class="error">
+                <?php if (isset($error['name']) && $error['name'] == 'blank'): ?>
+                    <p class="error">*ニックネームを入力してくださいね。</p>
+                <?php endif; ?>
+                </div>
+           
+                <div class="form_title">
+                    <p class="input">メールアドレス</p>
+                </div>
 
-        <br><button type="submit">入力内容を確認する</button> 
-    </form>
-    <div>すでに登録済みの方は<a href="../login.php">こちら</a></div>
+                <div class="form_contents">
+                    <label class="ef">
+                        <input type="text" name="email" size="35" maxlength="255" value="<?php echo h($form['email']); ?>"/>
+                    </label>
+                </div>
+                
+                <div class="error">
+                <label class="ef">
+                    <?php if (isset($error['email']) && $error['email'] == 'blank'): ?>
+                        <p class="error">*メールアドレスを入力してくださいね。</p>
+                    <?php endif; ?>        
+                    <?php if (isset($error['email']) && $error['email'] == 'failed'): ?> 
+                        <p class="error">*メールアドレスを正しい形式で入力してくださいね。</p>
+                    <?php endif; ?>
+                    <?php if (isset($error['email']) && $error['email'] == 'juhuku'): ?>
+                        <p class="error">*指定されたメールアドレスは既に登録してあります。</p>
+                    <?php endif; ?>              
+                </div>
+
+                <div class="form_title">
+                    <p class="input">パスワード</p>
+                </div>
+
+                <div class="form_contents">
+                    <label class="ef">
+                        <input type="password" name="password" size="35" maxlength="255" value="<?php echo h($form['password']); ?>"/>
+                    </label>
+                </div>
+
+                <div class="error">
+                    <?php if (isset($error['password']) && $error['password'] == 'blank'): ?>
+                    <p class="error">*パスワードを入力してくださいね。</p>
+                    <?php endif; ?>
+                    
+                    <?php if (isset($error['password']) && $error['password'] == 'length'): ?>
+                    <p class="error">*パスワードは4文字以上で入力してくださいね。</p>
+                    <?php endif; ?>
+                </div>
+
+                <div class="form2">
+                    <button type="submit">入力内容を確認する</button> 
+                </div>
+            
+            
+            </form>
+        </div>
+        <div class=login>すでに登録済みの方は<a href="../login.php">こちら</a></div>
+    </diV>
+</div>
 </body>
 </html>
 
