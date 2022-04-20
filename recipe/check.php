@@ -50,24 +50,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <title>投稿確認画面</title>
 </head>
 <body>
-<form action="" method="post" enctype="multipart/form-data">
-    <dl>
-        <dt>レシピ名</dt>
-        <dd><?php echo h($form['recipe']); ?></dd>
-        <dt>写真</dt>
-        <dd>
-            <img src="../recipe_picture/<?php echo h($form['image']); ?>">
-        </dd>
-        <dt>材料</dt>
-        <dd><?php echo h($form['foodstuffs']); ?></dd>
-        <dt>作り方</dt>
-        <dd><?php echo h($form['recipe']); ?></dd>
-    </dl>
+<div class="recipe_check_page">
+    
+    <div class="recipe_form">
+        <div class=page_title>
+            <h1>確認画面</h1>
+        </div>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="form_title">
+                <dt>レシピ名</dt>
+            </div>
 
-    <div><button type="submit">投稿する</button></div>
+        <dl>
+            <div class="form">
+                <dd><?php echo h($form['recipe']); ?></dd>
+            </div>
 
-</form>
+            <div class="form_title">
+                <dt>写真</dt>
+            </div>  
+            
+            <div class="form">
+                <dd>
+                    <img src="../recipe_picture/<?php echo h($form['image']); ?>">
+                </dd>
+            </div>  
 
+            <div class="form_title">
+                <dt>材料</dt>
+            </div>
+
+            <div class="form">
+                <dd><?php echo h($form['foodstuffs']); ?></dd>
+            </div>
+
+            <div class="form_title">
+                <dt>作り方</dt>
+            </div>
+
+            <div class="form">
+                <dd><?php echo h($form['recipe']); ?></dd>
+            </div>
+            </dl>
+            <div class="form3">
+            <div><button type="submit">投稿する</button></div>
+            </div>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

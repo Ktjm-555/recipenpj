@@ -19,11 +19,19 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
     <title>投稿完了</title>
 </head>
 <body>
-    <div>投稿完了しました</div>
-    <form action="../toppage.php" method="post" >
-        <button type="submit"> 
-        TOPページに戻る
-        </button>
-    </form>
+    <div class="join_thank_page">
+        
+        <div class="end">
+            <div>投稿完了しました</div>
+        </div>
+        
+        <div class="form4" >
+            <form action="../toppage.php" method="post" >
+                <button type="submit"> 
+                TOPページに戻る
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

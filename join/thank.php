@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -14,7 +13,7 @@
         <div class="end">
             登録完了！！
         </div>
-        <div class="form2" >
+        <div class="form5" >
             <form action="../toppage.php" method="post" >
                 <button type="submit"> 
                     TOPページへ

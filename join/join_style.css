@@ -183,17 +183,13 @@ button {
     cursor: pointer;
 }
 
-.end{
-    display: flex;
-    justify-content: center;
-    padding-top:65px ;
-}
+
 
 .join_thank_page {
     margin:100px auto 100px auto;
     background-color: rgb(247, 244, 244);
     width: 50%;
-    height: 50%;
+    height: 45%;
 }
 
 .form2{
@@ -203,3 +199,16 @@ button {
     margin-top: 10px;
 }
 
+.end{
+    display: flex;
+    justify-content: center;
+    padding-top:65px ;
+}
+
+.form5{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+  
