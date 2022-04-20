@@ -15,7 +15,7 @@ r.modified, m.name from recipen r, member m where m.id=r.member_id order by id d
 if (!$stmt){
     die($db->error);
 }
-$page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT );
+$page = filter_input(INPUT_POST, 'page', FILTER_SANITIZE_NUMBER_INT );
 $page = ($page ?: 1);
 $start = ($page - 1) * 5;
 $stmt->bind_param('i', $start);
@@ -37,6 +37,7 @@ $result = $stmt->execute();
     <?php 
         $error = '';
         if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
+            $user_id = $_SESSION['id'];
             $name = $_SESSION['name'];
             echo $name .'さん、ようこそ';
         } else {
@@ -45,7 +46,7 @@ $result = $stmt->execute();
             echo '会員登録まだの方は会員登録をお願いします！';
         }
     ?>
-    
+        
     <?php if ($error == 'blank'): ?>
         <form action="login.php" method="post" >
         <input type="hidden" name="type" value="2">
@@ -74,14 +75,7 @@ $result = $stmt->execute();
     <?php $count =0; ?>
     <?php while ($stmt->fetch()): ?>
   
-    <?php if (!$error == 'blank'): ?>
-        <form action="myrecipen.php" method="post" >
-            <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
-            <button type="submit"> 
-            マイページ
-            </button>
-        </form>
-    <?php endif; ?>
+    
     
     
  
@@ -96,10 +90,20 @@ $result = $stmt->execute();
          </div>
         <?php endwhile; ?>
         <?php if ($page > 1): ?>
-            <a href="?page=<?php echo $page-1;?>"><?php echo $page-1;?>ページ目へ</a>|
+            <form action="" method="post" >
+                <input type ="hidden" name="page" value="<?php echo $page-1; ?>">
+                <button type="submit"> 
+                    <?php echo $page-1;?>ページ目へ
+                </button>
+            </form>
         <?php endif;?>
         <?php if($page < $max_page): ?>
-            <a href="?page=<?php echo $page+1;?>"><?php echo $page+1;?>ページ目へ</a>
+            <form action="" method="post" >
+                <input type ="hidden" name="page" value="<?php echo $page+1; ?>">
+                <button type="submit"> 
+                    <?php echo $page+1;?>ページ目へ
+                </button>
+            </form>
         <?php endif;?>
 
         
@@ -108,14 +112,20 @@ $result = $stmt->execute();
             <p>
                 表示するデータはありません。
             </p>
+           
         <?php endif; ?>
-       
-       
-
         
-    <!-- <div>
-        <a href="#">マイページへ</a>
-    </div> -->
+        <?php if (!$error == 'blank'){ ?>
+        <form action="myrecipen.php" method="post" >
+            <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
+            <button type="submit"> 
+            マイページ
+            </button>
+        </form>
+    <?php } ?>
+   
+   
+
     <?php if (!$error == 'blank'): ?>
         <form action="logout.php" method="post" >
             <button type="submit"> 

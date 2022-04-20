@@ -91,6 +91,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
     <div class=page_title>
         <h1>会員登録</h1>
     </div>
+    
     <div class="join_form">
         <form action="" method="post">
             <input type="hidden" name="action" value="submit">

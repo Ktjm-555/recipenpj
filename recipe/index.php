@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
   <title>レシピ投稿画面</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="recipe.css">
+  <link rel="stylesheet" href="recipe_style.css">
 </head>
 
 <body>
@@ -117,85 +117,93 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
   <div class=hallow>
     <?php echo h($name); ?>さん、今日もレシピ投稿ありがとうございます！
   </div>
+  <div class="recipe_form">
+    <form action="" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="type" value="1">
+      <input type="hidden" name="recipe_member_id" value="<?php echo $user_id; ?>">
 
-  <form action="" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="type" value="1">
-    <input type="hidden" name="recipe_member_id" value="<?php echo $user_id; ?>">
+      <div class="form_title">
+        <p>レシピ名</P>
+      </div>
+        
+      <div class="form_contents">
+        <label class="ef">
+        <input type="text" name="recipename" size="35" maxlength="255" value="<?php echo h($form['recipename']); ?>"/>
+        </label>
+      </div>
 
-    <div class="form_title">               
-      <p>レシピ名</P>
-    </div>
-      
-    <div class="form_contents">
-      <label class="ef">
-      <input type="text" name="recipename" size="35" maxlength="255" value="<?php echo h($form['recipename']); ?>"/>
-      </label>
-    </div>
-
-    <div class="error">
-      <?php if (isset($error['recipename']) && $error['recipename'] === 'blank'): ?>
-      <p>レシピ名を入力してください。</p>
-      <?php endif; ?>
-    </div>
-
-    <div class="form_title">
-      <p>完成写真</P>
-    </div>
-
-      <input type="file" name="image" size="35" value=""/>
-
-    <div class="error">
-      <?php if (isset($error['image']) && $error['image'] == 'type'): ?>
-      <p>写真は「.png」または「.jpg」の画像を指定してください。</p>
-      <?php endif; ?>
-    </div>
-
-    <div class="error">
-      <?php if (isset($error['image']) && $error['image'] == 'blank'): ?>
-      <p>写真を投稿してください。</p>
-      <?php endif; ?>
-    </div>
-
-    <div class="form_title">
-      <p>材料</P>
-    </div>
-
-    <div class="form_contents">
-      <label class="ef">
-        <textarea name="foodstuffs" cols="50" rows="5"><?php echo h($form['foodstuffs']); ?></textarea>
-      </label>
-    </div>
-
-    <div class="error">
-      <?php if (isset($error['foodstuffs']) && $error['foodstuffs'] == 'blank'): ?>
-      <p class="error">材料を入力してください。</p>
+      <div class="error">
+        <?php if (isset($error['recipename']) && $error['recipename'] === 'blank'): ?>
+        <p>レシピ名を入力してください。</p>
         <?php endif; ?>
-    </div>
-    <div class="form_contents">
-      <p>作り方</P>
-    </div>
+      </div>
 
-    <div class="form_contents">
-      <label class="ef">
-        <textarea name="recipe" cols="50" rows="5"><?php echo h($form['recipe']); ?></textarea>
-      </label>
-    </div>
+      <div class="form_title">
+        <p>完成写真</P>
+      </div>
+      <div class="form_contents">
+        <input type="file" name="image" size="35" value=""/>
+      </div>
+      <div class="error">
+        <?php if (isset($error['image']) && $error['image'] == 'type'): ?>
+        <p>写真は「.png」または「.jpg」の画像を指定してください。</p>
+        <?php endif; ?>
+      </div>
 
-    <div class="error">
-      <?php if (isset($error['recipe']) && $error['recipe'] = 'blank'): ?>
-      <p class="error">作り方を入力してください。</p>
-      <?php endif; ?>
-    </div>
+      <div class="error">
+        <?php if (isset($error['image']) && $error['image'] == 'blank'): ?>
+        <p>写真を投稿してください。</p>
+        <?php endif; ?>
+      </div>
 
-    <div class="form2">
-      <button type="submit">入力内容を確認する</button>
-    </div>
+      <div class="form_title">
+        <p>材料</P>
+      </div>
 
-    <div class="form3">
-      <a href="../toppage.php" class="gopage">TOPページに戻る</a>
+      <div class="form_contents">
+        <label class="ef">
+          <textarea name="foodstuffs" cols="50" rows="5"><?php echo h($form['foodstuffs']); ?></textarea>
+        </label>
+      </div>
+
+      <div class="error">
+        <?php if (isset($error['foodstuffs']) && $error['foodstuffs'] == 'blank'): ?>
+        <p class="error">材料を入力してください。</p>
+          <?php endif; ?>
+      </div>
+      <div class="form_contents">
+        <p>作り方</P>
+      </div>
+
+      <div class="form_contents">
+        <label class="ef">
+          <textarea name="recipe" cols="50" rows="5"><?php echo h($form['recipe']); ?></textarea>
+        </label>
+      </div>
+
+      <div class="error">
+        <?php if (isset($error['recipe']) && $error['recipe'] = 'blank'): ?>
+        <p class="error">作り方を入力してください。</p>
+        <?php endif; ?>
+      </div>
+
+      <div class="form2">
+        <button type="submit">入力内容を確認する</button>
+      </div>
+
+    </form>
+    
+    <div class="form3" >
+      <form action="../toppage.php" method="post" >
+        <button type="submit"> 
+          TOPページへ
+        </button>
+      </form>
     </div>
-  </form>
+  </div>
 </div>
 </body>
 
 </html>
+
+
