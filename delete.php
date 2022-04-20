@@ -24,11 +24,11 @@ $recipe_id = filter_input(INPUT_POST, 'recipe_id', FILTER_SANITIZE_NUMBER_INT);
 // exit();
 $recipe_member_id = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_NUMBER_INT);
 
-if ($iser_id == $recipe_member_id){
+if ($user_id == $recipe_member_id){
     $stmt = $db->prepare($sql);
 
     if (!$stmt){
-        echo '消せてないよ！';
+        header('Location: delete_error.html');
         exit();
     }
     
@@ -37,7 +37,7 @@ if ($iser_id == $recipe_member_id){
     $success = $stmt->execute();
     
     if (!$success){
-        echo '何か問題あったよ！';
+        header('Location: delete_error.html');
         die($db->error);
     }
     header('Location: deletegoal.php?result=1');
@@ -46,9 +46,5 @@ if ($iser_id == $recipe_member_id){
     
     header('Location: deletegoal.php?result=2');
 
-
-
 }
-
-
 ?>
