@@ -19,6 +19,18 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
     <title>投稿完了</title>
 </head>
 <body>
+<header>
+    <h1 class="title">タイトル</h1>
+    <nav class="nav">
+      <ul class="menu-group">
+        <li class="menu-item"><a href="#">項目1</a></li>
+        <li class="menu-item"><a href="#">項目2</a></li>
+        <li class="menu-item"><a href="#">項目3</a></li>
+        <li class="menu-item"><a href="#">項目4</a></li>
+        <li class="menu-item"><a href="#">項目5</a></li>
+      </ul>
+    </nav>
+  </header>
     <div class="join_thank_page">
         
         <div class="end">

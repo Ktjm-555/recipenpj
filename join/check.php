@@ -66,10 +66,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <title>登録確認画面</title>
 </head>
 <body>
+    <header>
+        <h1 class="title">Recipen 会員登録</h1>
+            <nav class="nav">
+                <div class="button5">
+                    <form action="login.php" method="post" >
+                        <input type="hidden" name="type" value="2">
+                        <button type="submit"> 
+                            ログイン
+                        </button>
+                    </form>
+                </div>
+                <div class="button5">
+                    <form action="../toppage.php" method="post" >
+                        <button type="submit"> 
+                            TOPページに戻る
+                        </button>
+                    </form>
+                </div>
+            </nav>
+    </header>
 <div class="join_check_page">
+
     <div class=page_title>
         <h1>確認画面</h1>
     </div>
+
     <form action="" method="post">
         <dl>
         <div class="form_title">
@@ -99,11 +121,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             <a href="index.php?action=rewrite">&laquo;&nbsp;書き直す</a>
         
         </div>
-        <div class="form">
+        <div class="button">
             <button type="submit">登録する</button>
         </div>
     </form>
 </div>
+
+    <footer>
+        2022 @recipenpj
+    </footer>
 
 </body>
 </html>

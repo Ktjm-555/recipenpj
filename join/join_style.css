@@ -65,17 +65,54 @@ width /***/:auto;
 
 /* コードCSSスタート */
 
-html {
-    box-sizing: border-box;
-  }
-  *, *::before, *::after {
-    box-sizing: inherit;
-  }
+/* ヘッダー */
+header {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    background-color: rgb(247, 244, 244);
+    align-items: center;
+}
+   
+.title {
+    margin-right: auto;
+    margin-left: 20px;
+}
+   
+.menu-item {
+    list-style: none;
+    display: inline-block;
+    padding: 10px;
+}
+
+/* 共通 */
+button {
+    color: #1b2538;
+    background: #acfcf1;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.button5 {
+    display: inline-block;
+    padding-right: 10px;
+}
+
+/* ボディー */
+body {
+    background: linear-gradient(to right, #0295f7, #F8FFAE);
+    width: 100vw;
+    
+}
 
 .error {
     display: flex;
     justify-content: center;
     color:red;
+    margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 .join_page {
@@ -83,13 +120,6 @@ html {
     background-color: rgb(247, 244, 244);
     width: 50%;
     height: 100%;
-
-}
-
-body {
-    background: linear-gradient(to right, #0295f7, #F8FFAE);
-    width: 100vw;
-    height: 70vh;
 }
 
 .page_title {
@@ -99,24 +129,6 @@ body {
     color:#0295f7;
     margin-bottom: 20px;
     padding-top: 20px;
-
-
-}
-
-.login {
-    display: flex;
-    justify-content: center;
-    background-color: rgb(247, 244, 244);
-    color:#0295f7;
-    padding-bottom: 20px;
-
-}
-
-.go {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-
 }
 
 .form_title, .form {
@@ -128,11 +140,9 @@ body {
 .form_contents{
     display: flex;
     justify-content: center;
-
 }
 
 .form_contents input[type='text'],input[type='password'] {
-    
     font: 15px/24px sans-serif;
 	box-sizing: border-box;
 	width: 100%;
@@ -156,42 +166,6 @@ body {
 	box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
 }
 
-.ef input[type='password']{
-}
-
-.error{
-    margin-top: 5px;
-    margin-bottom: 20px;
-}
-
-
-.join_check_page{
-    margin:100px auto 100px auto;
-    background-color: rgb(247, 244, 244);
-    width: 50%;
-    height: 80%;
-}
-
-button {
-    color: #1b2538;
-    background: #acfcf1;
-    padding: 10px 30px;
-    display: inline-block;
-    justify-content: center;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-
-
-
-.join_thank_page {
-    margin:100px auto 100px auto;
-    background-color: rgb(247, 244, 244);
-    width: 50%;
-    height: 45%;
-}
-
 .form2{
     display: flex;
     justify-content: center;
@@ -199,10 +173,42 @@ button {
     margin-top: 10px;
 }
 
+.login {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(247, 244, 244);
+    color: black;
+    padding-bottom: 20px;
+}
+
+/* check */
+.join_check_page{
+    margin:100px auto 110px auto;
+    background-color: rgb(247, 244, 244);
+    width: 50%;
+    height: 70%;
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+}
+
+/* thank */
+.join_thank_page {
+    margin:170px auto 180px auto;
+    background-color: rgb(247, 244, 244);
+    width: 50%;
+    height: 45%;
+}
+
 .end{
     display: flex;
     justify-content: center;
     padding-top:65px ;
+    
 }
 
 .form5{
@@ -210,5 +216,15 @@ button {
     justify-content: center;
     margin-bottom: 0px;
     margin-top: 10px;
+    padding-bottom: 65px;
 }
-  
+
+/* 　フッター */
+footer {
+    padding: 18px 0;
+    color: #1b2538;
+    font-size: 0.8rem;
+    text-align: center;
+    background-color: rgb(247, 244, 244);  
+    bottom: 0; /*下に固定*/
+}

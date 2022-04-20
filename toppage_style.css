@@ -87,6 +87,17 @@ header {
     margin-right: auto;
     margin-left: 20px;
 }
+
+/* 　フッター */
+footer {
+    padding: 18px 0;
+    color: #1b2538;
+    font-size: 0.8rem;
+    text-align: center;
+    background-color: rgb(247, 244, 244); 
+
+} 
+  
    
 
 
@@ -95,11 +106,10 @@ body {
     background: linear-gradient(to right, #0295f7, #F8FFAE);
     width: 100vw;
     height: auto;
-    padding-bottom: 70px;
 }
 
 .top_page {
-    margin:70px auto 0px auto;
+    margin:70px auto 70px auto;
     background-color: rgb(247, 244, 244);
     width: 60%;
     height: 100%;

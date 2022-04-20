@@ -8,8 +8,11 @@
     <title>登録完了画面</title>
 </head>
 <body>
-    <div class="join_thank_page">
+    <header>
+        <h1 class="title">Recipen 会員登録</h1>
         
+    </header>    
+    <div class="join_thank_page">
         <div class="end">
             登録完了！！
         </div>
@@ -21,6 +24,8 @@
             </form>
         </div>
     </div>
-    
+    <footer>
+        2022 @recipenpj
+    </footer>
 </body>
 </html>
