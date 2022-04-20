@@ -29,126 +29,131 @@ $result = $stmt->execute();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="toppage_style.css">
     <title>トップページ</title>
 </head>
 <body>
-    <div><h1>トップページ</h1></div>
-    <div><h2>投稿一覧</h2></div>
     <?php 
         $error = '';
         if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
             $user_id = $_SESSION['id'];
             $name = $_SESSION['name'];
-            echo $name .'さん、ようこそ';
         } else {
             $error = 'blank';
-            echo 'ログインすれば、あなたもレシピを公開できます！';
-            echo '会員登録まだの方は会員登録をお願いします！';
         }
-    ?>
+    ?>         
+    <header>
+        <div class="title">
+            Recipen
+        </div>
+        <nav class="nav">
+            <?php if ($error == 'blank'): ?>
+                <div class="button5 login1">
+                    ログインすれば、あなたもレシピを公開できます！
+                    会員登録まだの方は会員登録をお願いします！
+                </div>
+                <div class="button5 login1">
+                    <form action="login.php" method="post" >
+                        <input type="hidden" name="type" value="2">
+                        <button type="submit"> 
+                            ログイン
+                        </button>
+                    </form>
+                </div>
+                <div class="button5 join1">
+                    <form action="join/index.php" method="post" >
+                        <input type="hidden" name="type" value="2">
+                        <button type="submit"> 
+                            会員登録する
+                        </button>
+                    </form>
+                </div>
+            <?php endif; ?>
+            <?php if (!$error == 'blank'): ?>
+                <div class="button5 join1">
+                    <?php echo h($name); ?>さん、ようこそ！
+                </div>
+                
+                <div class="button5 join1">
+                    <form action="recipe/index.php" method="post" >
+                        <input type="hidden" name="type" value="2">
+                        <button type="submit"> 
+                            投稿する
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="button5 join1">
+                    <form action="myrecipen.php" method="post" >
+                        <input type ="hidden" name="recipe_member_id" value="<?php echo $user_id; ?>">
+                        <button type="submit"> 
+                            マイページ
+                        </button>
+                    </form>
+                </div>
+                <div class="button5 join1">
+                    <form action="logout.php" method="post" >
+                        <button type="submit"> 
+                            ログアウト
+                        </button>
+                    </form>
+                </div>
+            <?php endif; ?>       
+        </nav>
+    </header>
+    <div class="top_page">  
+        <?php $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified, $name); ?>
+        <?php $count =0; ?>
+        <?php while ($stmt->fetch()): ?>
+        <div class="top_page2">
+            <div class="form_title">
+                <?php echo h($name) . 'さんのレシピん♪'; ?>
+            </div>
         
-    <?php if ($error == 'blank'): ?>
-        <form action="login.php" method="post" >
-        <input type="hidden" name="type" value="2">
-            <button type="submit"> 
-            ログイン
-            </button>
-        </form>
-        <form action="join/index.php" method="post" >
-        <input type="hidden" name="type" value="2">
-            <button type="submit"> 
-            会員登録する
-            </button>
-        </form>
-    <?php endif; ?>
-    <?php if (!$error == 'blank'): ?>
-        
-    <form action="recipe/index.php" method="post" >
-        <input type="hidden" name="type" value="2">
-        <button type="submit"> 
-        投稿する
-        </button>
-    </form>
-    <?php endif; ?>
-<hr>
-    <?php $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified, $name); ?>
-    <?php $count =0; ?>
-    <?php while ($stmt->fetch()): ?>
-  
-    
-    
-    
- 
-        <div>
-        <div><?php echo h($name) . 'さんのレシピん♪'; ?></div>
-        <a href="recipe.php?id=<?php echo $recipe_id; ?>"><?php echo h($recipename); ?></a>
-        <time><?php echo h($created); ?></time><br>
-        <a href="recipe.php?id=<?php echo $recipe_id; ?>"><img src="recipe_picture/<?php echo h($image); ?>"></a>
-<hr>
+            <div class="form_title">
+                <a href="recipe.php?id=<?php echo $recipe_id; ?>"><?php echo h($recipename); ?></a>
+            </div>
 
-        <?php $count+=1; ?>
-         </div>
-        <?php endwhile; ?>
-        <?php if ($page > 1): ?>
-            <form action="" method="post" >
-                <input type ="hidden" name="page" value="<?php echo $page-1; ?>">
-                <button type="submit"> 
-                    <?php echo $page-1;?>ページ目へ
-                </button>
-            </form>
-        <?php endif;?>
-        <?php if($page < $max_page): ?>
-            <form action="" method="post" >
-                <input type ="hidden" name="page" value="<?php echo $page+1; ?>">
-                <button type="submit"> 
-                    <?php echo $page+1;?>ページ目へ
-                </button>
-            </form>
-        <?php endif;?>
+            <div class="form_title">
+                <time><?php echo h($created); ?></time>
+            </div>
 
-        
+            <div class="form_title">
+                <a href="recipe.php?id=<?php echo $recipe_id; ?>"><img src="recipe_picture/<?php echo h($image); ?>"></a>
+            </div>
 
-        <?php if ($count == 0): ?>
-            <p>
+            <?php $count+=1; ?>
+            </div>
+            <?php endwhile; ?>  
+            
+            <?php if ($page > 1){ ?>
+                <div class="button2">
+                    <form action="" method="post" >
+                        <input type ="hidden" name="page" value="<?php echo $page-1; ?>">
+                        <button type="submit"> 
+                            <?php echo $page-1;?>ページ目へ
+                        </button>
+                    </form>
+                </div>
+            <?php } ?>
+
+            <?php if($page < $max_page) { ?>
+                <div class="button2">
+                    <form action="" method="post" >
+                        <input type ="hidden" name="page" value="<?php echo $page+1; ?>">
+                        <button type="submit"> 
+                            <?php echo $page+1;?>ページ目へ
+                        </button>
+                    </form>
+                </div>
+            <?php } ?>
+
+            <?php if ($count == 0){ ?>
+                <p>
                 表示するデータはありません。
-            </p>
-           
-        <?php endif; ?>
-        
-        <?php if (!$error == 'blank'){ ?>
-        <form action="myrecipen.php" method="post" >
-            <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
-            <button type="submit"> 
-            マイページ
-            </button>
-        </form>
-    <?php } ?>
-   
-   
-
-    <?php if (!$error == 'blank'): ?>
-        <form action="logout.php" method="post" >
-            <button type="submit"> 
-            ログアウト
-            </button>
-        </form>
-    <?php endif; ?>
-
-   
-    <?php if ($error == 'blank'): ?>
-        <form action="login.php" method="post" >
-        <input type="hidden" name="type" value="2">
-            <button type="submit"> 
-            ログイン
-            </button>
-        </form>
-        <form action="join/index.php" method="post" >
-            <button type="submit"> 
-            会員登録する
-            </button>
-        </form>
-    <?php endif; ?>
-    
-
+                </p>
+            <?php } ?>
+        </div>   
+    </div>
 </body>
 </html>
