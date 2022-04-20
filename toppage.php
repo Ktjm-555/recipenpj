@@ -83,7 +83,7 @@ $result = $stmt->execute();
                     </form>
                 </div>
                 
-                <div class="button5 join1">
+                <div class="button5">
                     <form action="myrecipen.php" method="post" >
                         <input type ="hidden" name="recipe_member_id" value="<?php echo $user_id; ?>">
                         <button type="submit"> 
@@ -91,7 +91,7 @@ $result = $stmt->execute();
                         </button>
                     </form>
                 </div>
-                <div class="button5 join1">
+                <div class="button5">
                     <form action="logout.php" method="post" >
                         <button type="submit"> 
                             ログアウト
@@ -123,7 +123,7 @@ $result = $stmt->execute();
             </div>
 
             <?php $count+=1; ?>
-            </div>
+        </div>
             <?php endwhile; ?>  
             
             <?php if ($page > 1){ ?>
@@ -152,8 +152,7 @@ $result = $stmt->execute();
                 <p>
                 表示するデータはありません。
                 </p>
-            <?php } ?>
-        </div>   
+            <?php } ?>          
     </div>
 </body>
 </html>
