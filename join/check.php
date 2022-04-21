@@ -66,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <title>登録確認画面</title>
 </head>
 <body>
+<div class="container">
     <header>
         <h1 class="title">Recipen 会員登録</h1>
             <nav class="nav">
@@ -86,50 +87,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                 </div>
             </nav>
     </header>
-<div class="join_check_page">
+    <div class="main">  
+        <div class="join_check_page">
+            <div class=join_page2>
+            <div class=join_form>
 
-    <div class=page_title>
-        <h1>確認画面</h1>
+                <div class=page_title>
+                    <h1>確認画面</h1>
+                </div>
+
+                <form action="" method="post">
+                    <dl>
+                    <div class="form_title2">
+                        <dt>ニックネーム</dt>
+                    </div>
+                    <div class="form_title2">
+                        <dd><?php echo h($form['name']); ?></dd>
+                        <dd><?php echo h($form['user_id']); ?></dd>
+                    </div>
+                    <div class="form_title2">
+                        <dt>アドレス</dt>
+                    </div>
+                    <div class="form_title2">
+                        <dd><?php echo h($form['email']); ?></dd>
+                    </div>
+
+                    <div class="form_title2">
+                        <dt>パスワード</dt>
+                    </div>
+                    <div class="form_title2">
+                        <dd>【表示はしないので、ご安心ください】</dd>
+                    </div>
+                    </dl>
+                    <div class="form_title2">   
+                        <a href="index.php?action=rewrite">&laquo;&nbsp;書き直す</a>
+                    </div>
+                    <div class="form2">
+                        <button type="submit">登録する</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
     </div>
-
-    <form action="" method="post">
-        <dl>
-        <div class="form_title">
-            <dt>ニックネーム</dt>
-        </div>
-        <div class="form">
-            <dd><?php echo h($form['name']); ?></dd>
-            <dd><?php echo h($form['user_id']); ?></dd>
-        </div>
-        <div class="form_title">
-            <dt>アドレス</dt>
-        </div>
-        <div class="form">
-            <dd><?php echo h($form['email']); ?></dd>
-        </div>
-
-        <div class="form_title">
-        <dt>パスワード</dt>
-        </div>
-        <div class="form_title">
-        <dd>【表示はしないので、ご安心ください】</dd>
-        </div>
-
-        </dl>
-        <div class="form">
-            
-            <a href="index.php?action=rewrite">&laquo;&nbsp;書き直す</a>
-        
-        </div>
-        <div class="button">
-            <button type="submit">登録する</button>
-        </div>
-    </form>
-</div>
 
     <footer>
         2022 @recipenpj
     </footer>
-
+</div>
 </body>
 </html>

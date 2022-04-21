@@ -66,26 +66,38 @@ width /***/:auto;
 /* コードCSSスタート */
 
 /* ヘッダー */
-header {
-    display: flex;
-    width: 100%;
-    height: 100px;
-    background-color: rgb(247, 244, 244);
-    align-items: center;
+body {
+    margin: 0;
+    overflow: hidden;
 }
-   
+
+.button5 {
+    display: inline-block;
+    padding-right: 10px;
+}
+  
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+  
+header {
+    background-color: rgba(255, 253, 237, 1);
+    display:flex;
+    align-items: center;
+    height: 100px;
+}
+
 .title {
     margin-right: auto;
     margin-left: 20px;
-}
-   
-.menu-item {
-    list-style: none;
-    display: inline-block;
-    padding: 10px;
+    /* margin-top: auto;
+    margin-top: auto; */
 }
 
-/* 共通 */
+/* ヘッター・メイン共通 */
 button {
     color: #1b2538;
     background: #acfcf1;
@@ -95,43 +107,26 @@ button {
     cursor: pointer;
 }
 
-.button5 {
-    display: inline-block;
-    padding-right: 10px;
-}
-
-/* ボディー */
-body {
-    background: linear-gradient(to right, #0295f7, #F8FFAE);
-    width: 100vw;
-    
-}
-
+/* メイン */
+/* 共通 */
 .error {
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
     color:red;
-    margin-top: 5px;
-    margin-bottom: 20px;
-}
-
-.join_page {
-    margin:70px auto 100px auto;
-    background-color: rgb(247, 244, 244);
-    width: 50%;
-    height: 100%;
+    margin-top: 0px;
+    margin-bottom: 10px;
 }
 
 .page_title {
     display: flex;
     justify-content: center;
-    background-color: rgb(247, 244, 244);
+    background-color: rgba(255, 253, 237, 1);
     color:#0295f7;
     margin-bottom: 20px;
     padding-top: 20px;
 }
 
-.form_title, .form {
+.form_title2 {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
@@ -166,40 +161,46 @@ body {
 	box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
 }
 
-.form2{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
+/* index */
+.join_page {
+    margin:60px auto 40px auto;
+    padding-bottom: 10px;
+    background-color: rgba(255, 253, 237, 1);
+    width: 50%;
 }
 
 .login {
     display: flex;
     justify-content: center;
-    background-color: rgb(247, 244, 244);
     color: black;
     padding-bottom: 20px;
+    margin-bottom: 0;
+}
+
+.form2{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: auto;
+}
+
+.join_page2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* check */
 .join_check_page{
-    margin:100px auto 110px auto;
-    background-color: rgb(247, 244, 244);
+    margin:100px auto 10px auto;
+    background-color: rgba(255, 253, 237, 1);
     width: 50%;
-    height: 70%;
-}
-
-.button{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-    padding-bottom: 20px;
 }
 
 /* thank */
 .join_thank_page {
-    margin:170px auto 180px auto;
-    background-color: rgb(247, 244, 244);
+    margin:150px auto 20px auto;
+    background-color: rgba(255, 253, 237, 1);
     width: 50%;
     height: 45%;
 }
@@ -207,8 +208,7 @@ body {
 .end{
     display: flex;
     justify-content: center;
-    padding-top:65px ;
-    
+    padding-top:65px ; 
 }
 
 .form5{
@@ -218,13 +218,15 @@ body {
     margin-top: 10px;
     padding-bottom: 65px;
 }
-
-/* 　フッター */
+  
+.main {
+    flex: 1;
+    background: linear-gradient(to right, #0295f7, #F8FFAE);
+    overflow-y: scroll;
+}
+  
 footer {
-    padding: 18px 0;
-    color: #1b2538;
-    font-size: 0.8rem;
+    background-color: rgba(255, 253, 237, 1);
     text-align: center;
-    background-color: rgb(247, 244, 244);  
-    bottom: 0; /*下に固定*/
+    padding: 18px 0;
 }

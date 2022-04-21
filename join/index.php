@@ -75,7 +75,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="join2_style.css">
+    <link rel="stylesheet" href="join_style.css">
     <title>会員登録画面</title>
 </head>
 <body>
@@ -84,7 +84,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
             <h1 class="title">Recipen 会員登録</h1>
             <nav class="nav">
                 <div class="button5">
-                    <form action="login.php" method="post" >
+                    <form action="../login.php" method="post" >
                         <input type="hidden" name="type" value="2">
                         <button type="submit"> 
                             ログイン
@@ -189,5 +189,3 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
     </div>
 </body>
 </html>
-
-

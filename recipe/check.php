@@ -46,11 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="recipe_style.css">
+    <link rel="stylesheet" href="recipe2_style.css">
     <title>投稿確認画面</title>
 </head>
 <body>
-<div class="recipe_check_page">
+<div class="container">
+<!-- <div class="recipe_check_page"> -->
     
     <div class="recipe_form">
         <div class=page_title>
@@ -97,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
         </form>
     </div>
+<!-- </div> -->
 </div>
 
 </body>
