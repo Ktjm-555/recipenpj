@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
 							<?php echo h($name); ?>さん、今日もレシピ投稿ありがとうございます！
 						</div>
 
-						<div class="recipe_form">
+						<div class="recipes_form">
 							<form action="" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="type" value="1">
 								<input type="hidden" name="recipe_member_id" value="<?php echo $user_id; ?>">

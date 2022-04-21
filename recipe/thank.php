@@ -15,35 +15,32 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="recipe_style.css">
+    <link rel="stylesheet" href="recipe2_style.css">
     <title>投稿完了</title>
 </head>
 <body>
-<header>
-    <h1 class="title">タイトル</h1>
-    <nav class="nav">
-      <ul class="menu-group">
-        <li class="menu-item"><a href="#">項目1</a></li>
-        <li class="menu-item"><a href="#">項目2</a></li>
-        <li class="menu-item"><a href="#">項目3</a></li>
-        <li class="menu-item"><a href="#">項目4</a></li>
-        <li class="menu-item"><a href="#">項目5</a></li>
-      </ul>
-    </nav>
-  </header>
-    <div class="join_thank_page">
-        
-        <div class="end">
-            <div>投稿完了しました</div>
+    <div class="container">
+        <header>
+            <h1 class="title">Recipen 投稿完了</h1>
+        </header>
+        <div class="main">
+            <div class="join_thank_page">
+                <div class="end">
+                    <div>投稿完了しました</div>
+                </div>
+                    
+                <div class="form5" >
+                    <form action="../toppage.php" method="post" >
+                        <button type="submit"> 
+                            TOPページに戻る
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
-        
-        <div class="form4" >
-            <form action="../toppage.php" method="post" >
-                <button type="submit"> 
-                TOPページに戻る
-                </button>
-            </form>
-        </div>
+        <footer>
+            2022 @recipenpj
+        </footer>
     </div>
 </body>
 </html>

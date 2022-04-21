@@ -224,7 +224,8 @@ button {
     background: linear-gradient(to right, #0295f7, #F8FFAE);
     overflow-y: scroll;
 }
-  
+
+/* フッター */
 footer {
     background-color: rgba(255, 253, 237, 1);
     text-align: center;
