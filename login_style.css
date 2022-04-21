@@ -64,78 +64,22 @@ width /***/:auto;
 }
 
 /* コードCSSスタート */
-
-/* ヘッダー */
-body {
-    margin: 0;
-    overflow: hidden;
+ html {
+    box-sizing: border-box;
+}
+  *, *::before, *::after {
+    box-sizing: inherit;
 }
 
-.button5 {
-    display: inline-block;
-    padding-right: 10px;
-}
-  
 .container {
     display: flex;
     flex-direction: column;
     height: 100vh;
     width: 100vw;
 }
-  
-header {
-    background-color: rgba(255, 253, 237, 1);
-    display:flex;
-    align-items: center;
-    height: 100px;
-}
-
-.title {
-    margin-right: auto;
-    margin-left: 20px;
-    /* margin-top: auto;
-    margin-top: auto; */
-}
-
-/* ヘッター・メイン共通 */
-button {
-    color: #1b2538;
-    background: #acfcf1;
-    padding: 10px 30px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-
-/* メイン */
-/* 共通 */
-.error {
-    color:red;
-    margin-top: 0px;
-    margin-bottom: 10px;
-}
-
-.page_title {
-    display: flex;
-    justify-content: center;
-    background-color: rgba(255, 253, 237, 1);
-    color:#0295f7;
-    margin-bottom: 20px;
-    padding-top: 20px;
-}
-
-.form_title2 {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-
-.form_contents{
-    display: flex;
-    justify-content: center;
-}
 
 .form_contents input[type='text'],input[type='password'] {
+    
     font: 15px/24px sans-serif;
 	box-sizing: border-box;
 	width: 100%;
@@ -159,27 +103,43 @@ button {
 	box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
 }
 
-/* index */
+.ef input[type='password']{
+    margin-bottom: 10px;
+}
+
+  
+/* ヘッター */
+header {
+    background-color: rgba(255, 253, 237, 1);
+    display:flex;
+    align-items: center;
+    height: 100px;
+}
+
+.title {
+    margin-right: auto;
+    margin-left: 20px;
+    /* margin-top: auto;
+    margin-top: auto; */
+}
+
+.button5 {
+    display: inline-block;
+    padding-right: 10px;
+}
+
+/* メイン */
+.main {
+    flex: 1;
+    background: linear-gradient(to right, #0295f7, #F8FFAE);
+    overflow-y: scroll;
+}
+
 .join_page {
     margin:60px auto 40px auto;
     padding-bottom: 10px;
     background-color: rgba(255, 253, 237, 1);
     width: 50%;
-}
-
-.login {
-    display: flex;
-    justify-content: center;
-    color: black;
-    padding-bottom: 20px;
-    margin-bottom: 0;
-}
-
-.form2{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-    margin-top: auto;
 }
 
 .join_page2{
@@ -188,39 +148,49 @@ button {
     align-items: center;
 }
 
-/* check */
-.join_check_page{
-    margin:100px auto 10px auto;
-    background-color: rgba(255, 253, 237, 1);
-    width: 50%;
-}
-
-/* thank */
-.join_thank_page {
-    margin:150px auto 20px auto;
-    background-color: rgba(255, 253, 237, 1);
-    width: 50%;
-    height: 45%;
-}
-
-.end{
+.page_title {
     display: flex;
     justify-content: center;
-    padding-top:65px ; 
+    background-color: rgba(255, 253, 237, 1);
+    color:#0295f7;
+    margin-bottom: 20px;
+    padding-top: 20px;
 }
 
-.form5{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 0px;
+.form_title {
+    margin-bottom: 10px;
     margin-top: 10px;
-    padding-bottom: 65px;
+
 }
-  
-.main {
-    flex: 1;
-    background: linear-gradient(to right, #0295f7, #F8FFAE);
-    overflow-y: scroll;
+
+button {
+    color: #1b2538;
+    background: #acfcf1;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.form2{
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.form3{
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    padding-bottom: 20px;
+}
+
+.error {
+    color:red;
+    margin-top: 0px;
+    margin-bottom: 10px;
 }
 
 /* フッター */

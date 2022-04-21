@@ -64,14 +64,12 @@ width /***/:auto;
 }
 
 /* コードCSSスタート */
-
-
  html {
     box-sizing: border-box;
   }
   *, *::before, *::after {
     box-sizing: inherit;
-  }
+}
 
 .error {
     display: flex;
@@ -168,8 +166,6 @@ body {
     margin-bottom: 20px;
 }
 
-
-
 .login_page{
     margin:100px auto 100px auto;
     background-color: rgb(247, 244, 244);
@@ -188,20 +184,5 @@ button {
     cursor: pointer;
 }
 
-.form2{
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
-    background-color: rgb(247, 244, 244);
 
-
-}
-
-.form3{
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
-    background-color: rgb(247, 244, 244);
-    padding-bottom: 20px;
-}
 
