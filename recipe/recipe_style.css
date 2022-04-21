@@ -82,7 +82,6 @@ html {
   background-color: rgb(247, 244, 244);
   width: 50%;
   height: 200%;
-
 }
 
 .recipe_form{
@@ -105,8 +104,6 @@ body {
   color:#0295f7;
   margin-bottom: 20px;
   padding-top: 20px;
-
-
 }
 
 
@@ -118,7 +115,7 @@ body {
 
 }
 
-.form_title, .form {
+.form_title {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
@@ -130,7 +127,7 @@ body {
 
 }
 
-.form_contents input[type='text'],input[type='password'] {
+.form_contents input[type='text'],[type='textara']  {
   
   font: 15px/24px sans-serif;
 box-sizing: border-box;
@@ -149,14 +146,12 @@ outline: none;
 box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
 }
 
-.ef input[type='password']:focus {
-border: 1px solid #02bef7de;
-outline: none;
-box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
-}
+.ef input[type='textara'] :focus {
+  border: 1px solid #02bef7de;
+  outline: none;
+  box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
+  }
 
-.ef input[type='password']{
-}
 
 .error{
   margin-top: 5px;
