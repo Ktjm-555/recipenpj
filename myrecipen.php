@@ -46,93 +46,106 @@ $result = $stmt->execute();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="myrecipen_style.css">
+    <link rel="stylesheet" href="my_style.css">
     <title>あなたのレシピん</title>
 </head>
 <body>
-    <header>
-        <h1 class="title">Recipen <?php echo $name ?>さんの投稿一覧</h1>
-        <nav class="nav">
+    <div class="container"> 
+        <header>
+            <h1 class="title">Recipen <?php echo $name ?>さんの投稿一覧</h1>
+            <nav class="nav">
             <div class="button5">
-                <form action="toppage.php" method="post" >
-                    <button type="submit"> 
-                        TOPページに戻る
-                    </button>
-                </form>
+                    <form action="recipe/index.php" method="post" >
+                        <input type="hidden" name="type" value="2">
+                        <button type="submit"> 
+                            投稿する
+                        </button>
+                    </form>
+                </div>
+                <div class="button5">
+                    <form action="toppage.php" method="post" >
+                        <button type="submit"> 
+                            TOPページに戻る
+                        </button>
+                    </form>
+                </div>
+                <div class="button5">
+                    <form action="logout.php" method="post" >
+                        <button type="submit"> 
+                            ログアウト
+                        </button>
+                    </form>
+                </div>
+            </nav>
+        </header>
+        <div class="main">
+            <div class=join_page> 
+                <div class=join_page2>
+                    <div class="join_form">
+                        <div class="page_title">
+                            <?php echo h($name) . 'さんのレシピん♪'; ?>
+                        </div>
+                        <?php $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified); ?>
+                        <?php $count =0; ?>
+                        <?php while ($stmt->fetch()): ?>
+                        <div class="forms">
+                            <div class="form_title2">
+                                <a href="recipe.php?id=<?php echo $recipe_id; ?>"><?php echo h($recipename); ?></a>
+                            </div>
+
+                            <div class="form_title2">
+                                <time><?php echo h($created); ?></time><br>
+                            </div>
+                            <div class="form_title2">
+                                <a href="recipe.php?id=<?php echo $recipe_id; ?>"><img src="recipe_picture/<?php echo h($image); ?>"></a>
+                            </div>
+
+
+                        <?php $count+=1; ?>
+                        </div>
+                        <?php endwhile; ?>
+
+                        <?php if ($page > 1): ?>
+                            <div class="page">
+                                <div class="button6">
+                                    <form action="" method="post" >
+                                        <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
+                                        <input type ="hidden" name="page" value="<?php echo $page-1; ?>">
+                                        <button type="submit"> 
+                                            <?php echo $page-1;?>ページ目へ
+                                        </button>
+                                    </form>
+                                </div>
+                        <?php endif;?>
+
+                        <?php if($page < $max_page): ?>
+                                <div class="page2">
+                                    <div class="button6">
+                                        <form action="" method="post" >
+                                            <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
+                                            <input type ="hidden" name="page" value="<?php echo $page+1; ?>">
+                                            <button type="submit"> 
+                                                <?php echo $page+1;?>ページ目へ
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>   
+                            </div>
+                        <?php endif;?>
+
+
+                        <?php if ($count == 0): ?>
+                            <p>
+                                表示するデータはありません。
+                            </p>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </div>
-            <div class="button5">
-                <form action="logout.php" method="post" >
-                    <button type="submit"> 
-                        ログアウト
-                    </button>
-                </form>
-            </div>
-        </nav>
-    </header>
-    <div class="top_page3">  
-        <?php $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified); ?>
-        <?php $count =0; ?>
-        <?php while ($stmt->fetch()): ?>
-
-        <div class="top_page2">
-            <div class="form_title">
-                <?php echo h($name) . 'さんのレシピん♪'; ?>
-            </div>
-
-            <div class="form_title">
-                <a href="recipe.php?id=<?php echo $recipe_id; ?>"><?php echo h($recipename); ?></a>
-            </div>
-
-            <div class="form_title">
-                <time><?php echo h($created); ?></time><br>
-            </div>
-            <div class="form_title">
-                <a href="recipe.php?id=<?php echo $recipe_id; ?>"><img src="recipe_picture/<?php echo h($image); ?>"></a>
-            </div>
-
-
-        <?php $count+=1; ?>
-         </div>
-        <?php endwhile; ?>
-
-        <?php if ($page > 1): ?>
-            <div class="button2">
-                <form action="" method="post" >
-                    <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
-                    <input type ="hidden" name="page" value="<?php echo $page-1; ?>">
-                    <button type="submit"> 
-                        <?php echo $page-1;?>ページ目へ
-                    </button>
-                </form>
-            </div>
-        <?php endif;?>
-
-        <?php if($page < $max_page): ?>
-            <div class="button2">
-                <form action="" method="post" >
-                    <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
-                    <input type ="hidden" name="page" value="<?php echo $page+1; ?>">
-                    <button type="submit"> 
-                        <?php echo $page+1;?>ページ目へ
-                    </button>
-                </form>
-            </div>
-        <?php endif;?>
-
-
-        <?php if ($count == 0): ?>
-            <p>
-                表示するデータはありません。
-            </p>
-        <?php endif; ?>
-    </div>
-        <div class="margin">
-
         </div>
-    <footer>
-        2022 @recipenpj
-    </footer>
-
-
+        <footer>
+            2022 @recipenpj
+        </footer>
+    <div>
 </body>
 </html>
