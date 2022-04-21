@@ -128,7 +128,6 @@ header {
     margin:70px auto 100px auto;
     background-color: rgba(255, 253, 237, 1);
     width: 50%;
-    /* height: 200%; */
 }
 
 .join_page2{
@@ -177,6 +176,27 @@ header {
     margin-bottom: 10px;
 }
   
+/* check */
+.recipe_form{
+    margin:70px auto 100px auto;
+    background-color: rgba(255, 253, 237, 1);
+    width: 50%;
+}
+
+.form_title2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.page_title{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    color:#0295f7;  
+}
+
   
 /* フッター */
 /* 共通 */
