@@ -1,76 +1,6 @@
-/* リセットCSS */
-@charset "UTF-8";
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-margin: 0;
-padding: 0;
-border: none;
-font-style: normal;
-text-align: left;
-zoom: 1;
-}
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-display: block;
-}
-table {
-border-collapse: collapse;
-font-family: inherit;
-}
-h1,h2,h3,h4,h5 {
-font-size: 100%;
-font-weight: normal;
-line-height: 1;
-}
-input,textarea,select {
-font-family: inherit;
-font-size: 16px;
-}
-input[type="button"],input[type="text"],input[type="submit"] {
- -webkit-appearance: none;
- border-radius: 0;
-}
-textarea {
-resize: none;
--webkit-appearance: none;
-border-radius: 0;
-}
-th,td {
-border-collapse: collapse;
-}
-table th,table td {
-white-space: nowrap;
-}
-ul,ol {
-list-style-type: none;
-}
-img {
-vertical-align: text-bottom;
-vertical-align: -webkit-baseline-middle;
-max-width: 100%;
-height: auto;
-width /***/:auto;
-}
-
-/* コードCSSスタート */
+@charset  "utf-8";
 html {
-  box-sizing: border-box;
-  font-size: 62.5%;
-
-}
-*, *::before, *::after {
-  box-sizing: inherit;
+    font-size: 62.5%;
 }
 
 body {
@@ -99,12 +29,12 @@ body {
     font-size: 2.0rem;
 }
 
-.chat_form {
+.send-box {
     text-align: center;
     padding: 0 40px;
 }
 
-.chat_show {
+.chat-area {
     max-height: 60vh;
     padding: 30px 60px;
     overflow-y: scroll;
@@ -112,25 +42,13 @@ body {
     scrollbar-width: none;
 }
 
-.chat_show::-webkit-scrollbar {
+.chat-area::-webkit-scrollbar {
     display: none;
 }
 
-.chat_corner input[type="submit"] {
-    /* display: none; */
-    /* noneをコメアウトしてる　したは貼り付けたやつ */
-    /* font-size: 3.5rem;
-    line-height: 44px;
-    cursor: pointer;
-    display: inline-block;
-    width: 200px;
-    height: 44px;
-    border: 2px solid;
-    background-color: #fff;
-    text-align: center;
-    vertical-align: bottom;
-    transition: all 0.3s; */
-}
+/* .chat-system input[type="submit"] {
+    display: none;
+} */
 
 .change-person {
     text-align: center;
@@ -162,11 +80,11 @@ body {
     overflow: hidden;
 }
 
-.chat_form label {
+.send-box label {
     margin: 30px 0;
 }
 
-.chat_form .far.fa-paper-plane::before {
+.send-box .far.fa-paper-plane::before {
     font-size: 3.5rem;
     line-height: 44px;
     cursor: pointer;
@@ -190,27 +108,27 @@ body {
     background-color: rgb(194, 97, 97);
 }
 
-.chat_show .person1 {
+.chat-area .person1 {
     text-align: right;
     vertical-align: top;
 }
 
-.chat_show .person2 {
+.chat-area .person2 {
     text-align: left;
     position: relative;
 }
 
-.second .chat_show .person1 {
+.second .chat-area .person1 {
     text-align: left;
     position: relative;
 }
 
-.second .chat_show .person2 {
+.second .chat-area .person2 {
     text-align: right;
     position: initial;
 }
 
-.chat_show .chat {
+.chat-area .chat {
     position: relative;
     margin: 20px;
     background-color: #fff;
@@ -222,7 +140,7 @@ body {
     word-wrap: break-word;
 }
 
-.chat_show .chat::after {
+.chat-area .chat::after {
     content: '';
     display: inline-block;
     width: 0;
@@ -235,7 +153,7 @@ body {
     bottom: 20px;
 }
 
-.chat_show .person2 .chat::after {
+.chat-area .person2 .chat::after {
     border-top: #fff solid 15px;
     border-left: transparent solid 6px;
     border-right: transparent solid 6px;
@@ -245,40 +163,40 @@ body {
     left: -9px;
 }
 
-.second .chat_show .chat::after {
+.second .chat-area .chat::after {
     transform: rotate(120deg);
     right: initial;
     left: -9px;
 }
 
-.second .chat_show .person2 .chat::after {
+.second .chat-area .person2 .chat::after {
     transform: rotate(-120deg);
     left: initial;
     right: -9px;
     bottom: 20px;
 }
 
-.chat_show .chat-time {
+.chat-area .chat-time {
     position: absolute;
     left: -60px;
 }
 
-.chat_show .person2 .chat-time {
+.chat-area .person2 .chat-time {
     left: initial;
     right: -60px;
 }
 
-.second .chat_show .chat-time {
+.second .chat-area .chat-time {
     left: initial;
     right: -60px;
 }
 
-.second .chat_show .person2 .chat-time {
+.second .chat-area .person2 .chat-time {
     right: initial;
     left: -60px;
 }
 
-.chat_show img {
+.chat-area img {
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -287,35 +205,35 @@ body {
     vertical-align: bottom;
 }
 
-.chat_show .person1 img {
+.chat-area .person1 img {
     background-color: aquamarine;
 }
 
-.chat_show .person2 img {
+.chat-area .person2 img {
     background-color: rgb(194, 97, 97);
 }
 
-.chat_show .person2 .chat {
+.chat-area .person2 .chat {
     margin-left: 80px;
 }
 
-.second .chat_show .chat {
+.second .chat-area .chat {
     margin-left: 80px;
 }
 
-.chat_show .person2 img {
+.chat-area .person2 img {
     position: absolute;
     left: -10px;
     bottom: 0px;
 }
 
-.second .chat_show img {
+.second .chat-area img {
     position: absolute;
     left: -10px;
     bottom: 0px;
 }
 
-.second .chat_show .person2 img {
+.second .chat-area .person2 img {
     position: initial;
 }
 
@@ -334,7 +252,7 @@ body {
     opacity: 0.8;
 }
 
-.cform {
+.flex-box {
     display: flex;
     justify-content: center;
 }
@@ -351,17 +269,17 @@ form {
         border-left: none;
         border-right: none;
     }
-    .chat_show {
+    .chat-area {
         height: 100vh;
         padding: 0px 15px;
     }
-    .chat_form {
+    .send-box {
         padding: 0 5px;
     }
-    .chat_form label {
+    .send-box label {
         margin: 0;
     }
-    .chat_corner .chat_form.cform {
+    .chat-system .send-box.flex-box {
         width: 100%;
         padding: 10px 0px 30px;
         flex-direction: row;
@@ -376,48 +294,48 @@ form {
         min-height: 18px;
         padding: 4px;
     }
-    .chat_form .far .fa-paper-plane::before {
+    .send-box .far.fa-paper-plane::before {
         width: 60px;
         height: 30px;
         margin: 0;
         line-height: 30px;
         font-size: 1.6rem;
     }
-    .chat_show .chat {
+    .chat-area .chat {
         margin: 10px 15px;
         padding: 10px;
         max-width: 200px;
         word-wrap: break-word;
         font-size: 1.3rem;
     }
-    .chat_show img {
+    .chat-area img {
         width: 30px;
         height: 30px;
         margin: 10px 0;
         border-width: 2px;
     }
-    .chat_show .chat::after {
+    .chat-area .chat::after {
         bottom: 10px;
     }
-    .second .chat_show .person2 .chat::after {
+    .second .chat-area .person2 .chat::after {
         bottom: 10px;
     }
-    .chat_show .person2 .chat {
+    .chat-area .person2 .chat {
         margin-left: 45px;
     }
-    .second .chat_show .chat {
+    .second .chat-area .chat {
         margin-left: 45px;
     }
-    .chat_show .chat-time {
+    .chat-area .chat-time {
         left: -45px;
     }
-    .chat_show .person2 .chat-time {
+    .chat-area .person2 .chat-time {
         right: -45px;
     }
-    .second .chat_show .chat-time {
+    .second .chat-area .chat-time {
         right: -45px;
     }
-    .second .chat_show .person2 .chat-time {
+    .second .chat-area .person2 .chat-time {
         left: -45px;
     }
 }
