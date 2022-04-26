@@ -1,6 +1,8 @@
 <?php
 require('library.php');
 
+
+
 session_start();
 $db = dbconnect();
 
@@ -37,7 +39,7 @@ $result = $stmt->execute();
         <?php 
             $error = '';
             if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
-                $user_id = $_SESSION['id'];
+                $user_id = $_SESSION['user_id'];
                 $name = $_SESSION['name'];
             } else {
                 $error = 'blank';
@@ -69,6 +71,14 @@ $result = $stmt->execute();
                             </button>
                         </form>
                     </div>
+                    <div class="button5 join1">
+                        <form action="chat/chat.php" >
+                            <button type="submit"> 
+                                チャットページ
+                            </button>
+                        </form>
+                    </div>
+                    
                 <?php endif; ?>
                 <?php if (!$error == 'blank'): ?>
                     <div class="button5 join1">
@@ -89,6 +99,13 @@ $result = $stmt->execute();
                             <input type ="hidden" name="recipe_member_id" value="<?php echo $user_id; ?>">
                             <button type="submit"> 
                                 マイページ
+                            </button>
+                        </form>
+                    </div>
+                    <div class="button5 join1">
+                        <form action="chat/chat.php" method="post" >
+                            <button type="submit"> 
+                                チャットページ
                             </button>
                         </form>
                     </div>
