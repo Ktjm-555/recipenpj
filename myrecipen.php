@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
     $name = $_SESSION['name'];
     $aisatsu = 'doumo';
 } else {
-    echo 'あれ？';
+    header('Location: toppage.php');
     exit();
 }
 

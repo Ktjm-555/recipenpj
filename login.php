@@ -7,6 +7,11 @@ $password = '';
 
 require('library.php');
 
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
+    header('Location: toppage.php');
+    exit();
+} 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
 
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
