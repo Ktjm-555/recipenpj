@@ -86,6 +86,8 @@ button {
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+
 }
 
 /* ヘッダー */
@@ -107,10 +109,20 @@ header {
 }
 
 /* メイン */
+.date {
+    background-color: rgba(255, 253, 237, 1);
+    text-align: center;
+}
+
 .main {
     flex: 1;
     background: linear-gradient(to right, #0295f7, #F8FFAE);
     overflow-y: scroll;
+}
+
+.form_title2:hover {
+    /* 透明度 */
+    opacity: .5;
 }
 
 .join_page {
@@ -130,7 +142,24 @@ header {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
+    transition-property: opacity;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
 }
+
+.form_title2:hover {
+    opacity: .5;
+}
+
+.form_title1{
+    color:#0295f7;
+}
+
+button:hover {
+    opacity: .5;
+}
+
 
 .page{
     display:flex;
@@ -147,10 +176,18 @@ header {
     padding:20px 30px 20px 30px;
 }
 
+a {
+    color:#1b2538;
+    text-decoration: none;
+}
+
+
+
 /* フッター */
 footer {
     background-color: rgba(255, 253, 237, 1);
     text-align: center;
     padding: 18px 0;
 }
+
 

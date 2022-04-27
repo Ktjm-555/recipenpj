@@ -97,14 +97,14 @@
 					<?php if ($clear == 'clear'): ?>
 						<div class="page">
 							<div class="button6">
-							<form action="update.php" method="post" enctype="multipart/form-data">
-								<input type="hidden" name="type" value="2">
-								<input type="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
-								<input type="hidden" name="recipe_id" value="<?php echo $recipe_id; ?>">
-								<button type="submit"> 
-								編集する
-								</button>
-							</form>
+								<form action="update.php" method="post" enctype="multipart/form-data">
+									<input type="hidden" name="type" value="2">
+									<input type="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
+									<input type="hidden" name="recipe_id" value="<?php echo $recipe_id; ?>">
+									<button type="submit"> 
+									編集する
+									</button>
+								</form>
 							</div>
 
 							<div class="button6">
@@ -117,9 +117,9 @@
 								</form>
 							</div>
 						</div>
+					<?php endif; ?>
 					</div>
 				</div>
-			<?php endif; ?>
 			</div>
 		</div>
 		<footer>

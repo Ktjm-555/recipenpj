@@ -104,11 +104,6 @@ if(isset($_GET['back']) && $_GET['back'] == "TOPページに戻る"){
 	<link rel="stylesheet" href="chat_style.css">
 	<script src="https://kit.fontawesome.com/2f5b67bf5b.js" crossorigin="anonymous"></script>
 	<script src="js/main.js"></script>
-	<script>
-		$('#click').click(function () {
-    	alert("アラートです");
- 		 });
-	</script>
 </head>
 <body>
 	<div class="container"> 

@@ -79,6 +79,15 @@ html {
     height: 100vh;
 }
 
+.btn {
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+
+}
+
+button:hover {
+    opacity: .5;
+}
+
 /* ヘッダー */
 header {
     background-color: rgba(255, 253, 237, 1);
@@ -124,9 +133,12 @@ body {
 
 .chat-box {
     border: 5px solid;
+    border-color: #ccc;
     width: 80%;
     margin: 30px auto;
     background-color: rgba(255, 253, 237, 1);
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .5);
 }
 
 .chat-box #textarea {
@@ -351,7 +363,7 @@ body {
 }
 
 .btn:hover {
-    opacity: 0.8;
+    opacity: 0.5;
 }
 
 .flex-box {

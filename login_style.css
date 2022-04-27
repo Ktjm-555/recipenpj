@@ -107,6 +107,9 @@ width /***/:auto;
     margin-bottom: 10px;
 }
 
+button:hover {
+    opacity: .5;
+}
   
 /* ヘッター */
 header {
@@ -170,6 +173,7 @@ button {
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
 }
 
 .form2{

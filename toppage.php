@@ -120,13 +120,18 @@ $result = $stmt->execute();
             </nav>
         </header>
         <div class="main">
+        <script>
+            var today = new Date();
+            var todayHtml = today.getFullYear() + '年' + (today.getMonth()+1) + '月' + today.getDate() + '日';
+            document.write('<p class="date">本日の日付は' + todayHtml + 'です</p>');
+        </script>
             <div class=join_page> 
                 <div class=join_page2>
                     <div class="join_form">
                     <?php $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified, $name); ?>
                     <?php $count =0; ?>
                     <?php while ($stmt->fetch()): ?>
-                        <div class="form_title2">
+                        <div class="form_title2 form_title1">
                             <?php echo h($name) . 'さんのレシピん♪'; ?>
                         </div>
                     
