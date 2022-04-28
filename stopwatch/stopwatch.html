@@ -10,25 +10,88 @@
     <title>stopwatch</title>
 </head>
 <body>
-    <div class="container">
-        <p id="timer">00:00:00</p>
-        <div>
-            <button id="start_stop" class="btn btn-lg btn-primary">START</button>
+    <div class="big-container">
+        <header>
+            <h1 class="title">Recipen ストップウォッチ</h1>
+            <nav class="nav">
+                <div class="button5">
+                    <form action="toppage.php" method="post" >
+                        <button type="submit"> 
+                            TOPページに戻る
+                        </button>
+                    </form>
+                </div>
+                <div class="button5 join1">
+                    <form action="chat/chat.php" >
+                        <button type="submit"> 
+                            チャットページ
+                        </button>
+                    </form>
+                </div>
+            </nav>
+        </header>
+        <div class="main">
+            <div class="container">
+                <p id="timer">00:00:00</p>
+                <div>
+                    <button id="start_stop" class="btn btn-lg btn-primary">StartReset</button>
+                </div>
+            </div>
+            <script>
+                var start;
+                var timer_id;
+        
+                document.getElementById('start_stop').addEventListener('click',function(){
+        
+                    if (this.innerHTML === 'StartReset'){
+                        start = new Date();
+        
+                        timer_id = setInterval(goTimer, 10);
+                        // 一定時間ごとに特定の処理を繰り返す
+        
+                        // STOPボタンにする。
+                        this.innerHTML = 'STOP';
+                        this.classList.remove('btn-primary');
+                        this.classList.add('btn-danger');
+                    } else {
+                        clearInterval(timer_id);
+                        // スタートボタンに戻す
+                        this.innerHTML = 'StartReset';
+                        this.classList.remove('btn-danger');
+                        this.classList.add('btn-primary');
+                    }
+                });
+        
+                var addZero = function(value){
+                    if (value < 10){
+                        value = '0' + value;
+                    }
+                    return value;
+                }
+        
+                var goTimer = function() {
+                    var now = new Date();
+        
+                    var milli = now.getTime() - start.getTime();
+                    var seconds = Math.floor(milli  / 1000);
+                    var minutes = Math.floor(seconds / 60);
+                    var hours = Math.floor(minutes / 60);
+        
+                    seconds = seconds - minutes * 60;
+                    minutes = minutes - hours  * 60;
+        
+                    hours = addZero(hours);
+                    minutes = addZero(minutes);
+                    seconds = addZero(seconds);
+        
+                    document.getElementById('timer').innerHTML = hours + ':' + minutes + ':' + seconds;
+                }
+            </script>
         </div>
+        <footer>
+            2022 @recipenpj
+        </footer>      
     </div>
-    <script>
-        document.getElementById('start_stop').addEventListener('click',function(){
-            var start = new Date();
-
-            setInterval(goTimer, 10);
-            // 一定時間ごとに特定の処理を繰り返す
-
-        });
-
-        var goTimer = function() {
-            var now = new Date();
-            document.getElementById('timer').innerHTML = now.getTime();
-        }
-    </script>    
+    
 </body>
 </html>

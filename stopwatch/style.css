@@ -1,3 +1,32 @@
+/* ヘッダー */
+header {
+    background-color: rgba(255, 253, 237, 1);
+    display:flex;
+    align-items: center;
+    height: 100px;
+}
+
+.button5 {
+    display: inline-block;
+    padding-right: 10px;
+}
+
+.title {
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+/* メイン */
+.main {
+    background: linear-gradient(to right, #0295f7, #F8FFAE);
+    height: auto;
+}
+
+.big-container{
+    background: linear-gradient(to right, #0295f7, #F8FFAE);
+ 
+}
+
 .container{
     text-align: center;
     margin: 30px auto;
@@ -25,4 +54,14 @@
 
 .btn:hover{
     opacity: 0.8;
+}
+
+/* フッター */
+footer {
+    background-color: rgba(255, 253, 237, 1);
+    text-align: center;
+    padding: 18px 0;
+    position: absolute;/*←絶対位置*/
+    bottom: 0; /*下に固定*/
+    width: 100%;
 }
