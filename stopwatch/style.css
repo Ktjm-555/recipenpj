@@ -11,10 +11,30 @@ header {
     padding-right: 10px;
 }
 
+button:hover {
+    opacity: .5;
+}
+
+button {
+    color: #1b2538;
+    background: #acfcf1;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+
+}
+
 .title {
     margin-right: auto;
     margin-left: 20px;
+    border: none;
+    font-family:'游ゴシック Medium';
+    font-size: 17px;
+
 }
+
 
 /* メイン */
 .main {
@@ -22,14 +42,15 @@ header {
     height: auto;
 }
 
-.big-container{
+/* .big-container{
     background: linear-gradient(to right, #0295f7, #F8FFAE);
  
-}
+} */
 
 .container{
     text-align: center;
     margin: 30px auto;
+    height: 100%;
 }
 
 #timer {

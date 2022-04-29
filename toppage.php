@@ -70,14 +70,6 @@ $result = $stmt->execute();
                                 会員登録する
                             </button>
                         </form>
-                    </div>
-                    <div class="button5 join1">
-                        <form action="chat/chat.php" >
-                            <button type="submit"> 
-                                チャットページ
-                            </button>
-                        </form>
-                    </div>
                     
                 <?php endif; ?>
                 <?php if (!$error == 'blank'): ?>
@@ -106,6 +98,13 @@ $result = $stmt->execute();
                         <form action="chat/chat.php" method="post" >
                             <button type="submit"> 
                                 チャットページ
+                            </button>
+                        </form>
+                    </div>
+                    <div class="button5 join1">
+                        <form action="stopwatch/stopwatch.html" method="post" >
+                            <button type="submit"> 
+                                ストップウォッチ
                             </button>
                         </form>
                     </div>
