@@ -38,8 +38,8 @@ font-family: inherit;
 font-size: 16px;
 }
 input[type="button"],input[type="text"],input[type="submit"] {
- -webkit-appearance: none;
- border-radius: 0;
+-webkit-appearance: none;
+border-radius: 0;
 }
 textarea {
 resize: none;
@@ -64,142 +64,142 @@ width /***/:auto;
 }
 
 /* コードCSSスタート */
- html {
-    box-sizing: border-box;
+html {
+  box-sizing: border-box;
 }
-  *, *::before, *::after {
-    box-sizing: inherit;
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
 }
 
 .form_contents input[type='text'],input[type='password'] {
-    
-    font: 15px/24px sans-serif;
-	box-sizing: border-box;
-	width: 100%;
-	padding: 0.3em;
-	/* transition: 0.3s; */
-	letter-spacing: 1px;
-	color: #1b2538;
-	border: 1px solid #1b2538;
-	border-radius: 4px;   
+  
+  font: 15px/24px sans-serif;
+box-sizing: border-box;
+width: 100%;
+padding: 0.3em;
+/* transition: 0.3s; */
+letter-spacing: 1px;
+color: #1b2538;
+border: 1px solid #1b2538;
+border-radius: 4px;   
 }
 
 .ef input[type='text']:focus {
-	border: 1px solid #02bef7de;
-	outline: none;
-	box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
+border: 1px solid #02bef7de;
+outline: none;
+box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
 }
 
 .ef input[type='password']:focus {
-	border: 1px solid #02bef7de;
-	outline: none;
-	box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
+border: 1px solid #02bef7de;
+outline: none;
+box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
 }
 
 .ef input[type='password']{
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 button:hover {
-    opacity: .5;
+  opacity: .5;
 }
-  
+
 /* ヘッター */
 header {
-    background-color: rgba(255, 253, 237, 1);
-    display:flex;
-    align-items: center;
-    height: 100px;
+  background-color: #FFD400;
+  display:flex;
+  align-items: center;
+  height: 100px;
 }
 
 .title {
-    margin-right: auto;
-    margin-left: 20px;
-    /* margin-top: auto;
-    margin-top: auto; */
+  margin-right: auto;
+  margin-left: 20px;
+  /* margin-top: auto;
+  margin-top: auto; */
 }
 
 .button5 {
-    display: inline-block;
-    padding-right: 10px;
+  display: inline-block;
+  padding-right: 10px;
 }
 
 /* メイン */
 .main {
-    flex: 1;
-    background: linear-gradient(to right, #0295f7, #F8FFAE);
-    overflow-y: scroll;
+  flex: 1;
+  background: linear-gradient(to right, #0295f7, #F8FFAE);
+  overflow-y: scroll;
 }
 
 .join_page {
-    margin:60px auto 40px auto;
-    padding-bottom: 10px;
-    background-color: rgba(255, 253, 237, 1);
-    width: 50%;
+  margin:60px auto 40px auto;
+  padding-bottom: 10px;
+  background-color: rgba(255, 253, 237, 1);
+  width: 50%;
 }
 
 .join_page2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .page_title {
-    display: flex;
-    justify-content: center;
-    background-color: rgba(255, 253, 237, 1);
-    color:#0295f7;
-    margin-bottom: 20px;
-    padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(255, 253, 237, 1);
+  color:#0295f7;
+  margin-bottom: 20px;
+  padding-top: 20px;
 }
 
 .form_title {
-    margin-bottom: 10px;
-    margin-top: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 
 }
 
 button {
-    color: #1b2538;
-    background: #acfcf1;
-    padding: 10px 30px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  color: #1b2538;
+  background: rgba(255, 253, 237, 1);
+  padding: 10px 30px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
 }
 
 .form2{
-    display: inline-block;
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
+  display: inline-block;
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
 }
 
 .form3{
-    display: inline-block;
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
-    padding-bottom: 20px;
+  display: inline-block;
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  padding-bottom: 20px;
 }
 
 .error {
-    color:red;
-    margin-top: 0px;
-    margin-bottom: 10px;
+  color:red;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
 /* フッター */
 footer {
-    background-color: rgba(255, 253, 237, 1);
-    text-align: center;
-    padding: 18px 0;
+  background-color: #FFD400;
+  text-align: center;
+  padding: 18px 0;
 }

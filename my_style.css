@@ -81,7 +81,7 @@ html {
 
 button {
     color: #1b2538;
-    background: #acfcf1;
+    background: rgba(255, 253, 237, 1);
     padding: 10px 30px;
     border-radius: 5px;
     border: none;
@@ -96,7 +96,7 @@ button:hover {
 
 /* ヘッダー */
 header {
-    background-color: rgba(255, 253, 237, 1);
+    background-color: #FFD400;
     display:flex;
     align-items: center;
     height: 100px;
@@ -119,7 +119,7 @@ a {
 }
 .main {
     flex: 1;
-    background: linear-gradient(to right, #0295f7, #F8FFAE);
+    background-color: #EEEEEE;
     overflow-y: scroll;
 }
 
@@ -178,7 +178,7 @@ a {
 
 /* フッター */
 footer {
-    background-color: rgba(255, 253, 237, 1);
+    background-color: #FFD400;
     text-align: center;
     padding: 18px 0;
 }

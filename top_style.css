@@ -38,8 +38,8 @@ font-family: inherit;
 font-size: 16px;
 }
 input[type="button"],input[type="text"],input[type="submit"] {
- -webkit-appearance: none;
- border-radius: 0;
+-webkit-appearance: none;
+border-radius: 0;
 }
 textarea {
 resize: none;
@@ -66,128 +66,128 @@ width /***/:auto;
 /* コードCSSスタート */
 
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 *, *::before, *::after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
 }
 
 button {
-    color: #1b2538;
-    background: #acfcf1;
-    padding: 10px 30px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  color: #1b2538;
+  background: rgba(255, 253, 237, 1);
+  padding: 10px 30px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
 
 }
 
 /* ヘッダー */
 header {
-    background-color: rgba(255, 253, 237, 1);
-    display:flex;
-    align-items: center;
-    height: 100px;
+  background-color: #FFD400;
+  display:flex;
+  align-items: center;
+  height: 100px;
 }
 
 .button5 {
-    display: inline-block;
-    padding-right: 10px;
+  display: inline-block;
+  padding-right: 10px;
 }
 
 .title {
-    margin-right: auto;
-    margin-left: 20px;
+  margin-right: auto;
+  margin-left: 20px;
 }
 
 /* メイン */
 .date {
-    background-color: rgba(255, 253, 237, 1);
-    text-align: center;
+  background-color: rgba(255, 253, 237, 1);
+  text-align: center;
 }
 
 .main {
-    flex: 1;
-    background: linear-gradient(to right, #0295f7, #F8FFAE);
-    overflow-y: scroll;
+  flex: 1;
+  background-color: #EEEEEE;
+  overflow-y: scroll;
 }
 
 .form_title2:hover {
-    /* 透明度 */
-    opacity: .5;
+  /* 透明度 */
+  opacity: .5;
 }
 
 .join_page {
-    margin:60px auto 40px auto;
-    padding-bottom: 10px;
-    background-color: rgba(255, 253, 237, 1);
-    width: 50%;
+  margin:60px auto 40px auto;
+  padding-bottom: 10px;
+  background-color: rgba(255, 253, 237, 1);
+  width: 50%;
 }
 
 .join_page2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form_title2 {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-    transition-property: opacity;
-    transition-duration: 1s;
-    transition-timing-function: ease;
-    transition-delay: 0s;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  transition-property: opacity;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
 }
 
 .form_title2:hover {
-    opacity: .5;
+  opacity: .5;
 }
 
 .form_title1{
-    color:#0295f7;
+  color:#0295f7;
 }
 
 button:hover {
-    opacity: .5;
+  opacity: .5;
 }
 
 
 .page{
-    display:flex;
-    justify-content: center;
+  display:flex;
+  justify-content: center;
 }
 
 .page2{
-    display:flex;
-    justify-content: center;
+  display:flex;
+  justify-content: center;
 }
 
 .button6 {
-    display: inline-block;
-    padding:20px 30px 20px 30px;
+  display: inline-block;
+  padding:20px 30px 20px 30px;
 }
 
 a {
-    color:#1b2538;
-    text-decoration: none;
+  color:#1b2538;
+  text-decoration: none;
 }
 
 
 
 /* フッター */
 footer {
-    background-color: rgba(255, 253, 237, 1);
-    text-align: center;
-    padding: 18px 0;
+  background-color: #FFD400;
+  text-align: center;
+  padding: 18px 0;
 }
 
 
