@@ -1,3 +1,30 @@
+<?php
+session_start();
+
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
+	$name = $_SESSION['name'];
+	$user_id = $_SESSION['user_id'];
+} else {
+	header('Location: ./login.php');
+	exit();
+}
+
+// フォームが送信されたとき
+$form = [
+  'product' => '',
+  'buy_u_id' => '',
+];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2"){
+  $form['product'] = filter_input(INPUT_POST, 'product', FILTER_SANITIZE_STRING);
+	$form['buy_u_id'] = filter_input(INPUT_POST, 'buy_u_id', FILTER_SANITIZE_STRING);
+	$form['recipe_u_id'] = filter_input(INPUT_POST, 'recipe_u_id', FILTER_SANITIZE_STRING);
+	$_SESSION['form']  = $form;
+	header('Location: check.php');
+	exit();
+} 
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -12,6 +39,13 @@
 		<header>
 			<h1 class="title">Recipen レシピん詳細</h1>
 				<nav class="nav">
+				<div class="button5">
+						<form action="buy_list.php" method="post" >
+								<button type="submit"> 
+									買うものリスト
+								</button>
+						</form>
+					</div>
 					<div class="button5">
 						<form action="recipe/index.php" method="post" >
 								<input type="hidden" name="type" value="2">
@@ -36,7 +70,6 @@
 						<?php
 						require('library.php');
 						$db = dbconnect();
-						session_start();
 
 						$stmt = $db->prepare('select r.id, r.recipename, r.member_id, r.image, r.foodstuffs, r.recipe, r.created,  
 						r.modified, m.name from recipen r, member m where r.id=? and m.id=r.member_id');
@@ -66,16 +99,24 @@
 						<div class="form_title2">
 							<p>材料</p>
 						</div>
-						<div class="form_title2">
-							<pre><?php echo h($foodstuffs); ?></pre>
-						</div>
+						<form action="" method="post">
+							<input type="hidden" name="type" value="2">
+							<input type="hidden" name="product" value="<?php echo h($foodstuffs); ?>">
+							<input type="hidden" name="buy_u_id" value="<?php echo $user_id; ?>">
+							<input type="hidden" name="recipe_u_id" value="<?php echo $recipe_id; ?>">
+							<div class="form_title2">
+								<pre><?php echo h($foodstuffs); ?></pre>
+							</div>
+							<div class="form3">
+								<button type="submit">作る予定</button>
+							</div>
+						</form>
 						<div class="form_title2">
 							<p>作り方</p>
 						</div>
 						<div class="form_title2">
 							<pre><?php echo h($recipe); ?></pre>
 						</div>
-						
 						<?php 
 						$clear = '';
 						if (isset($_SESSION['user_id']) && isset($_SESSION['name']) && $_SESSION['user_id'] == $recipe_member_id){
@@ -94,7 +135,6 @@
 									</button>
 								</form>
 							</div>
-
 							<div class="button6">
 								<form action="delete.php" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">

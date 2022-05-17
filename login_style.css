@@ -134,7 +134,7 @@ header {
 /* メイン */
 .main {
   flex: 1;
-  background: linear-gradient(to right, #0295f7, #F8FFAE);
+  background-color: #EEEEEE;
   overflow-y: scroll;
 }
 
