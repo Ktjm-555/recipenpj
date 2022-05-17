@@ -1,94 +1,86 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <title>stopwatch</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>stopwatch</title>
 </head>
 <body>
-        <header>
-            <h1 class="title">Recipen ストップウォッチ</h1>
-            <nav class="nav">
-                <div class="button5">
-                    <form action="../toppage.php" method="post" >
-                        <button type="submit"> 
-                            TOPページに戻る
-                        </button>
-                    </form>
-                </div>
-                <div class="button5 join1">
-                    <form action="chat/chat.php" >
-                        <button type="submit"> 
-                            チャットページ
-                        </button>
-                    </form>
-                </div>
-            </nav>
-        </header>
-        <div class="main">
-            <div class="container">
-                <p id="timer">00:00:00</p>
-                <div>
-                    <button id="start_stop" class="btn btn-lg btn-primary">StartReset</button>
-                </div>
-            </div>
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Recipen ストップウォッチ</h1>
+      <nav class="nav">
+        <div class="button5">
+          <form action="../toppage.php" method="post" >
+            <button type="submit"> 
+              TOPページに戻る
+            </button>
+          </form>
         </div>
-        <footer>
-            2022 @recipenpj
-        </footer>      
-        <script>
-            var start;
-            var timer_id;
-    
-            document.getElementById('start_stop').addEventListener('click',function(){
-    
-                if (this.innerHTML === 'StartReset'){
-                    start = new Date();
-    
-                    timer_id = setInterval(goTimer, 10);
-                    // 一定時間ごとに特定の処理を繰り返す
-    
-                    // STOPボタンにする。
-                    this.innerHTML = 'STOP';
-                    this.classList.remove('btn-primary');
-                    this.classList.add('btn-danger');
-                } else {
-                    clearInterval(timer_id);
-                    // スタートボタンに戻す
-                    this.innerHTML = 'StartReset';
-                    this.classList.remove('btn-danger');
-                    this.classList.add('btn-primary');
-                }
-            });
-    
-            var addZero = function(value){
-                if (value < 10){
-                    value = '0' + value;
-                }
-                return value;
-            }
-    
-            var goTimer = function() {
-                var now = new Date();
-    
-                var milli = now.getTime() - start.getTime();
-                var seconds = Math.floor(milli  / 1000);
-                var minutes = Math.floor(seconds / 60);
-                var hours = Math.floor(minutes / 60);
-    
-                seconds = seconds - minutes * 60;
-                minutes = minutes - hours  * 60;
-    
-                hours = addZero(hours);
-                minutes = addZero(minutes);
-                seconds = addZero(seconds);
-    
-                document.getElementById('timer').innerHTML = hours + ':' + minutes + ':' + seconds;
-            }
-        </script>
+      </nav>
+    </header>
+    <div class="main">
+      <div class="container">
+        <p id="timer">00:00:00</p>
+        <div>
+          <button id="start_stop" class="btn btn-lg btn-primary">StartReset</button>
+        </div>
+      </div>
+    </div>
+    <footer>
+      2022 @recipenpj
+    </footer> 
+  </div>     
+  <script>
+    let start;
+    let timer_id;
+
+    document.getElementById('start_stop').addEventListener('click',function(){
+      if (this.innerHTML === 'StartReset'){
+        start = new Date();
+        // 一定時間ごとに特定の処理を繰り返す
+        timer_id = setInterval(goTimer, 10);
+        // STOPボタンにする。
+        this.innerHTML = 'STOP';
+        this.classList.remove('btn-primary');
+        this.classList.add('btn-danger');
+      } else {
+        clearInterval(timer_id);
+        // スタートボタンに戻す
+        this.innerHTML = 'StartReset';
+        this.classList.remove('btn-danger');
+        this.classList.add('btn-primary');
+      }
+    });
+
+    let addZero = function(value){
+      if (value < 10){
+         value = '0' + value;
+      }
+      return value;
+    }
+
+    let goTimer = function() {
+      let now = new Date();
+
+      let milli = now.getTime() - start.getTime();
+      let seconds = Math.floor(milli  / 1000);
+      let minutes = Math.floor(seconds / 60);
+      let hours = Math.floor(minutes / 60);
+
+      seconds = seconds - minutes * 60;
+      minutes = minutes - hours  * 60;
+
+      hours = addZero(hours);
+      minutes = addZero(minutes);
+      seconds = addZero(seconds);
+
+      document.getElementById('timer').innerHTML = hours + ':' + minutes + ':' + seconds;
+    }
+  </script>
 </body>
 </html>

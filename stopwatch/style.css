@@ -1,4 +1,12 @@
 /* ヘッダー */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+
+  
 header {
     background-color: rgba(255, 253, 237, 1);
     display:flex;
@@ -39,7 +47,7 @@ button {
 /* メイン */
 .main {
     background: linear-gradient(to right, #0295f7, #F8FFAE);
-    height: auto;
+    height: 80vh;
 }
 
 /* .big-container{
