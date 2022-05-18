@@ -12,42 +12,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3"){
   if (!$db){
     die($db->error); 
   }
-  // $stmt = $db->prepare('select count(buy_u_id) from buy where recipe_d_id=?');
-  // if (!$stmt){
-  //   die($db->error);
-  // }
-  // $stmt->bind_param('i', $form['recipe_d_id']);
-  // $success = $stmt->execute();
-  // if (!$success){
-  //   die($db->error);
-  // } 
-  // $stmt->bind_result($cnt);
-  // $stmt->fetch();
-  // if($cnt > 0){
-  //   $error['recipe_id'] = 'juhuku';
-  // }
-  
-  // if (empty($error)){
+  $stmt = $db->prepare('select count(buy_u_id) from buy where recipe_d_id=?');
+  // var_dump($stmt);
+  // exit();
+  if (!$stmt){
+    die($db->error);
+  }
+  $stmt->bind_param('i', $form['recipe_d_id']);
+  $success = $stmt->execute();
+  if (!$success){
+    die($db->error);
+  } 
+  $stmt->bind_result($cnt);
+    // var_dump($form['recipe_d_id']);
+  $stmt->fetch();
+  // var_dump($cnt);
+  // exit();
+  if($cnt > 0){
+    $error['recipe_id'] = 'juhuku';
+  }
+  $stmt->close();
+
+  if (empty($error)){
     $sql = "INSERT INTO
     buy
     (product, buy_u_id, recipe_d_id)
     VALUES
-    ('".$form['product']."', '".$form['buy_u_id']."','".$form['recipe_d_id']."')";
-    $res = $db->query($sql);
+    (?, ?, ?)";
+    $stmt = $db->prepare($sql);
+    // var_dump($sql);
+    // exit();
+    $stmt->bind_param('sii', $form['product'], $form['buy_u_id'], $form['recipe_d_id']);
+    $success = $stmt->execute();
+    // $sql = "INSERT INTO
+    // buy
+    // (product, buy_u_id, recipe_d_id)
+    // VALUES
+    // ('".$form['product']."', '".$form['buy_u_id']."','".$form['recipe_d_id']."')";
+    // $res = $db->prepare($sql);
     // var_dump($res);
     // var_dump($sql);
     // var_dump($db->query($sql));
     // exit();
-    if ($res){
-      $recipe_d_id = $form['recipe_d_id'];
-      header('Location: recipe.php?id=' . $recipe_d_id );
+    if ($success){
+      header('Location: recipe.php?id=' . $form['recipe_d_id'] );
       exit();
     }else{
+      $error = $db->errno.": ".$db->error;
+      echo $error;
       // var_dump($form['recipe_d_id']);
-      // exit();
-     echo 'aaa';
+      exit();
     }   
-  // }
+  }
 }
   ?>
 <!DOCTYPE html>
