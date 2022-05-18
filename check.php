@@ -3,7 +3,6 @@ session_start() ;
 
 if (isset($_SESSION['form'])){
   $form = $_SESSION['form'];
-
 } else {
   header('Location: ../login.php');
   exit();
@@ -16,15 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3"){
 	}
 	$sql = "INSERT INTO
 	buy
-	(product, buy_u_id, recipe_u_id)
+	(product, buy_u_id, recipe_d_id)
 	VALUES
-	('".$form['product']."', '".$form['buy_u_id']."','".$form['recipe_u_id']."')";
+	('".$form['product']."', '".$form['buy_u_id']."','".$form['recipe_d_id']."')";
 
-  $recipe_u_id = $form['recipe_u_id'];
+  $recipe_d_id = $form['recipe_d_id'];
 
 	$res = $db->query($sql);
 	if ($res){
-		header('Location: recipe.php?id=' . $recipe_u_id );
+		header('Location: recipe.php?id=' . $recipe_d_id );
 		exit();
 	}else{
 		echo 'できていませんよ！何かがおかしいよ！'; 
@@ -70,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3"){
             <h1>確認画面</h1>
           </div>
           <form action="" method="post">
+            <input type="hidden" name="type" value="3">
             <input type="hidden" name="type" value="3">
             <dl>					
               <div class="form_title2">

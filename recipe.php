@@ -11,18 +11,20 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
 
 // フォームが送信されたとき
 $form = [
-  'product' => '',
-  'buy_u_id' => '',
+  'product' 	  => '',
+  'buy_u_id'    => '',
+	'recipe_d_id' => ''
 ];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2"){
   $form['product'] = filter_input(INPUT_POST, 'product', FILTER_SANITIZE_STRING);
 	$form['buy_u_id'] = filter_input(INPUT_POST, 'buy_u_id', FILTER_SANITIZE_STRING);
-	$form['recipe_u_id'] = filter_input(INPUT_POST, 'recipe_u_id', FILTER_SANITIZE_STRING);
+	$form['recipe_d_id'] = filter_input(INPUT_POST, 'recipe_d_id', FILTER_SANITIZE_STRING);
 	$_SESSION['form']  = $form;
 	header('Location: check.php');
 	exit();
 } 
+
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2"){
 							<input type="hidden" name="type" value="2">
 							<input type="hidden" name="product" value="<?php echo h($foodstuffs); ?>">
 							<input type="hidden" name="buy_u_id" value="<?php echo $user_id; ?>">
-							<input type="hidden" name="recipe_u_id" value="<?php echo $recipe_id; ?>">
+							<input type="hidden" name="recipe_d_id" value="<?php echo $recipe_id; ?>">
 							<div class="form_title2">
 								<pre><?php echo h($foodstuffs); ?></pre>
 							</div>
