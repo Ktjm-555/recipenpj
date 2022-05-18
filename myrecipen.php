@@ -41,31 +41,39 @@ $result = $stmt->execute();
 <body>
   <div class="container"> 
     <header>
-        <h1 class="title">Recipen <?php echo $name ?>さんの投稿一覧</h1>
-        <nav class="nav">
+      <h1 class="title">Recipen <?php echo $name ?>さんの投稿一覧</h1>
+      <nav class="nav"> <div class="button5">
+          <form action="./buy_list.php" method="post" >
+            <input type="hidden" name="type" value="2">
+            <input type ="hidden" name="buy_u_id" value="<?php echo $user_id; ?>">
+            <button type="submit"> 
+              買い物リスト
+            </button>
+          </form>
+        </div>
         <div class="button5">
-                <form action="recipe/index.php" method="post" >
-                    <input type="hidden" name="type" value="2">
-                    <button type="submit"> 
-                        投稿する
-                    </button>
-                </form>
-            </div>
-            <div class="button5">
-                <form action="toppage.php" method="post" >
-                    <button type="submit"> 
-                        TOPページに戻る
-                    </button>
-                </form>
-            </div>
-            <div class="button5">
-                <form action="logout.php" method="post" >
-                    <button type="submit"> 
-                        ログアウト
-                    </button>
-                </form>
-            </div>
-        </nav>
+          <form action="recipe/index.php" method="post" >
+            <input type="hidden" name="type" value="2">
+            <button type="submit"> 
+              投稿する
+            </button>
+          </form>
+        </div>
+        <div class="button5">
+          <form action="toppage.php" method="post" >
+            <button type="submit"> 
+              TOPページに戻る
+            </button>
+          </form>
+        </div>
+        <div class="button5">
+          <form action="logout.php" method="post" >
+            <button type="submit"> 
+              ログアウト
+            </button>
+          </form>
+        </div>
+      </nav>
     </header>
     <div class="main">
       <div class=join_page> 
@@ -128,6 +136,6 @@ $result = $stmt->execute();
     <footer>
         2022 @recipenpj
     </footer>
-  <div>
+  </div>
 </body>
 </html>

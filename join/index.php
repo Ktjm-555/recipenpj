@@ -29,7 +29,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
 		$error['email'] = 'failed';
 	} else {
 		$db = dbconnect();
-		$stmt = $db->prepare('select count(*) from member where email=?');
+		$stmt = $db->prepare('select count(*) as cnt from member where email=?');
 		if (!$stmt){
 			die($db->error);
 		}

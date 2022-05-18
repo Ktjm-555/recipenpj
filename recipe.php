@@ -43,9 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2"){
 				<nav class="nav">
 				<div class="button5">
 						<form action="buy_list.php" method="post" >
-								<button type="submit"> 
-									買うものリスト
-								</button>
+							<input type ="hidden" name="buy_u_id" value="<?php echo $user_id; ?>">
+							<button type="submit"> 
+								買うものリスト
+							</button>
 						</form>
 					</div>
 					<div class="button5">
