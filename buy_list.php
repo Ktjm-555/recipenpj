@@ -4,22 +4,22 @@ require('library.php');
 session_start();
 $db = dbconnect();
 
-if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
-    $user_id = $_SESSION['user_id'];
-    $name = $_SESSION['name'];
-    $aisatsu = 'doumo';
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
+  $user_id = $_SESSION['user_id'];
+  $name    = $_SESSION['name'];
+  $aisatsu = 'doumo';
 } else {
-    header('Location: toppage.php');
-    exit();
+  header('Location: toppage.php');
+  exit();
 }
 
 $buy_u_id = filter_input(INPUT_POST, 'buy_u_id', FILTER_SANITIZE_NUMBER_INT);
-$counts = $db->query("select count(*) as cnt from buy where buy_u_id='".$buy_u_id."'");
-$count = $counts->fetch_assoc();
+$counts   = $db->query("select count(*) as cnt from buy where buy_u_id='".$buy_u_id."'");
+$coun     = $counts->fetch_assoc();
 
-$stmt = $db->prepare('select * from buy where buy_u_id=? order by id desc');
-if (!$stmt){
-    die($db->error);
+$stmt = $db->prepare('select distinct product, recipe_d_id from buy where buy_u_id=?');
+if (!$stmt) {
+  die($db->error);
 }
 $stmt->bind_param('i', $buy_u_id);
 $result = $stmt->execute();
@@ -78,7 +78,7 @@ $result = $stmt->execute();
             <div class="page_title">
               <?php echo h($name) . 'さんの買い物リスト♪'; ?>
             </div>
-            <?php $stmt->bind_result($buy_id, $product, $buy_u_id, $recipe_d_id); ?>
+            <?php $stmt->bind_result($product, $recipe_d_id); ?>
             <?php $count =0; ?>
             <?php while ($stmt->fetch()): ?>
               <div class="forms">

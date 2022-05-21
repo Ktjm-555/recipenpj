@@ -1,71 +1,42 @@
 <?php 
 session_start() ;
-if (isset($_SESSION['form'])){
+if (isset($_SESSION['form'])) {
   $form = $_SESSION['form'];
+  exit();
 } else {
   header('Location: ../login.php');
   exit();
 }
+
 $error = [];
-if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3"){
+if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3") {
   $db = new mysqli('localhost:8889', 'root', 'root', 'recipenpj'); 
-  if (!$db){
+  if (!$db) {
     die($db->error); 
   }
-  $stmt = $db->prepare('select count(buy_u_id) from buy where recipe_d_id=?');
-  // var_dump($stmt);
-  // exit();
-  if (!$stmt){
-    die($db->error);
-  }
-  $stmt->bind_param('i', $form['recipe_d_id']);
-  $success = $stmt->execute();
-  if (!$success){
-    die($db->error);
-  } 
-  $stmt->bind_result($cnt);
-    // var_dump($form['recipe_d_id']);
-  $stmt->fetch();
-  // var_dump($cnt);
-  // exit();
-  if($cnt > 0){
-    $error['recipe_id'] = 'juhuku';
-  }
-  $stmt->close();
-
-  if (empty($error)){
+  
+  if (empty($error)) {
     $sql = "INSERT INTO
     buy
     (product, buy_u_id, recipe_d_id)
     VALUES
     (?, ?, ?)";
     $stmt = $db->prepare($sql);
-    // var_dump($sql);
-    // exit();
     $stmt->bind_param('sii', $form['product'], $form['buy_u_id'], $form['recipe_d_id']);
     $success = $stmt->execute();
-    // $sql = "INSERT INTO
-    // buy
-    // (product, buy_u_id, recipe_d_id)
-    // VALUES
-    // ('".$form['product']."', '".$form['buy_u_id']."','".$form['recipe_d_id']."')";
-    // $res = $db->prepare($sql);
-    // var_dump($res);
-    // var_dump($sql);
-    // var_dump($db->query($sql));
-    // exit();
-    if ($success){
+   
+    if ($success) {
       header('Location: recipe.php?id=' . $form['recipe_d_id'] );
       exit();
-    }else{
+    } else {
       $error = $db->errno.": ".$db->error;
       echo $error;
-      // var_dump($form['recipe_d_id']);
       exit();
     }   
   }
 }
-  ?>
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -111,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3"){
               </div>
               <div class="form_title2">
                 <dd><pre><?php echo $form['product']; ?></pre></dd>
-                <?php if (isset($error['recipe_id'])): ?>
+                <?php if (isset($error['recipe_id'])) : ?>
                     <p>*既に登録されています</p>
                   <?php endif; ?>   
               </div>            

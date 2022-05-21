@@ -126,7 +126,7 @@ $result = $stmt->execute();
             <?php endif;?>
             <?php if ($count == 0): ?>
               <p>
-                 表示するデータはありません。
+                表示するデータはありません。
               </p>
             <?php endif; ?>
           </div>
