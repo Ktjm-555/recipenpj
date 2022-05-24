@@ -1,11 +1,11 @@
 <?php
-function h($value){
+function h($value) {
   return htmlspecialchars($value, ENT_QUOTES);
 }
 
-function dbconnect(){
+function dbconnect() {
   $db = new mysqli('localhost', 'root', 'root', 'recipenpj');
-	if (!$db){
+	if (!$db) {
     die($db->error);
   }
   return $db;

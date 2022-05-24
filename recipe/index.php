@@ -37,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {
   if ($form['recipe'] == '') {
     $error['recipe'] = 'blank';
   }
-  $form['recipe_member_id'] = $_POST['recipe_member_id'];
- 
+	$form['recipe_member_id'] = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_NUMBER_INT);
+
 	/**
 　　	* 画像のチェック
 　　	*/

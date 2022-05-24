@@ -16,9 +16,7 @@
       <nav class="nav">
         <div class="button5">
           <form action="../toppage.php" method="post" >
-            <button type="submit"> 
-              TOPページに戻る
-            </button>
+            <button type="submit">TOPページに戻る</button>
           </form>
         </div>
       </nav>
@@ -31,16 +29,14 @@
         </div>
       </div>
     </div>
-    <footer>
-      2022 @recipenpj
-    </footer> 
+    <footer>2022 @timerpj</footer> 
   </div>     
   <script>
     let start;
     let timer_id;
 
-    document.getElementById('start_stop').addEventListener('click',function(){
-      if (this.innerHTML === 'StartReset'){
+    document.getElementById('start_stop').addEventListener('click',function() {
+      if (this.innerHTML === 'StartReset') {
         start = new Date();
         // 一定時間ごとに特定の処理を繰り返す
         timer_id = setInterval(goTimer, 10);
@@ -57,9 +53,9 @@
       }
     });
 
-    let addZero = function(value){
-      if (value < 10){
-         value = '0' + value;
+    let addZero = function(value) {
+      if (value < 10) {
+        value = '0' + value;
       }
       return value;
     }

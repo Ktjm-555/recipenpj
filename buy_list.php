@@ -1,7 +1,6 @@
 <?php
-require('library.php');
-
 session_start();
+require('library.php');
 $db = dbconnect();
 
 if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
@@ -13,16 +12,40 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
   exit();
 }
 
+/**
+　　* 表示するものがないときの表示に備える
+　　*/
 $buy_u_id = filter_input(INPUT_POST, 'buy_u_id', FILTER_SANITIZE_NUMBER_INT);
-$counts   = $db->query("select count(*) as cnt from buy where buy_u_id='".$buy_u_id."'");
-$coun     = $counts->fetch_assoc();
-
-$stmt = $db->prepare('select distinct product, recipe_d_id from buy where buy_u_id=?');
-if (!$stmt) {
+$sql = "
+  SELECT 
+    count(*) AS cnt 
+  FROM 
+    buy 
+  WHERE 
+    buy_u_id = ".$buy_u_id." 
+";
+$counts = $db->query($sql);
+if (!$counts) {
   die($db->error);
 }
-$stmt->bind_param('i', $buy_u_id);
-$result = $stmt->execute();
+$count = $counts->fetch_assoc();
+
+/**
+　　* SQL実行　買い物リストの表示
+　　*/
+$sql = "
+  SELECT 
+    distinct 
+    product, recipe_d_id 
+  FROM 
+    buy 
+  WHERE 
+    buy_u_id = ".$buy_u_id." 
+";
+$lists = $db->query($sql);
+if (!$lists) {
+  die($db->error);
+}
 ?>
 
 <!DOCTYPE html>
@@ -78,30 +101,25 @@ $result = $stmt->execute();
             <div class="page_title">
               <?php echo h($name) . 'さんの買い物リスト♪'; ?>
             </div>
-            <?php $stmt->bind_result($product, $recipe_d_id); ?>
             <?php $count =0; ?>
-            <?php while ($stmt->fetch()): ?>
+            <?php while ($list = $lists->fetch_assoc()) { ?>
               <div class="forms">
                 <div class="form_title2">
-                  <pre><a href="recipe.php?id=<?php echo $recipe_d_id; ?>"><?php echo h($product); ?></a></pre>
+                  <pre><a href="recipe.php?id=<?php echo $list['recipe_d_id']; ?>"><?php echo h($list['product']); ?></a></pre>
                 </div>
                 <?php $count+=1; ?>
               </div>
-              <?php endwhile; ?>
+              <?php } ?>
               <div class="page">
-                <?php if ($count == 0): ?>
-                  <p>
-                    表示するデータはありません。
-                  </p>
-                <?php endif; ?>
+                <?php if ($count == 0) { ?>
+                  <p>表示するデータはありません</p>
+                <?php } ?>
               </div>
           </div>
         </div>
       </div>
     </div>
-    <footer>
-      2022 @recipenpj
-    </footer>
+    <footer>2022 @recipenpj</footer>
   </div> 
 </body>
 </html>

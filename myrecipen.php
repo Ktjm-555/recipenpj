@@ -1,29 +1,61 @@
 <?php
-require('library.php');
-
 session_start();
+require('library.php');
 $db = dbconnect();
 
-if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
-    $user_id = $_SESSION['user_id'];
-    $name = $_SESSION['name'];
-    $aisatsu = 'doumo';
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
+  $user_id = $_SESSION['user_id'];
+  $name    = $_SESSION['name'];
+  $aisatsu = 'doumo';
 } else {
-    header('Location: toppage.php');
-    exit();
+  header('Location: toppage.php');
+  exit();
 }
 
-$recipe_member_id = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_NUMBER_INT);
-
-$counts = $db->query("select count(*) as cnt from recipen where member_id='".$recipe_member_id."'");
-$count = $counts->fetch_assoc();
-$max_page = floor(($count['cnt']-1)/5+1);
-$stmt = $db->prepare('select * from recipen where member_id=? order by id desc limit ?, 5');
-if (!$stmt){
-    die($db->error);
+/**
+　　* SQL実行　ユーザーが登録したデータのみを取り出す。
+　　*/
+$sql = "
+  SELECT 
+    * 
+  FROM 
+    recipen 
+  WHERE 
+    member_id=? 
+  ORDER BY 
+    id DESC 
+  LIMIT 
+    ?, 5
+";
+$stmt = $db->prepare($sql);
+if (!$stmt) {
+  die($db->error);
 }
-$page = filter_input(INPUT_POST, 'page', FILTER_SANITIZE_NUMBER_INT );
-$page = ($page ?: 1);
+
+/**
+　　* SQL実行　　レコードの数取得(ページネーション準備)
+　　*/
+$recipe_member_id = $_POST['recipe_member_id'];
+$sql = "
+  SELECT 
+    count(*) AS cnt 
+  FROM 
+    recipen 
+  WHERE 
+    member_id = ".$recipe_member_id."
+";
+$counts   = $db->query($sql);
+$count    = $counts->fetch_assoc();
+$max_page = floor(($count['cnt']-1)/5+1); //　Point floor 切り捨て
+
+/**
+　　* ページネーション
+　　*/
+if (isset($_POST['page'])) {
+  $page  = filter_input(INPUT_POST, 'page', FILTER_SANITIZE_NUMBER_INT);
+} else {
+  $page = 1; // Point $pageに何も入っていない時は、1を入れる
+}
 $start = ($page - 1) * 5;
 $stmt->bind_param('ii', $user_id, $start);
 $result = $stmt->execute();
@@ -43,34 +75,26 @@ $result = $stmt->execute();
     <header>
       <h1 class="title">Recipen <?php echo $name ?>さんの投稿一覧</h1>
       <nav class="nav"> <div class="button5">
-          <form action="./buy_list.php" method="post" >
+          <form action="./buy_list.php" method="post">
             <input type="hidden" name="type" value="2">
             <input type ="hidden" name="buy_u_id" value="<?php echo $user_id; ?>">
-            <button type="submit"> 
-              買い物リスト
-            </button>
+            <button type="submit">買い物リスト</button>
           </form>
         </div>
         <div class="button5">
-          <form action="recipe/index.php" method="post" >
+          <form action="recipe/index.php" method="post">
             <input type="hidden" name="type" value="2">
-            <button type="submit"> 
-              投稿する
-            </button>
+            <button type="submit">投稿する</button>
           </form>
         </div>
         <div class="button5">
-          <form action="toppage.php" method="post" >
-            <button type="submit"> 
-              TOPページに戻る
-            </button>
+          <form action="toppage.php" method="post">
+            <button type="submit">TOPページに戻る</button>
           </form>
         </div>
         <div class="button5">
-          <form action="logout.php" method="post" >
-            <button type="submit"> 
-              ログアウト
-            </button>
+          <form action="logout.php" method="post">
+            <button type="submit">ログアウト</button>
           </form>
         </div>
       </nav>
@@ -84,7 +108,7 @@ $result = $stmt->execute();
             </div>
             <?php $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified); ?>
             <?php $count =0; ?>
-            <?php while ($stmt->fetch()): ?>
+            <?php while ($stmt->fetch()) { ?>
               <div class="forms">
                 <div class="form_title2">
                   <a href="recipe.php?id=<?php echo $recipe_id; ?>"><?php echo h($recipename); ?></a>
@@ -97,11 +121,11 @@ $result = $stmt->execute();
                 </div>
             <?php $count+=1; ?>
               </div>
-            <?php endwhile; ?>
-            <?php if ($page > 1): ?>
+            <?php } ?>
+            <?php if ($page > 1) { ?>
               <div class="page">
                 <div class="button6">
-                  <form action="" method="post" >
+                  <form action="" method="post">
                     <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
                     <input type ="hidden" name="page" value="<?php echo $page-1; ?>">
                     <button type="submit"> 
@@ -109,33 +133,27 @@ $result = $stmt->execute();
                     </button>
                   </form>
                 </div>
-            <?php endif;?>
-            <?php if($page < $max_page): ?>
+            <?php } ?>
+            <?php if($page < $max_page) { ?>
                 <div class="page2">
                   <div class="button6">
-                    <form action="" method="post" >
+                    <form action="" method="post">
                       <input type ="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
                       <input type ="hidden" name="page" value="<?php echo $page+1; ?>">
-                      <button type="submit"> 
-                          <?php echo $page+1;?>ページ目へ
-                      </button>
+                      <button type="submit"><?php echo $page+1;?>ページ目へ</button>
                     </form>
                   </div>
                 </div>   
               </div>
-            <?php endif;?>
-            <?php if ($count == 0): ?>
-              <p>
-                表示するデータはありません。
-              </p>
-            <?php endif; ?>
+            <?php } ?>
+            <?php if ($count == 0) { ?>
+              <p>表示するデータはありません。</p>
+            <?php } ?>
           </div>
         </div>
       </div>
     </div>
-    <footer>
-        2022 @recipenpj
-    </footer>
+    <footer>2022 @recipenpj</footer>
   </div>
 </body>
 </html>

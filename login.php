@@ -1,40 +1,56 @@
 <?php
 session_start();
+require('library.php');
 
 $error = [];
 $email = '';
 $password = '';
 
-require('library.php');
-
-if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
   header('Location: toppage.php');
   exit();
 } 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
-  $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-  $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-  if ($email == '' || $password == ''){
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {
+  $email    = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+  $password = h($_POST['password']);
+
+  /**
+　　  * フォームの値のエラーチェック（空）
+　　  */
+  if ($email == '' || $password == '') {
     $error['login'] = 'blank';
   } else {
     $db = dbconnect();
-    $stmt = $db->prepare('select id, name, password from member where email=? limit 1');
-    if (!$stmt){
+
+    /**
+　　    * 該当するレコードを取得
+　　    */
+    $sql = "
+      SELECT 
+        id, name, password 
+      FROM 
+        member 
+      WHERE 
+        email=? limit 1
+    ";
+    $stmt = $db->prepare($sql);
+    if (!$stmt) {
       die($db->error);
     }
     $stmt->bind_param('s', $email);
     $success = $stmt->execute();
-    if (!$success){
+    if (!$success) {
       die($db->error);
     }
     $stmt->bind_result($user_id, $name, $hash);
     $stmt->fetch();
     
-    if (password_verify($password, $hash)){
-      // ログイン成功
-      session_regenerate_id();
-      // idを再形成
+     /**
+　　    *  ユーザーのパスワードがハッシュ化されたものと一致しているか
+　　    */
+    if (password_verify($password, $hash)) {
+      session_regenerate_id(); // Point セッションidを再発行して、乗っ取りを防ぐ。
       $_SESSION['user_id'] = $user_id;
       $_SESSION['name'] = $name;
       header('Location: toppage.php');
@@ -61,9 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
       <nav class="nav">
         <div class="button5">
           <form action="toppage.php" method="post" >
-            <button type="submit"> 
-              TOPページに戻る
-            </button>
+            <button type="submit">TOPページに戻る</button>
           </form>
         </div>
       </nav>
@@ -73,10 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
         <div class=join_page2>
           <div class="join_form">
             <div class=page_title>
-                <h1>ようこそ！！</h1>
+              <h1>ようこそ！！</h1>
             </div>
             <div class="form_title">
-                <p>会員登録まだの方はこちらへ</p>
+              <p>会員登録まだの方はこちらへ</p>
             </div>
             <div class="form2">
               <form action="join/index.php" method="post" >
@@ -111,26 +125,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
                 </div>
               </dl>
               <div class="error">
-                  <?php if (isset($error['login']) && $error['login'] == 'blank'): ?>
+                <?php if (isset($error['login']) && $error['login'] == 'blank') { ?>
                   <p>*メールアドレスとパスワードを両方記入してログインしましょう！</p>
-                  <?php endif; ?>
+                <?php } ?>
               </div>                
               <div class="error">
-                  <?php if (isset($error['login']) && $error['login'] == 'failed'): ?>
-                  <p>*ログインに失敗しました。正しく入力しまししょう！</p>
-                  <?php endif; ?>
+                <?php if (isset($error['login']) && $error['login'] == 'failed') { ?>
+                  <p>*ログインに失敗しました。正しく入力しまししょう！*</p>
+                <?php } ?>
               </div>            
               <div class="form2">
-                  <button type="submit">ログイン</button> 
+                <button type="submit">ログイン</button> 
               </div>
             </form>
           </div>
         </div>        
       </div>
     </div>
-    <footer>
-      2022 @recipenpj
-    </footer>
+    <footer>2022 @recipenpj</footer>
   </div>
 </body>
 </html>

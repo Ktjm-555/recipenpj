@@ -1,7 +1,9 @@
 <?php
 session_start();
+require('library.php');
 
-if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
+
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 	$name = $_SESSION['name'];
 	$user_id = $_SESSION['user_id'];
 } else {
@@ -9,22 +11,49 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
 	exit();
 }
 
-// フォームが送信されたとき
+$db = dbconnect();
+
+/**
+　　* SQL実行 一つ取得
+　　*/
+$sql = "
+	SELECT 
+		r.*, 
+		m.name 
+	FROM 
+		recipen r        
+	LEFT JOIN 
+		member m ON r.member_id = m.id
+	WHERE 
+		r.id=?
+";
+$stmt = $db->prepare($sql);
+if (!$stmt) {
+die($db->error);
+}					
+$recipe_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$stmt->bind_param('i', $recipe_id);
+$stmt->execute();
+$stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified, $name);
+$stmt->fetch();
+
+/**
+　　* 買い物リストに登録するため、チェック画面へ
+　　*/
 $form = [
   'product' 	  => '',
   'buy_u_id'    => '',
 	'recipe_d_id' => ''
 ];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2"){
-  $form['product'] = filter_input(INPUT_POST, 'product', FILTER_SANITIZE_STRING);
-	$form['buy_u_id'] = filter_input(INPUT_POST, 'buy_u_id', FILTER_SANITIZE_STRING);
-	$form['recipe_d_id'] = filter_input(INPUT_POST, 'recipe_d_id', FILTER_SANITIZE_STRING);
-	$_SESSION['form']  = $form;
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2") {
+  $form['product']     = h($_POST['product']);
+	$form['buy_u_id']    = filter_input(INPUT_POST, 'buy_u_id', FILTER_SANITIZE_NUMBER_INT);
+	$form['recipe_d_id'] = filter_input(INPUT_POST, 'recipe_d_id', FILTER_SANITIZE_NUMBER_INT);
+	$_SESSION['form']    = $form;
 	header('Location: check.php');
 	exit();
 } 
-
 ?>
 
 <!DOCTYPE html>
@@ -40,53 +69,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2"){
 	<div class="container"> 
 		<header>
 			<h1 class="title">Recipen レシピん詳細</h1>
-				<nav class="nav">
+			<nav class="nav">
+			<div class="button5">
+					<form action="buy_list.php" method="post">
+						<input type ="hidden" name="buy_u_id" value="<?php echo $user_id; ?>">
+						<button type="submit">買うものリスト</button>
+					</form>
+				</div>
 				<div class="button5">
-						<form action="buy_list.php" method="post" >
-							<input type ="hidden" name="buy_u_id" value="<?php echo $user_id; ?>">
-							<button type="submit"> 
-								買うものリスト
-							</button>
-						</form>
-					</div>
-					<div class="button5">
-						<form action="recipe/index.php" method="post" >
-								<input type="hidden" name="type" value="2">
-								<button type="submit"> 
-									投稿する
-								</button>
-						</form>
-					</div>
-					<div class="button5">
-						<form action="toppage.php" method="post" >
-							<button type="submit"> 
-							TOPページに戻る
-							</button>
-						</form>
-					</div>
-				</nav>
+					<form action="recipe/index.php" method="post">
+						<input type="hidden" name="type" value="2">
+						<button type="submit">投稿する</button>
+					</form>
+				</div>
+				<div class="button5">
+					<form action="toppage.php" method="post">
+						<button type="submit">TOPページに戻る</button>
+					</form>
+				</div>
+			</nav>
 		</header>
 		<div class="main">
 			<div class=join_page> 
 				<div class=join_page2>
 					<div class="join_form">
-						<?php
-						require('library.php');
-						$db = dbconnect();
-
-						$stmt = $db->prepare('select r.id, r.recipename, r.member_id, r.image, r.foodstuffs, r.recipe, r.created,  
-						r.modified, m.name from recipen r, member m where r.id=? and m.id=r.member_id');
-						if (!$stmt){
-						die($db->error);
-						}					
-						$recipe_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT );
-						$stmt->bind_param('i', $recipe_id);
-						$stmt->execute();
-
-						$stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modified, $name);
-						$stmt->fetch();
-						?>
-
 						<div class=page_title>
 							<?php echo h($name) . 'さんのレシピん♪' ; ?>
 						</div>
@@ -122,40 +128,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2"){
 						</div>
 						<?php 
 						$clear = '';
-						if (isset($_SESSION['user_id']) && isset($_SESSION['name']) && $_SESSION['user_id'] == $recipe_member_id){
+						if (isset($_SESSION['user_id']) && isset($_SESSION['name']) && $_SESSION['user_id'] == $recipe_member_id) {
 							$clear = 'clear'; 
 						}  
 						?>						
-					<?php if ($clear == 'clear'): ?>
+					<?php if ($clear == 'clear') { ?>
 						<div class="page">
 							<div class="button6">
 								<form action="update.php" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="type" value="2">
 									<input type="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
 									<input type="hidden" name="recipe_id" value="<?php echo $recipe_id; ?>">
-									<button type="submit"> 
-										編集する
-									</button>
+									<button type="submit">編集する</button>
 								</form>
 							</div>
 							<div class="button6">
 								<form action="delete.php" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
 									<input type="hidden" name="recipe_id" value="<?php echo $recipe_id; ?>">
-									<button type="submit"> 
-										削除する
-									</button>
+									<button type="submit">削除する</button>
 								</form>
 							</div>
 						</div>
-					<?php endif; ?>
+					<?php } ?>
 					</div>
 				</div>
 			</div>
 		</div>
-		<footer>
-			2022 @recipenpj
-		</footer>
+		<footer>2022 @recipenpj</footer>
 	</div>
 </body>
 </html>

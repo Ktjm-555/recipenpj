@@ -36,7 +36,7 @@ if ($user_id == $recipe_member_id){
   $error = []; 
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
-    $form['recipe_id'] = filter_input(INPUT_POST, 'recipe_id', FILTER_SANITIZE_STRING);
+    $form['recipe_id'] = filter_input(INPUT_POST, 'recipe_id', FILTER_SANITIZE_NUMBER_INT);
     $form['recipename'] = filter_input(INPUT_POST, 'recipename', FILTER_SANITIZE_STRING);
     if ($form['recipename'] == ''){
       $error['recipename'] = 'blank';
@@ -49,7 +49,7 @@ if ($user_id == $recipe_member_id){
     if ($form['recipe'] == ''){
       $error['recipe'] = 'blank';
     }    
-    $form['recipe_member_id'] = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_STRING);
+    $form['recipe_member_id'] = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_NUMBER_INT);
     $image = array();
     if ($_FILES['image']['name'] != ''){
       $image = $_FILES['image'];

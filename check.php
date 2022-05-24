@@ -1,10 +1,10 @@
 <?php 
-session_start() ;
+session_start();
+
 if (isset($_SESSION['form'])) {
   $form = $_SESSION['form'];
-  exit();
 } else {
-  header('Location: ../login.php');
+  header('Location: ./login.php');
   exit();
 }
 
@@ -14,26 +14,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3") {
   if (!$db) {
     die($db->error); 
   }
-  
-  if (empty($error)) {
-    $sql = "INSERT INTO
-    buy
-    (product, buy_u_id, recipe_d_id)
+  /**
+　　  * SQL実行　
+　　  */
+  $sql = "
+    INSERT INTO
+      buy
+      (product, buy_u_id, recipe_d_id)
     VALUES
-    (?, ?, ?)";
-    $stmt = $db->prepare($sql);
-    $stmt->bind_param('sii', $form['product'], $form['buy_u_id'], $form['recipe_d_id']);
-    $success = $stmt->execute();
-   
-    if ($success) {
-      header('Location: recipe.php?id=' . $form['recipe_d_id'] );
-      exit();
-    } else {
-      $error = $db->errno.": ".$db->error;
-      echo $error;
-      exit();
-    }   
-  }
+      (?, ?, ?)
+  ";
+  $stmt = $db->prepare($sql);
+  $stmt->bind_param('sii', $form['product'], $form['buy_u_id'], $form['recipe_d_id']);
+  $success = $stmt->execute();
+  
+  if ($success) {
+    header('Location: recipe.php?id=' . $form['recipe_d_id'] );
+    exit();
+  } else {
+    header('Location: check.php');
+    exit();
+  }   
 }
 ?>
 
@@ -53,17 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3") {
         <nav class="nav">
           <div class="button5">
             <form action="recipe/index.php" method="post" >
-                <input type="hidden" name="type" value="2">
-                <button type="submit"> 
-                  投稿する
-                </button>
+              <input type="hidden" name="type" value="2">
+              <button type="submit">投稿する</button>
             </form>
           </div>
           <div class="button5">
             <form action="toppage.php" method="post" >
-              <button type="submit"> 
-              TOPページに戻る
-              </button>
+              <button type="submit">TOPページに戻る</button>
             </form>
           </div>
         </nav>
@@ -81,10 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3") {
                 <dt>買うもの</dt>
               </div>
               <div class="form_title2">
-                <dd><pre><?php echo $form['product']; ?></pre></dd>
-                <?php if (isset($error['recipe_id'])) : ?>
-                    <p>*既に登録されています</p>
-                  <?php endif; ?>   
+                <dd><pre><?php echo $form['product']; ?></pre></dd>   
               </div>            
             </dl>
             <div class="form2">
@@ -94,9 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3") {
         </div>
       </div>
     </div>
-    <footer>
-      2022 @recipenpj
-    </footer>
+    <footer>2022 @recipenpj</footer>
   </div>
 </body>
 </html>
