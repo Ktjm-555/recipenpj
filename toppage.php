@@ -5,6 +5,7 @@ session_start();
 $db = dbconnect();
 
 $counts = $db->query('select count(*) as cnt from recipen');
+
 $count = $counts->fetch_assoc();
 $max_page = floor(($count['cnt']-1)/5+1);
 

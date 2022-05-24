@@ -2,60 +2,71 @@
 session_start();
 require('../library.php');
 
-if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
-	$name = $_SESSION['name'];
+/**
+　　* ログイン確認と変数を使えるようにする
+　　*/
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
+	$name    = $_SESSION['name'];
 	$user_id = $_SESSION['user_id'];
 } else {
 	header('Location: ../login.php');
 	exit();
 }
 
-// フォームが送信されたとき
 $form = [
-  'recipename' => '',
-  'foodstuffs' => '',
-  'recipe' => '',
-  'recipe_member_id'=>'',
+  'recipename'       => '',
+  'foodstuffs'       => '',
+  'recipe'           => '',
+  'recipe_member_id' => '',
 ];
 $error = [];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
-  $form['recipename'] = filter_input(INPUT_POST, 'recipename', FILTER_SANITIZE_STRING);
-  if ($form['recipename'] == ''){
+/**
+　　* フォームの値のエラーチェック（空）
+　　*/
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {  
+	$form['recipename'] = h($_POST['recipename']);
+  if ($form['recipename'] == '') {
     $error['recipename'] = 'blank';
   }
-  $form['foodstuffs'] = filter_input(INPUT_POST, 'foodstuffs', FILTER_SANITIZE_STRING);
-  if ($form['foodstuffs'] == ''){
+	$form['foodstuffs'] = h($_POST['foodstuffs']);
+  if ($form['foodstuffs'] == '') {
     $error['foodstuffs'] = 'blank';
   }
-  $form['recipe'] = filter_input(INPUT_POST, 'recipe', FILTER_SANITIZE_STRING);
-  if ($form['recipe'] == ''){
+	$form['recipe'] = h($_POST['recipe']);
+  if ($form['recipe'] == '') {
     $error['recipe'] = 'blank';
   }
-  $form['recipe_member_id'] = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_STRING);
+  $form['recipe_member_id'] = $_POST['recipe_member_id'];
  
-  // がそうのチェック
+	/**
+　　	* 画像のチェック
+　　	*/
   $image = array();
-  if ($_FILES['image']['name'] != ''){
+	// Point 画像が指定されているかどうかを画像の名前があるかないかで確認 
+  if ($_FILES['image']['name'] != '') {
     $image = $_FILES['image'];
   } else {
     $error['image'] = 'blank';
   }
 
-  if(!empty($image)){
-    if($image['error'] == 0){
+  if (!empty($image)) {
+    if ($image['error'] == 0) {
       $type = mime_content_type($image['tmp_name']);
-      if ($type !== 'image/png' && $type !== 'image/jpeg'){
+      if ($type !== 'image/png' && $type !== 'image/jpeg') {
         $error['image'] = 'type';
       }
     }
   }
 
-	if (empty($error)){
+	if (empty($error)) {
 		$_SESSION['form']  = $form;
-		// 画像のアップロード
+
+		/**
+　　		* 画像のアップロード
+　　		*/
 		$filename = date('YmdHis') . '_' . $image['name'];
-		if (!move_uploaded_file($image['tmp_name'], '../recipe_picture/' . $filename)){
+		if (!move_uploaded_file($image['tmp_name'], '../recipe_picture/' . $filename)) {
 			die('ファイルのアップロードに失敗しました');
 		} else {
 			$_SESSION['form']['image'] = $filename;
@@ -84,9 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
 			<nav class="nav">
 				<div class="button5">
 					<form action="../toppage.php" method="post" >
-						<button type="submit"> 
-							TOPページに戻る
-						</button>
+						<button type="submit">TOPページに戻る</button>
 					</form>
 				</div>
 			</nav>
@@ -95,9 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
 			<div class="join_page">
 				<div class=join_page2>
 					<div class="joins_form">						
-						<div class=hallow>
-							<?php echo h($name); ?>さん、今日もレシピ投稿ありがとうございます！
-						</div>
+						<div class=hallow><?php echo h($name); ?>さん、今日もレシピ投稿ありがとうございます！</div>
 						<div class="recipes_form">
 							<form action="" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="type" value="1">
@@ -111,9 +118,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
 									</label>
 								</div>									
 								<div class="error">
-									<?php if (isset($error['recipename']) && $error['recipename'] === 'blank'): ?>
+									<!-- Point issetでその変数が存在しているか見る、これがないと $error['recipename']がない時、エラーが出てしまう。　-->
+									<?php if (isset($error['recipename']) && $error['recipename'] === 'blank') { ?>
 									<p>*レシピ名を入力してください。</p>
-									<?php endif; ?>
+									<?php } ?>
 								</div>
 								<div class="form_title">
 									<p>完成写真</P>
@@ -122,14 +130,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
 									<input type="file" name="image" size="35" value=""/>
 								</div>
 								<div class="error">
-									<?php if (isset($error['image']) && $error['image'] == 'type'): ?>
+									<?php if (isset($error['image']) && $error['image'] == 'type') { ?>
 									<p>*写真は「.png」または「.jpg」の画像を指定してください。</p>
-									<?php endif; ?>
+									<?php } ?>
 								</div>
 								<div class="error">
-									<?php if (isset($error['image']) && $error['image'] == 'blank'): ?>
+									<?php if (isset($error['image']) && $error['image'] == 'blank') { ?>
 									<p>*写真を投稿してください。</p>
-									<?php endif; ?>
+									<?php } ?>
 								</div>
 								<div class="form_title">
 									<p>材料</P>
@@ -140,9 +148,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
 									</label>
 								</div>
 								<div class="error">
-									<?php if (isset($error['foodstuffs']) && $error['foodstuffs'] == 'blank'): ?>
+									<?php if (isset($error['foodstuffs']) && $error['foodstuffs'] == 'blank') { ?>
 									<p class="error">*材料を入力してください。</p>
-									<?php endif; ?>
+									<?php } ?>
 								</div>
 								<div class="form_contents">
 									<p>作り方</P>
@@ -153,9 +161,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
 									</label>
 								</div>
 								<div class="error">
-									<?php if (isset($error['recipe']) && $error['recipe'] = 'blank'): ?>
+									<?php if (isset($error['recipe']) && $error['recipe'] = 'blank') { ?>
 									<p class="error">*作り方を入力してください。</p>
-									<?php endif; ?>
+									<?php } ?>
 								</div>
 								<div class="form2">
 									<button type="submit">入力内容を確認する</button>
@@ -166,9 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
 				</div>
 			</div>
 		</div>	
-		<footer>
-      2022 @recipenpj
-    </footer>
+		<footer>2022 @recipenpj</footer>
 	</div>
 </body>
 </html>

@@ -3,56 +3,70 @@ session_start();
 
 require('../library.php');
 
-if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['form'])){
+/**
+* rewriteの場合かそうでない場合
+*/
+if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['form'])) {
   $form = $_SESSION['form'];
 } else {
 	$form = [
-	'user_id'=>'',
-	'name' =>'',
-	'email' =>'',
-	'password' =>''
+	'user_id'  => '',
+	'name'     => '',
+	'email'    => '',
+	'password' => ''
 	];
 }
-  $error = [];
+	$error = [];
 
- if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
-	$form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-	if ($form['name'] === ''){
-		$error['name'] = 'blank';
-	}
-
-	$form['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-	$pattern = "/^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/";
-	if ($form['email'] === ''){
-		$error['email'] = 'blank';
-	} else  if (!preg_match($pattern, $form['email'])){
-		$error['email'] = 'failed';
-	} else {
-		$db = dbconnect();
-		$stmt = $db->prepare('select count(*) as cnt from member where email=?');
-		if (!$stmt){
-			die($db->error);
+ 	/**
+	　　* フォームの値のエラーチェック
+	　　*/
+	// Point リクエストはGETかPOSTかをみる、この場合、POSTの場合となる。
+	// Point この画面にくるとき、トップページなどから、POSTで飛んでくるので「type」を指定する。
+ 	if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {		
+		$form['name'] = h($_POST['name']);
+		if ($form['name'] === '')	{
+			$error['name'] = 'blank';
 		}
-		$stmt->bind_param('s', $form['email']);
-		$success = $stmt->execute();
-		if (!$success){
-			die($db->error);
-		} 
-		$stmt->bind_result($cnt);
-		$stmt->fetch();
-		if($cnt > 0){
-			$error['email'] = 'juhuku';
+
+		$form['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+		$pattern 	     = "/^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/";
+		if ($form['email'] === '') {
+			$error['email'] = 'blank';
+		} else if (!preg_match($pattern, $form['email'])) {
+			$error['email'] = 'failed';
+		} else {
+			$db   = dbconnect();
+			$sql = "
+				SELECT
+					count(*) AS cnt 
+				FROM 
+					member where email=?	
+			";
+			$stmt = $db->prepare($sql);	
+			if (!$stmt) {
+				die($db->error);
+			}
+			$stmt->bind_param('s', $form['email']);  //　Point　どの値を?に入れるか
+			$success = $stmt->execute();	//　Point　実行
+			if (!$success) {
+				die($db->error);
+			} 
+			$stmt->bind_result($cnt);  // Point　実行して出てきたものを受け取る変数
+			$stmt->fetch();
+			if ($cnt > 0) {
+				$error['email'] = 'juhuku';
+			}
 		}
-	}
 
-	$form['password'] = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-	if ($form['password'] === ''){
-		$error['password'] = 'blank';
-	} else if (strlen($form['password']) < 4) { 
-		$error['password'] = 'length';
-	}
+		$form['password'] = h($_POST['password']);
+		if ($form['password'] === '') {
+			$error['password'] = 'blank';
+		} else if (strlen($form['password']) < 4) { 
+			$error['password'] = 'length';
+		}
 
-	if (empty($error)){
+	if (empty($error)) {
 		$_SESSION['form'] = $form;
 		header('Location: check.php');
 		exit();
@@ -77,16 +91,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
 				<div class="button5">
 					<form action="../login.php" method="post" >
 						<input type="hidden" name="type" value="2">
-						<button type="submit"> 
-							ログイン
-						</button>
+						<button type="submit">ログイン</button>
 					</form>
 				</div>
 				<div class="button5">
 					<form action="../toppage.php" method="post" >
-						<button type="submit"> 
-							TOPページに戻る
-						</button>
+						<button type="submit">TOPページに戻る</button>
 					</form>
 				</div>
 			</nav>
@@ -124,15 +134,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
 							</div>										
 							<div class="error">
 								<label class="ef">
-									<?php if (isset($error['email']) && $error['email'] == 'blank'): ?>
+									<?php if (isset($error['email']) && $error['email'] == 'blank') { ?>
 										<p>*メールアドレスを入力してくださいね。</p>
-									<?php endif; ?>        
-									<?php if (isset($error['email']) && $error['email'] == 'failed'): ?> 
+									<?php } ?>        
+									<?php if (isset($error['email']) && $error['email'] == 'failed') { ?> 
 										<p>*メールアドレスを正しい形式で入力してくださいね。</p>
-									<?php endif; ?>
-									<?php if (isset($error['email']) && $error['email'] == 'juhuku'): ?>
+									<?php } ?>
+									<?php if (isset($error['email']) && $error['email'] == 'juhuku') { ?>
 										<p>*指定されたメールアドレスは既に登録してあります。</p>
-									<?php endif; ?>         
+									<?php } ?>         
 								</label>     
 							</div>
 							<div class="form_title">
@@ -144,12 +154,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
 								</label>
 							</div>
 							<div class="error">
-								<?php if (isset($error['password']) && $error['password'] == 'blank'): ?>
+								<?php if (isset($error['password']) && $error['password'] == 'blank') { ?>
 									<p">*パスワードを入力してくださいね。</p>
-								<?php endif; ?>											
-								<?php if (isset($error['password']) && $error['password'] == 'length'): ?>
+								<?php } ?>											
+								<?php if (isset($error['password']) && $error['password'] == 'length') { ?>
 									<p>*パスワードは4文字以上で入力してくださいね。</p>
-								<?php endif; ?>
+								<?php } ?>
 							</div>
 							<div class="form2">
 								<button type="submit">入力内容を確認する</button> 
@@ -162,9 +172,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
 				</div>
 			</div>
 		</div>
-		<footer>
-				2022 @recipenpj
-		</footer>
+		<footer>2022 @recipenpj</footer>
 	</div>
 </body>
 </html>

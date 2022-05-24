@@ -2,37 +2,65 @@
 session_start();
 require('../library.php');
 
-if (isset($_SESSION['form'])){
+if (isset($_SESSION['form'])) {
 	$form = $_SESSION['form'];
 } else {
  	header('Location: index.php');
  	exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+/**
+　　* SQLの実行　
+　　*/
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$db = dbconnect();
-	if (!$db){
+	if (!$db) {
 		die($db->error);
 	}
 
 	$password = password_hash($form['password'], PASSWORD_DEFAULT);
-	$sql = "INSERT INTO 
-	member
-	(name, email, password) 
-	VALUES 
-	('".$form['name']."','".$form['email']."','".$password."')";
-	$res = $db->query($sql);
+	$sql = "
+		INSERT INTO 
+			member
+			(name, email, password) 
+		VALUES 
+			(?, ?, ?)
+	";
+	$stmt = $db->prepare($sql);	
+	if (!$stmt){
+		header('Location: index.php');
+		exit();
+	}
+	$stmt->bind_param("sss", $form['name'], $form['email'], $password);	
+	$success = $stmt->execute();	
+	if (!$success){
+		header('Location: index.php');
+		die($db->error);
+	}
+	
+	/**
+　　	* 「セッションに保存するためにidを取ってくる。」ためのSQLを実行
+　	　*/
+	$sql = "
+	SELECT
+		id
+	FROM
+		member
+	WHERE
+		email = ?
+	";
 
-	$sql = "SELECT id
-	from
-	member
-	where email='".$form['email']."'";
+	$stmt = $db->prepare($sql);	
+	$stmt->bind_param('s', $form['email']);
+	$success = $stmt->execute();
+	if (!$success){
+		die($db->error);
+	} 
+	$stmt->bind_result($id);
+	$stmt->fetch();
 
-	$result = mysqli_query($db, $sql);
-	$row = mysqli_fetch_assoc($result);
-
-	if ($res){
-		$_SESSION['user_id'] = $row['id'];
+	if ($id){
+		$_SESSION['user_id'] = $id;
 		$_SESSION['name'] = $form['name'];
 		header('Location: thank.php');
 	}else{
@@ -40,8 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 	}
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -60,16 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 				<div class="button5">
 					<form action="login.php" method="post" >
 						<input type="hidden" name="type" value="2">
-						<button type="submit"> 
-							ログイン
-						</button>
+						<button type="submit">ログイン</button>
 					</form>
 				</div>
 				<div class="button5">
 					<form action="../toppage.php" method="post" >
-						<button type="submit"> 
-							TOPページに戻る
-						</button>
+						<button type="submit">TOPページに戻る</button>
 					</form>
 				</div>
 			</nav>
@@ -97,7 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 					<div class="form_title2">
 						<dd><?php echo h($form['email']); ?></dd>
 					</div>
-
 					<div class="form_title2">
 						<dt>パスワード</dt>
 					</div>
@@ -116,10 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 			</div>
 		</div>
 	</div>
-
-	<footer>
-		2022 @recipenpj
-	</footer>
+	<footer>2022 @recipenpj</footer>
 </div>
 </body>
 </html>

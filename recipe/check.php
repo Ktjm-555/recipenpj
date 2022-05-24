@@ -3,31 +3,40 @@ session_start();
 require('../library.php');
 
 
-if (isset($_SESSION['form'])){
+if (isset($_SESSION['form'])) {
   $form = $_SESSION['form'];
 } else {
 	header('Location: ../login.php');
 	exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+/**
+　　* SQLの実行
+　　*/
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$db = new mysqli('localhost:8889', 'root', 'root', 'recipenpj'); 
-	if (!$db){
+	if (!$db) {
 		die($db->error); 
 	}
-	$sql = "INSERT INTO
-	recipen
-	(recipename, member_id, foodstuffs, recipe, image)
-	VALUES
-	('".$form['recipename']."', '".$form['recipe_member_id']."','".$form['foodstuffs']."','".$form['recipe']."','".$form['image']."')";
-
-	$res = $db->query($sql);
-	if ($res){
-		header('Location: thank.php');
+	$sql = "
+		INSERT INTO
+			recipen
+			(recipename, member_id, foodstuffs, recipe, image)
+		VALUES
+			(?, ?, ?, ?, ?)
+		";
+	$stmt = $db->prepare($sql);	
+	if (!$stmt){
+		header('Location: index.php');
 		exit();
-	}else{
-		echo 'できていませんよ！何かがおかしいよ！'; 
-	}   
+	}
+	$stmt->bind_param("sisss", $form['recipename'], $form['recipe_member_id'], $form['foodstuffs'],$form['recipe'],$form['image']);	
+	$success = $stmt->execute();	
+	if (!$success){
+		header('Location: index.php');
+		die($db->error);
+	}
+	header('Location: thank.php');
 }
 ?>
 
@@ -47,9 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			<nav class="nav">
 				<div class="button5">
 					<form action="../toppage.php" method="post" >
-						<button type="submit"> 
-							TOPページに戻る
-						</button>
+						<button type="submit">TOPページに戻る</button>
 					</form>
 				</div>
 			</nav>
@@ -58,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			<div class=join_page2>  
 				<div class="recipe_form">
 					<div class=page_title>
-							<h1>確認画面</h1>
+						<h1>確認画面</h1>
 					</div>						
 					<form action="" method="post" enctype="multipart/form-data">
 						<div class="form_title2">
@@ -96,9 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				</div>
 			</div>
 		</div>   
-		<footer>
-			@2022 recipenpj
-		</footer>
+		<footer>@2022 recipenpj</footer>
 	</div>
 </body>
 </html>
