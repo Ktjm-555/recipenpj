@@ -1,7 +1,6 @@
 <?php 
 session_start();
 require('library.php');
-$db = dbconnect();
 
 /**
 　　* ログインチェック
@@ -23,7 +22,7 @@ if (isset($_SESSION['form'])) {
   header('Location: toppage.php');
   exit();
 }
-
+$db = dbconnect();
 $sql = "
   UPDATE 
     recipen 

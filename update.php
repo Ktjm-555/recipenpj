@@ -1,7 +1,6 @@
 <?php
 session_start();
 require('library.php');
-$db = dbconnect();
 
 /**
 　　* ログインチェック
@@ -23,6 +22,7 @@ $recipe_id        = filter_input(INPUT_POST, 'recipe_id', FILTER_SANITIZE_NUMBER
 
 //　Point 編集するユーザーがレシピを投稿したユーザーと同じだった時
 if ($user_id == $recipe_member_id) {
+  $db = dbconnect();
   $sql = "
     SELECT 
       *

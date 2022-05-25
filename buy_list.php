@@ -1,7 +1,6 @@
 <?php
 session_start();
 require('library.php');
-$db = dbconnect();
 
 /**
 　　* ログイン確認
@@ -19,6 +18,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 　　* 表示するものがないときの表示に備える
 　　*/
 $buy_u_id = filter_input(INPUT_POST, 'buy_u_id', FILTER_SANITIZE_NUMBER_INT);
+$db = dbconnect();
 $sql = "
   SELECT 
     count(*) AS cnt 

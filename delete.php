@@ -2,6 +2,9 @@
 session_start();
 require('library.php');
 
+/**
+　　* ログイン確認
+　　*/
 if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 	$user_id = $_SESSION['user_id'];
 	$name = $_SESSION['name'];
@@ -10,11 +13,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 	exit();
 }
 
-$db = dbconnect();
-
 /**
 　　* SQL実行　削除
 　　*/
+$db = dbconnect();
 $sql = "
 	DELETE 
 	FROM 

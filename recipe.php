@@ -2,7 +2,9 @@
 session_start();
 require('library.php');
 
-
+/**
+　　* ログイン確認
+　　*/
 if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 	$name = $_SESSION['name'];
 	$user_id = $_SESSION['user_id'];
@@ -11,11 +13,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 	exit();
 }
 
-$db = dbconnect();
-
 /**
 　　* SQL実行 一つ取得
 　　*/
+$db = dbconnect();
 $sql = "
 	SELECT 
 		r.*, 

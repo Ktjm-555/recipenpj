@@ -13,10 +13,8 @@ if (isset($_SESSION['form'])) {
 　　* SQLの実行　
 　　*/
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$db = dbconnect();
-
-
 	$password = password_hash($form['password'], PASSWORD_DEFAULT);
+	$db = dbconnect();
 	$sql = "
 		INSERT INTO 
 			member
@@ -60,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$stmt->bind_result($id);
 	$stmt->fetch();
 
-	if ($id){
+	if ($id) {
 		$_SESSION['user_id'] = $id;
 		$_SESSION['name'] = $form['name'];
 		header('Location: thank.php');

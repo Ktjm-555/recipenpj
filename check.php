@@ -10,10 +10,7 @@ if (isset($_SESSION['form'])) {
 
 $error = [];
 if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3") {
-  $db = new mysqli('localhost:8889', 'root', 'root', 'recipenpj'); 
-  if (!$db) {
-    die($db->error); 
-  }
+  $db = dbconnect();
   /**
 　　  * SQL実行　 買うものリスト登録
 　　  */

@@ -1,8 +1,11 @@
 <?php
 session_start();
 require('library.php');
-$db = dbconnect();
 
+
+/**
+　　* ログイン確認
+　　*/
 if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
   $user_id = $_SESSION['user_id'];
   $name    = $_SESSION['name'];
@@ -15,6 +18,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 /**
 　　* SQL実行　ユーザーが登録したデータのみを取り出す。
 　　*/
+$db = dbconnect();
 $sql = "
   SELECT 
     * 
