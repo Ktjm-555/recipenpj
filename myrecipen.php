@@ -45,6 +45,9 @@ $sql = "
     member_id = ".$recipe_member_id."
 ";
 $counts   = $db->query($sql);
+if (!$counts) {
+  die($db->error);
+}
 $count    = $counts->fetch_assoc();
 $max_page = floor(($count['cnt']-1)/5+1); //　Point floor 切り捨て
 

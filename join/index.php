@@ -88,13 +88,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
 			<h1 class="title">Recipen 会員登録</h1>
 			<nav class="nav">
 				<div class="button5">
-					<form action="../login.php" method="post" >
+					<form action="../login.php" method="post">
 						<input type="hidden" name="type" value="2">
 						<button type="submit">ログイン</button>
 					</form>
 				</div>
 				<div class="button5">
-					<form action="../toppage.php" method="post" >
+					<form action="../toppage.php" method="post">
 						<button type="submit">TOPページに戻る</button>
 					</form>
 				</div>
@@ -119,9 +119,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
 								</label>
 							</div>
 							<div class="error">
-								<?php if (isset($error['name']) && $error['name'] == 'blank'): ?>
+								<?php if (isset($error['name']) && $error['name'] == 'blank') { ?>
 								<p>*ニックネームを入力してくださいね。</p>
-								<?php endif; ?>
+								<?php } ?>
 							</div>
 							<div class="form_title">
 								<p>メールアドレス</p>

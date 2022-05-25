@@ -10,7 +10,7 @@ if (isset($_SESSION['form'])) {
 }
 
 /**
-　　* SQLの実行
+　　* SQLの実行 レシピ登録
 　　*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$db = new mysqli('localhost:8889', 'root', 'root', 'recipenpj'); 
@@ -25,17 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			(?, ?, ?, ?, ?)
 		";
 	$stmt = $db->prepare($sql);	
-	if (!$stmt){
-		header('Location: index.php');
-		exit();
-	}
+	if (!$stmt) {
+    die($db->error);
+  }
 	$stmt->bind_param("sisss", $form['recipename'], $form['recipe_member_id'], $form['foodstuffs'],$form['recipe'],$form['image']);	
 	$success = $stmt->execute();	
 	if (!$success){
 		header('Location: index.php');
-		die($db->error);
+		exit();
 	}
 	header('Location: thank.php');
+	exit();
 }
 ?>
 
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			<h1 class="title">Recipen 投稿画面</h1>
 			<nav class="nav">
 				<div class="button5">
-					<form action="../toppage.php" method="post" >
+					<form action="../toppage.php" method="post">
 						<button type="submit">TOPページに戻る</button>
 					</form>
 				</div>

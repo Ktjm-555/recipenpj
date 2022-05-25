@@ -16,7 +16,7 @@
 			<div class=join_thank_page>
 				<div class="end">登録完了！！</div>
 				<div class="form5" >
-					<form action="../toppage.php" method="post" >
+					<form action="../toppage.php" method="post">
 						<button type="submit">TOPページへ</button>
 					</form>
 				</div>

@@ -31,7 +31,6 @@ $sql = "
   LIMIT 
     ?, 5
 ";
-
 $stmt = $db->prepare($sql);
 if (!$stmt) {
   die($db->error);
@@ -47,6 +46,9 @@ $sql = "
     recipen
 ";
 $counts = $db->query($sql);
+if (!$counts) {
+  die($db->error);
+}
 $count = $counts->fetch_assoc();
 $max_page = floor(($count['cnt']-1)/5+1);
 

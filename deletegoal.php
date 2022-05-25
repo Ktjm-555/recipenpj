@@ -14,13 +14,9 @@
 		</header>
 		<div class="main">
 			<div class="join_thank_page">
-				<?php if ($_GET['result'] == 1) { ?>
 					<div class="end">
 						<p>削除完了しました！！</p>
 					</div>				
-				<?php } else { ?>
-					<?php header('Location: delete_error.html'); ?>
-				<?php } ?>
 				<div class="form5" >
 					<form action="toppage.php" method="post">
 						<button type="submit">TOPページに戻る</button>

@@ -1,8 +1,12 @@
 <?php
 session_start();
 require('library.php');
+$db = dbconnect();
 
-if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
+/**
+　　* ログインチェック
+　　*/
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
   $user_id = $_SESSION['user_id'];
   $name = $_SESSION['name'];
 } else {
@@ -10,14 +14,27 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
   exit();
 }
 
+/**
+　　* SQL実行　フォームのvalueに表示するため。
+　　*/
+// Point ここは前ページからのPOSTで送られてきた値を受け取っている。
 $recipe_member_id = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_NUMBER_INT);
-if ($user_id == $recipe_member_id){
-  $db = dbconnect();
-  $stmt = $db->prepare('select * from recipen where id=?');
-  if (!$stmt){
+$recipe_id        = filter_input(INPUT_POST, 'recipe_id', FILTER_SANITIZE_NUMBER_INT);
+
+//　Point 編集するユーザーがレシピを投稿したユーザーと同じだった時
+if ($user_id == $recipe_member_id) {
+  $sql = "
+    SELECT 
+      *
+    FROM 
+      recipen 
+    WHERE 
+      id=?
+  ";
+  $stmt = $db->prepare($sql);
+  if (!$stmt) {
     die($db->error);
   }
-  $recipe_id = filter_input(INPUT_POST, 'recipe_id', FILTER_SANITIZE_NUMBER_INT);
   $stmt->bind_param('i', $recipe_id);
   $stmt->execute();
   $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modifind); 
@@ -26,48 +43,59 @@ if ($user_id == $recipe_member_id){
     die('正しい値を指定してください。');
   }
 
+  /**
+　  　* 配列の初期化
+　　  */
   $form = [
-    'recipe_id' => '',
-    'recipename' => '',
-    'foodstuffs' => '',
-    'recipe' => '',
-    'recipe_member_id'=>'',
+    'recipe_id'        => '',
+    'recipename'       => '',
+    'foodstuffs'       => '',
+    'recipe'           => '',
+    'recipe_member_id' =>'',
   ];
   $error = []; 
 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1"){
-    $form['recipe_id'] = filter_input(INPUT_POST, 'recipe_id', FILTER_SANITIZE_NUMBER_INT);
+  /**
+　  　* フォームの値のエラーチェック（空）
+　　  */
+  if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {
+    // Point ここは「編集する」を押したときに、POSTで送られてきた値を受け取っている。
+    $form['recipe_id']  = filter_input(INPUT_POST, 'recipe_id', FILTER_SANITIZE_NUMBER_INT);
     $form['recipename'] = filter_input(INPUT_POST, 'recipename', FILTER_SANITIZE_STRING);
-    if ($form['recipename'] == ''){
+    if ($form['recipename'] == '') {
       $error['recipename'] = 'blank';
     }      
-    $form['foodstuffs'] = filter_input(INPUT_POST, 'foodstuffs', FILTER_SANITIZE_STRING);
-    if ($form['foodstuffs'] == ''){
+    $form['foodstuffs'] = h($_POST['foodstuffs']);
+    if ($form['foodstuffs'] == '') {
       $error['foodstuffs'] = 'blank';
     }    
-    $form['recipe'] = filter_input(INPUT_POST, 'recipe', FILTER_SANITIZE_STRING);
-    if ($form['recipe'] == ''){
+    $form['recipe'] = h($_POST['recipe']);
+    if ($form['recipe'] == '') {
       $error['recipe'] = 'blank';
     }    
     $form['recipe_member_id'] = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_NUMBER_INT);
+
+    /**
+  　  　* 画像のチェック
+  　　  */
     $image = array();
-    if ($_FILES['image']['name'] != ''){
+    if ($_FILES['image']['name'] != '') {
       $image = $_FILES['image'];
     } else {
       $error['image'] = 'blank';
     }
-    if(!empty($image)){
-      if($image['error'] == 0){
+    if (!empty($image)) {
+      if ($image['error'] == 0) {
         $type = mime_content_type($image['tmp_name']);
-        if ($type !== 'image/png' && $type !== 'image/jpeg'){
+        if ($type !== 'image/png' && $type !== 'image/jpeg') {
           $error['image'] = 'type';
         }
       }
     }
-    if (empty($error)){
-      $_SESSION['form']  = $form;  
+    if (empty($error)) {
+      $_SESSION['form'] = $form;  
       $filename = date('YmdHis') . '_' . $image['name'];        
-      if (!move_uploaded_file($image['tmp_name'], 'recipe_picture/' . $filename)){
+      if (!move_uploaded_file($image['tmp_name'], 'recipe_picture/' . $filename)) {
         die('ファイルのアップロードに失敗しました');
       } else {
         $_SESSION['form']['image'] = $filename;
@@ -97,10 +125,8 @@ if ($user_id == $recipe_member_id){
       <h1 class="title">Recipen 投稿画面</h1>
       <nav class="nav">
         <div class="button5">
-          <form action="toppage.php" method="post" >
-            <button type="submit"> 
-              TOPページに戻る
-            </button>
+          <form action="toppage.php" method="post">
+            <button type="submit">TOPページに戻る</button>
           </form>
         </div>
       </nav>
@@ -124,9 +150,9 @@ if ($user_id == $recipe_member_id){
                   <input type="text" name="recipename" size="35" maxlength="255" value="<?php echo h($recipename); ?>"/>
                 </div>
                 <div class="error">
-                  <?php if (isset($error['recipename']) && $error['recipename'] === 'blank'): ?>
+                  <?php if (isset($error['recipename']) && $error['recipename'] === 'blank') { ?>
                     <p>レシピ名を入力してください。</p>
-                  <?php endif; ?>
+                  <?php } ?>
                 </div>
                 <div class="form_title">
                   <p>完成写真</P>
@@ -135,12 +161,12 @@ if ($user_id == $recipe_member_id){
                   <input type="file" name="image" size="35" value=""/>
                 </div>
                 <div class="error">
-                  <?php if (isset($error['image']) && $error['image'] == 'type'): ?>
+                  <?php if (isset($error['image']) && $error['image'] == 'type') { ?>
                     <p>写真は「.png」または「.jpg」の画像を指定してください。</p>
-                  <?php endif; ?>
-                  <?php if (isset($error['image']) && $error['image'] == 'blank'): ?>
+                  <?php } ?>
+                  <?php if (isset($error['image']) && $error['image'] == 'blank') { ?>
                     <p>写真を投稿してください。</p>
-                  <?php endif; ?>
+                  <?php } ?>
                 </div>
                 <div class="form_title">
                   <p>材料</P>
@@ -149,9 +175,9 @@ if ($user_id == $recipe_member_id){
                   <textarea name="foodstuffs" cols="50" rows="5"><?php echo h($foodstuffs); ?></textarea>
                 </div>
                 <div class="error">
-                  <?php if (isset($error['foodstuffs']) && $error['foodstuffs'] == 'blank'): ?>
+                  <?php if (isset($error['foodstuffs']) && $error['foodstuffs'] == 'blank') { ?>
                     <p>材料を入力してください。</p>
-                  <?php endif; ?>
+                  <?php } ?>
                 </div>
                 <div class="form_title">
                   <p>作り方</P>
@@ -160,9 +186,9 @@ if ($user_id == $recipe_member_id){
                   <textarea name="recipe" cols="50" rows="5"><?php echo h($recipe); ?></textarea>
                 </div>
                 <div class="error">
-                  <?php if (isset($error['recipe']) && $error['recipe'] = 'blank'): ?>
+                  <?php if (isset($error['recipe']) && $error['recipe'] = 'blank') { ?>
                     <p>作り方を入力してください。</p>
-                  <?php endif; ?>
+                  <?php } ?>
                 </div>
                 <div class="form2">
                   <button type="submit">編集する</button>
@@ -173,9 +199,7 @@ if ($user_id == $recipe_member_id){
         </div>
       </div>
     </div>
-    <footer>
-      2022 @recipenpj
-    </footer>
+    <footer>2022 @recipenpj</footer>
   </div>
 </body>
 </html>

@@ -18,30 +18,29 @@ $db = dbconnect();
 $sql = "
 	DELETE 
 	FROM 
-		recipen 
+		recipen
 	WHERE  
 		id=? and member_id=? 
 ";
 $recipe_id        = filter_input(INPUT_POST, 'recipe_id', FILTER_SANITIZE_NUMBER_INT);
 $recipe_member_id = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_NUMBER_INT);
 
-
 // Point 削除するユーザーがレシピを投稿したユーザーと同じだった時
 if ($user_id == $recipe_member_id) {
   $stmt = $db->prepare($sql);	
 	if (!$stmt) {
-		header('Location: delete_error.html');
-		exit();
-	}
+    die($db->error);
+  }
 	$stmt->bind_param("ii", $recipe_id, $recipe_member_id);	
 	$success = $stmt->execute();	
 	if (!$success) {
 		header('Location: delete_error.html');
-		die($db->error);
+		exit();
 	}
-	// Point GETのパラメーターによって、出す文言やページを変える。
-	header('Location: deletegoal.php?result=1');
+	header('Location: deletegoal.php');
+	exit();
 } else {    
-  header('Location: deletegoal.php?result=2');
+	header('Location: delete_error.html');
+	exit();
 }
 ?>

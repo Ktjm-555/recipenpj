@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3") {
     die($db->error); 
   }
   /**
-　　  * SQL実行　
+　　  * SQL実行　 買うものリスト登録
 　　  */
   $sql = "
     INSERT INTO
@@ -25,16 +25,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3") {
       (?, ?, ?)
   ";
   $stmt = $db->prepare($sql);
+  if (!$stmt) {
+    die($db->error);
+  }
   $stmt->bind_param('sii', $form['product'], $form['buy_u_id'], $form['recipe_d_id']);
   $success = $stmt->execute();
   
-  if ($success) {
-    header('Location: recipe.php?id=' . $form['recipe_d_id'] );
+  if (!$success) {
+		header('Location: check.php');
     exit();
   } else {
-    header('Location: check.php');
+    header('Location: recipe.php?id=' . $form['recipe_d_id'] );
     exit();
   }   
+  if (!$success) {
+	}
 }
 ?>
 

@@ -14,9 +14,7 @@ if (isset($_SESSION['form'])) {
 　　*/
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$db = dbconnect();
-	if (!$db) {
-		die($db->error);
-	}
+
 
 	$password = password_hash($form['password'], PASSWORD_DEFAULT);
 	$sql = "
@@ -27,15 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			(?, ?, ?)
 	";
 	$stmt = $db->prepare($sql);	
-	if (!$stmt){
-		header('Location: index.php');
-		exit();
-	}
+	if (!$stmt) {
+    die($db->error);
+  }
 	$stmt->bind_param("sss", $form['name'], $form['email'], $password);	
 	$success = $stmt->execute();	
 	if (!$success){
 		header('Location: index.php');
-		die($db->error);
+		exit();
 	}
 	
 	/**
@@ -51,11 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	";
 
 	$stmt = $db->prepare($sql);	
+	if (!$stmt) {
+    die($db->error);
+  }
 	$stmt->bind_param('s', $form['email']);
 	$success = $stmt->execute();
 	if (!$success){
-		die($db->error);
-	} 
+		header('Location: index.php');
+		exit();
+	}
 	$stmt->bind_result($id);
 	$stmt->fetch();
 
@@ -63,8 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$_SESSION['user_id'] = $id;
 		$_SESSION['name'] = $form['name'];
 		header('Location: thank.php');
+		exit();
 	}else{
-	echo 'できていませんよ！何かがおかしいよ！'; 
+		echo 'できていませんよ！何かがおかしいよ！'; 
 	}
 }
 ?>
@@ -84,13 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		<h1 class="title">Recipen 会員登録</h1>
 			<nav class="nav">
 				<div class="button5">
-					<form action="login.php" method="post" >
+					<form action="login.php" method="post">
 						<input type="hidden" name="type" value="2">
 						<button type="submit">ログイン</button>
 					</form>
 				</div>
 				<div class="button5">
-					<form action="../toppage.php" method="post" >
+					<form action="../toppage.php" method="post">
 						<button type="submit">TOPページに戻る</button>
 					</form>
 				</div>

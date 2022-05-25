@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+/**
+　　* ログイン確認
+　　*/
 if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
   $name = $_SESSION['name'];
 } else {
@@ -28,7 +31,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
           <div>投稿完了しました</div>
         </div>              
         <div class="form5" >
-          <form action="../toppage.php" method="post" >
+          <form action="../toppage.php" method="post">
             <button type="submit">TOPページに戻る</button>
           </form>
         </div>

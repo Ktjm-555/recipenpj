@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {
       $_SESSION['user_id'] = $user_id;
       $_SESSION['name'] = $name;
       header('Location: toppage.php');
+      exit();
     } else {
       $error['login'] = 'failed';
     }
@@ -76,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {
       <h1 class="title">Recipen ログイン</h1>
       <nav class="nav">
         <div class="button5">
-          <form action="toppage.php" method="post" >
+          <form action="toppage.php" method="post">
             <button type="submit">TOPページに戻る</button>
           </form>
         </div>
@@ -93,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {
               <p>会員登録まだの方はこちらへ</p>
             </div>
             <div class="form2">
-              <form action="join/index.php" method="post" >
+              <form action="join/index.php" method="post">
               <input type="hidden" name="type" value="2">
                 <button type="submit"> 
                   会員登録する

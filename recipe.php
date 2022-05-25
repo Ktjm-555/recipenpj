@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2") {
 								<form action="delete.php" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="recipe_member_id" value="<?php echo $recipe_member_id; ?>">
 									<input type="hidden" name="recipe_id" value="<?php echo $recipe_id; ?>">
-									<button type="submit">削除する</button>
+									<button type="submit">削除</button>
 								</form>
 							</div>
 						</div>
