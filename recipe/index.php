@@ -3,7 +3,7 @@ session_start();
 require('../library.php');
 
 /**
-　　* ログイン確認と変数を使えるようにする
+　　* ログイン確認
 　　*/
 if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 	$name    = $_SESSION['name'];
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {
 　　	* 画像のチェック
 　　	*/
   $image = array();
-	// Point 画像が指定されているかどうかを画像の名前があるかないかで確認 
+	//　画像が指定されているかどうかを画像の名前があるかないかで確認 
   if ($_FILES['image']['name'] != '') {
     $image = $_FILES['image'];
   } else {
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {
 									</label>
 								</div>									
 								<div class="error">
-									<!-- Point issetでその変数が存在しているか見る、これがないと $error['recipename']がない時、エラーが出てしまう。　-->
+									<!-- issetでその変数が存在しているか見る、これがないと $error['recipename']がない時、エラーが出てしまう。　-->
 									<?php if (isset($error['recipename']) && $error['recipename'] === 'blank') { ?>
 									<p>*レシピ名を入力してください。</p>
 									<?php } ?>

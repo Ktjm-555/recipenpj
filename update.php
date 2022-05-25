@@ -16,11 +16,11 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 /**
 　　* SQL実行　フォームのvalueに表示するため。
 　　*/
-// Point ここは前ページからのPOSTで送られてきた値を受け取っている。
+//　ここは前ページからのPOSTで送られてきた値を受け取っている。
 $recipe_member_id = filter_input(INPUT_POST, 'recipe_member_id', FILTER_SANITIZE_NUMBER_INT);
 $recipe_id        = filter_input(INPUT_POST, 'recipe_id', FILTER_SANITIZE_NUMBER_INT);
 
-//　Point 編集するユーザーがレシピを投稿したユーザーと同じだった時
+//　編集するユーザーがレシピを投稿したユーザーと同じだった時
 if ($user_id == $recipe_member_id) {
   $db = dbconnect();
   $sql = "
@@ -39,7 +39,7 @@ if ($user_id == $recipe_member_id) {
   $stmt->execute();
   $stmt->bind_result($recipe_id, $recipename, $recipe_member_id, $image, $foodstuffs, $recipe, $created, $modifind); 
   $res = $stmt->fetch();
-  if (!$res){
+  if (!$res) {
     die('正しい値を指定してください。');
   }
 

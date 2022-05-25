@@ -89,7 +89,7 @@ button {
 	box-shadow: 0 0 10px rgba(0, 0, 0, .2);
 }
 
-.hallow{
+.hallow {
 	margin-bottom: 20px;
 	padding-top: 20px;
 	color:#0295f7;  
@@ -133,7 +133,7 @@ button:hover {
 	width: 50%;
 }
 
-.join_page2{
+.join_page2 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -149,7 +149,6 @@ button:hover {
 	box-sizing: border-box;
 	width: 100%;
 	padding: 0.3em;
-	/* transition: 0.3s; */
 	letter-spacing: 1px;
 	color: #1b2538;
 	border: 1px solid #1b2538;
@@ -162,7 +161,7 @@ button:hover {
 	box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
 }
 
-.form2{
+.form2 {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 0px;
@@ -171,8 +170,6 @@ button:hover {
 }
 
 .error {
-	/* display: flex;
-	justify-content: center; */
 	color:red;
 	margin-top: 0px;
 	margin-bottom: 10px;
@@ -184,7 +181,7 @@ button:hover {
 }
 
 /* check */
-.recipe_form{
+.recipe_form {
 	margin:70px auto 100px auto;
 	background-color: rgba(255, 253, 237, 1);
 	width: 50%;
@@ -196,7 +193,7 @@ button:hover {
 	margin-bottom: 5px;
 }
 
-.page_title{
+.page_title {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 20px;
@@ -212,20 +209,19 @@ button:hover {
 	height: 45%;
 }
 
-.end{
+.end {
 	display: flex;
 	justify-content: center;
 	padding-top:65px ; 
 }
 
-.form5{
+.form5 {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 0px;
 	margin-top: 10px;
 	padding-bottom: 65px;
 }
-
 
 /* フッター */
 /* 共通 */

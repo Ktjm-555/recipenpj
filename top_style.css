@@ -132,7 +132,7 @@ header {
   width: 50%;
 }
 
-.join_page2{
+.join_page2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,7 +152,7 @@ header {
   opacity: .5;
 }
 
-.form_title1{
+.form_title1 {
   color:#0295f7;
 }
 
@@ -161,12 +161,12 @@ button:hover {
 }
 
 
-.page{
+.page {
   display:flex;
   justify-content: center;
 }
 
-.page2{
+.page2 {
   display:flex;
   justify-content: center;
 }
@@ -180,8 +180,6 @@ a {
   color:#1b2538;
   text-decoration: none;
 }
-
-
 
 /* フッター */
 footer {

@@ -116,7 +116,7 @@ body {
 	height: 45%;
 }
 
-.form5{
+.form5 {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 0px;
@@ -147,13 +147,13 @@ button {
 
 }
 
-.come{
+.come {
 	display:block;
 	display:flex;
 	justify-content: center;
 }
 
-.form6{
+.form6 {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 0px;
@@ -174,7 +174,7 @@ button {
 	width: 50%;
 }
 
-.join_page2{
+.join_page2 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -202,7 +202,7 @@ button {
 	box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
 }
 
-.form2{
+.form2 {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 0px;
@@ -218,13 +218,13 @@ button {
 	margin-bottom: 10px;
 }
 
-.recipes_form{
+.recipes_form {
 	margin:20px auto 20px auto;
 	background-color: rgba(255, 253, 237, 1);
 }
 
 /* check */
-.recipe_form{
+.recipe_form {
 	margin:70px auto 100px auto;
 	background-color: rgba(255, 253, 237, 1);
 	width: 50%;
@@ -236,14 +236,13 @@ button {
 	margin-bottom: 5px;
 }
 
-.page_title{
+.page_title {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 20px;
 	padding-top: 20px;
 	color:#0295f7;  
 }
-
 
 /* フッター */
 footer {

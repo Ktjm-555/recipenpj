@@ -6,7 +6,6 @@
   position: relative;
 }
 
-
 header {
   background-color: #FFD400;
   display:flex;
@@ -31,7 +30,6 @@ button {
   border: none;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-
 }
 
 .title {
@@ -40,9 +38,7 @@ button {
   border: none;
   font-family:'游ゴシック Medium';
   font-size: 17px;
-
 }
-
 
 /* メイン */
 .main {
@@ -50,7 +46,7 @@ button {
   height: 80vh;
 }
 
-.container{
+.container {
   text-align: center;
   margin: 30px auto;
   height: 100%;
@@ -66,7 +62,7 @@ button {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .5);
 }
 
-.btn{
+.btn {
   color: #1b2538;
   background: rgba(255, 253, 237, 1);
   padding: 10px 30px;
@@ -76,7 +72,7 @@ button {
   box-shadow: 0 0 10px rgba(0, 0, 0, .2);
 }
 
-.btn:hover{
+.btn:hover {
   opacity: 0.8;
 }
 
@@ -85,7 +81,7 @@ footer {
   background-color: #FFD400;
   text-align: center;
   padding: 18px 0;
-  position: absolute;/*←絶対位置*/
-  bottom: 0; /*下に固定*/
+  position: absolute;
+  bottom: 0; 
   width: 100%;
 }

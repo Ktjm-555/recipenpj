@@ -64,7 +64,6 @@ width /***/:auto;
 }
 
 /* コードCSSスタート */
-
 html {
 	box-sizing: border-box;
 }
@@ -121,8 +120,7 @@ header {
 	width: 50%;
 }
 
-
-.join_page2{
+.join_page2 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -163,7 +161,7 @@ header {
 	justify-content: center;
 }
 
-.page{
+.page {
 	display:flex;
 	justify-content: center;
 }
@@ -176,7 +174,6 @@ header {
 button:hover {
 	opacity: .5;
 }
-
 
 /* フッター */
 footer {

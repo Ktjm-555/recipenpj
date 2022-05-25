@@ -78,17 +78,15 @@ html {
   width: 100vw;
 }
 
-.form_contents input[type='text'],input[type='password'] {
-  
+.form_contents input[type='text'],input[type='password'] { 
   font: 15px/24px sans-serif;
-box-sizing: border-box;
-width: 100%;
-padding: 0.3em;
-/* transition: 0.3s; */
-letter-spacing: 1px;
-color: #1b2538;
-border: 1px solid #1b2538;
-border-radius: 4px;   
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.3em;
+  letter-spacing: 1px;
+  color: #1b2538;
+  border: 1px solid #1b2538;
+  border-radius: 4px;   
 }
 
 .ef input[type='text']:focus {
@@ -103,7 +101,7 @@ outline: none;
 box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
 }
 
-.ef input[type='password']{
+.ef input[type='password'] {
   margin-bottom: 10px;
 }
 
@@ -122,8 +120,6 @@ header {
 .title {
   margin-right: auto;
   margin-left: 20px;
-  /* margin-top: auto;
-  margin-top: auto; */
 }
 
 .button5 {
@@ -145,7 +141,7 @@ header {
   width: 50%;
 }
 
-.join_page2{
+.join_page2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -163,7 +159,6 @@ header {
 .form_title {
   margin-bottom: 10px;
   margin-top: 10px;
-
 }
 
 button {
