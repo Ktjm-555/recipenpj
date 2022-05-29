@@ -6,7 +6,7 @@ require('library.php');
 　　* ログインチェック
 　　*/
 $error = '';
-if (isset($_SESSION['user_id']) && isset($_SESSION['name'])){
+if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
   $user_id = $_SESSION['user_id'];
   $name = $_SESSION['name'];
 } else {
@@ -161,7 +161,7 @@ $result = $stmt->execute();
                   </form>
                 </div>
             <?php } ?>
-            <?php if($page < $max_page) { ?>
+            <?php if ($page < $max_page) { ?>
                 <div class="page2">
                   <div class="button6">
                       <form action="" method="post">

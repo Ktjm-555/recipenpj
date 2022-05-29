@@ -145,20 +145,10 @@ button:hover {
 
 /* index */
 .form_contents input[type='text'] {
-	font: 15px/24px sans-serif;
-	box-sizing: border-box;
 	width: 100%;
 	padding: 0.3em;
-	letter-spacing: 1px;
 	color: #1b2538;
 	border: 1px solid #1b2538;
-	border-radius: 4px;   
-}
-
-.ef input[type='text']:focus {
-	border: 1px solid #02bef7de;
-	outline: none;
-	box-shadow: 0 0 5px 1px rgba(2, 213, 250, 0.5);
 }
 
 .form2 {

@@ -59,7 +59,7 @@ if ($user_id == $recipe_member_id) {
 　  　* フォームの値のエラーチェック（空）
 　　  */
   if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {
-    // Point ここは「編集する」を押したときに、POSTで送られてきた値を受け取っている。
+    //　ここは「編集する」を押したときに、POSTで送られてきた値を受け取っている。
     $form['recipe_id']  = filter_input(INPUT_POST, 'recipe_id', FILTER_SANITIZE_NUMBER_INT);
     $form['recipename'] = filter_input(INPUT_POST, 'recipename', FILTER_SANITIZE_STRING);
     if ($form['recipename'] == '') {

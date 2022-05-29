@@ -20,8 +20,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
  	/**
 	　　* フォームの値のエラーチェック
 	　　*/
-	// Point リクエストはGETかPOSTかをみる、この場合、POSTの場合となる。
-	// Point この画面にくるとき、トップページなどから、POSTで飛んでくるので「type」を指定する。
+	//　リクエストはGETかPOSTかをみる、この場合、POSTの場合となる。
+	//　この画面にくるとき、トップページなどから、POSTで飛んでくるので「type」を指定する。
  	if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {		
 		$form['name'] = h($_POST['name']);
 		if ($form['name'] === '')	{
@@ -35,7 +35,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
 		} else if (!preg_match($pattern, $form['email'])) {
 			$error['email'] = 'failed';
 		} else {
-			$db   = dbconnect();
+			$db  = dbconnect();
 			$sql = "
 				SELECT
 					count(*) AS cnt 
