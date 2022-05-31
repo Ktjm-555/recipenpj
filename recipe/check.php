@@ -13,7 +13,7 @@ if (isset($_SESSION['form'])) {
 　　* SQLの実行 レシピ登録
 　　*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$db = new mysqli('localhost:8889', 'root', 'root', 'recipenpj'); 
+	$db = dbconnect();
 	if (!$db) {
 		die($db->error); 
 	}
