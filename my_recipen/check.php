@@ -5,7 +5,7 @@ require('../library.php');
 if (isset($_SESSION['form'])) {
   $form = $_SESSION['form'];
 } else {
-  header('Location: ./login.php');
+  header('Location: ../login.php');
   exit();
 }
 
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'&& $_POST['type'] == "3") {
 		header('Location: check.php');
     exit();
   } else {
-    header('Location: recipe.php?id=' . $form['recipe_d_id'] );
+    header('Location: ../recipe/recipe.php?id=' . $form['recipe_d_id'] );
     exit();
   }   
   if (!$success) {
