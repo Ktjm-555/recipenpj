@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2") {
 	$form['buy_u_id']    = filter_input(INPUT_POST, 'buy_u_id', FILTER_SANITIZE_NUMBER_INT);
 	$form['recipe_d_id'] = filter_input(INPUT_POST, 'recipe_d_id', FILTER_SANITIZE_NUMBER_INT);
 	$_SESSION['form']    = $form;
-	header('Location: check.php');
+	header('Location: ../my_recipen/check.php');
 	exit();
 } 
 ?>
