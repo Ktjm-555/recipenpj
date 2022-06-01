@@ -108,7 +108,7 @@ $result = $stmt->execute();
             </form>
           </div>            
           <div class="button5">
-            <form action="myrecipen.php" method="post">
+            <form action="my_recipen/myrecipen.php" method="post">
               <input type ="hidden" name="recipe_member_id" value="<?php echo $user_id; ?>">
               <button type="submit">マイページ</button>
             </form>
@@ -142,13 +142,13 @@ $result = $stmt->execute();
                 <?php echo h($name) . 'さんのレシピん♪'; ?>
               </div>            
               <div class="form_title2">
-                <a href="recipe.php?id=<?php echo $recipe_id; ?>"><?php echo h($recipename); ?></a>
+                <a href="recipe/recipe.php?id=<?php echo $recipe_id; ?>"><?php echo h($recipename); ?></a>
               </div>
               <div class="form_title2">
                 <time><?php echo h($created); ?></time>
               </div>
               <div class="form_title2">
-                <a href="recipe.php?id=<?php echo $recipe_id; ?>"><img src="recipe_picture/<?php echo h($image); ?>"></a>
+                <a href="recipe/recipe.php?id=<?php echo $recipe_id; ?>"><img src="recipe_picture/<?php echo h($image); ?>"></a>
               </div>
               <?php $count+=1; ?>
             <?php } ?>                

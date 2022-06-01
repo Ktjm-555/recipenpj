@@ -18,7 +18,7 @@
 						<p>削除完了しました！！</p>
 					</div>				
 				<div class="form5" >
-					<form action="index.php" method="post">
+					<form action="../index.php" method="post">
 						<button type="submit">TOPページに戻る</button>
 					</form>
 				</div>

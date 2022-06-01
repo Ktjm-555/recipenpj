@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('library.php');
+require('../library.php');
 
 /**
 　　* ログイン確認
@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 	$name = $_SESSION['name'];
 	$user_id = $_SESSION['user_id'];
 } else {
-	header('Location: ./login.php');
+	header('Location: ../login.php');
 	exit();
 }
 
@@ -72,19 +72,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2") {
 			<h1 class="title">Recipen レシピん詳細</h1>
 			<nav class="nav">
 			<div class="button5">
-					<form action="buy_list.php" method="post">
+					<form action="../my_recipen/buy_list.php" method="post">
 						<input type ="hidden" name="buy_u_id" value="<?php echo $user_id; ?>">
 						<button type="submit">買うものリスト</button>
 					</form>
 				</div>
 				<div class="button5">
-					<form action="recipe/index.php" method="post">
+					<form action="./index.php" method="post">
 						<input type="hidden" name="type" value="2">
 						<button type="submit">投稿する</button>
 					</form>
 				</div>
 				<div class="button5">
-					<form action="index.php" method="post">
+					<form action="../index.php" method="post">
 						<button type="submit">TOPページに戻る</button>
 					</form>
 				</div>
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "2") {
 							<time><?php echo h($created); ?></time>
 						</div>						
 						<div class="form_title2">
-							<img src="recipe_picture/<?php echo h($image); ?>">
+							<img src="../recipe_picture/<?php echo h($image); ?>">
 						</div>
 						<div class="form_title2">
 							<p>材料</p>

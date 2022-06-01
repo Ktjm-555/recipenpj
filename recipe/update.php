@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('library.php');
+require('../library.php');
 
 /**
 　　* ログインチェック
@@ -95,7 +95,7 @@ if ($user_id == $recipe_member_id) {
     if (empty($error)) {
       $_SESSION['form'] = $form;  
       $filename = date('YmdHis') . '_' . $image['name'];        
-      if (!move_uploaded_file($image['tmp_name'], 'recipe_picture/' . $filename)) {
+      if (!move_uploaded_file($image['tmp_name'], '../recipe_picture/' . $filename)) {
         die('ファイルのアップロードに失敗しました');
       } else {
         $_SESSION['form']['image'] = $filename;
@@ -125,7 +125,7 @@ if ($user_id == $recipe_member_id) {
       <h1 class="title">Recipen 投稿画面</h1>
       <nav class="nav">
         <div class="button5">
-          <form action="index.php" method="post">
+          <form action="../index.php" method="post">
             <button type="submit">TOPページに戻る</button>
           </form>
         </div>

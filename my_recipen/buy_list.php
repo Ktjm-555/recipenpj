@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('library.php');
+require('../library.php');
 
 /**
 　　* ログイン確認
@@ -10,7 +10,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
   $name    = $_SESSION['name'];
   $aisatsu = 'doumo';
 } else {
-  header('Location: index.php');
+  header('Location: ../index.php');
   exit();
 }
 
@@ -18,7 +18,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 　　* 表示するものがないときの表示に備える
 　　*/
 $buy_u_id = filter_input(INPUT_POST, 'buy_u_id', FILTER_SANITIZE_NUMBER_INT);
-$db = dbconnect();
+$db       = dbconnect();
 $sql = "
   SELECT 
     count(*) AS cnt 
@@ -66,33 +66,25 @@ if (!$lists) {
       <h1 class="title">Recipen <?php echo $name ?>さんの買い物リスト</h1>
       <nav class="nav">
         <div class="button5">
-          <form action="recipe/index.php" method="post" >
+          <form action="../recipe/index.php" method="post" >
             <input type="hidden" name="type" value="2">
-            <button type="submit"> 
-              投稿する
-            </button>
+            <button type="submit">投稿する</button>
           </form>
         </div>
         <div class="button5">
           <form action="myrecipen.php" method="post" >
             <input type ="hidden" name="recipe_member_id" value="<?php echo $user_id; ?>">
-            <button type="submit"> 
-              マイページ
-            </button>
+            <button type="submit">マイページ</button>
           </form>
         </div>
         <div class="button5">
-          <form action="./index.php" method="post" >
-            <button type="submit"> 
-              TOPページに戻る
-            </button>
+          <form action="../index.php" method="post" >
+            <button type="submit">TOPページに戻る</button>
           </form>
         </div>
         <div class="button5">
-          <form action="logout.php" method="post" >
-            <button type="submit"> 
-              ログアウト
-            </button>
+          <form action="../logout.php" method="post" >
+            <button type="submit">ログアウト</button>
           </form>
         </div>
       </nav>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('library.php');
+require('../library.php');
 
 /**
 　　* ログイン確認
@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 	$user_id = $_SESSION['user_id'];
 	$name = $_SESSION['name'];
 } else {
-	header('Location: login.php');
+	header('Location: ../login.php');
 	exit();
 }
 

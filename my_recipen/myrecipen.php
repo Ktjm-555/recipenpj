@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('library.php');
+require('../library.php');
 
 
 /**
@@ -11,7 +11,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
   $name    = $_SESSION['name'];
   $aisatsu = 'doumo';
 } else {
-  header('Location: index.php');
+  header('Location: ../index.php');
   exit();
 }
 
@@ -82,7 +82,7 @@ $result = $stmt->execute();
     <header>
       <h1 class="title">Recipen <?php echo $name ?>さんの投稿一覧</h1>
       <nav class="nav"> <div class="button5">
-          <form action="./buy_list.php" method="post">
+          <form action="buy_list.php" method="post">
             <input type="hidden" name="type" value="2">
             <input type ="hidden" name="buy_u_id" value="<?php echo $user_id; ?>">
             <button type="submit">買い物リスト</button>
@@ -95,12 +95,12 @@ $result = $stmt->execute();
           </form>
         </div>
         <div class="button5">
-          <form action="index.php" method="post">
+          <form action="../index.php" method="post">
             <button type="submit">TOPページに戻る</button>
           </form>
         </div>
         <div class="button5">
-          <form action="logout.php" method="post">
+          <form action="../logout.php" method="post">
             <button type="submit">ログアウト</button>
           </form>
         </div>
@@ -118,13 +118,13 @@ $result = $stmt->execute();
             <?php while ($stmt->fetch()) { ?>
               <div class="forms">
                 <div class="form_title2">
-                  <a href="recipe.php?id=<?php echo $recipe_id; ?>"><?php echo h($recipename); ?></a>
+                  <a href="../recipe/recipe.php?id=<?php echo $recipe_id; ?>"><?php echo h($recipename); ?></a>
                 </div>
                 <div class="form_title2">
                   <time><?php echo h($created); ?></time><br>
                 </div>
                 <div class="form_title2">
-                  <a href="recipe.php?id=<?php echo $recipe_id; ?>"><img src="recipe_picture/<?php echo h($image); ?>"></a>
+                  <a href="../recipe/recipe.php?id=<?php echo $recipe_id; ?>"><img src="../recipe_picture/<?php echo h($image); ?>"></a>
                 </div>
             <?php $count+=1; ?>
               </div>
