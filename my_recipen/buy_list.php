@@ -100,7 +100,7 @@ if (!$lists) {
             <?php while ($list = $lists->fetch_assoc()) { ?>
               <div class="forms">
                 <div class="form_title2">
-                  <pre><a href="recipe.php?id=<?php echo $list['recipe_d_id']; ?>"><?php echo h($list['product']); ?></a></pre>
+                  <pre><a href="../recipe/recipe.php?id=<?php echo $list['recipe_d_id']; ?>"><?php echo h($list['product']); ?></a></pre>
                 </div>
                 <?php $count+=1; ?>
               </div>
