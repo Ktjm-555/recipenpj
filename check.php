@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require('./library.php');
 
 if (isset($_SESSION['form'])) {
   $form = $_SESSION['form'];
