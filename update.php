@@ -125,7 +125,7 @@ if ($user_id == $recipe_member_id) {
       <h1 class="title">Recipen 投稿画面</h1>
       <nav class="nav">
         <div class="button5">
-          <form action="toppage.php" method="post">
+          <form action="index.php" method="post">
             <button type="submit">TOPページに戻る</button>
           </form>
         </div>

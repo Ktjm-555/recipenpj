@@ -19,7 +19,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
 if (isset($_SESSION['form'])) { 
   $form = $_SESSION['form'];
 } else {
-  header('Location: toppage.php');
+  header('Location: index.php');
   exit();
 }
 $db = dbconnect();

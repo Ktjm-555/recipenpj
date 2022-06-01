@@ -10,7 +10,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
   $name    = $_SESSION['name'];
   $aisatsu = 'doumo';
 } else {
-  header('Location: toppage.php');
+  header('Location: index.php');
   exit();
 }
 
@@ -82,7 +82,7 @@ if (!$lists) {
           </form>
         </div>
         <div class="button5">
-          <form action="toppage.php" method="post" >
+          <form action="./index.php" method="post" >
             <button type="submit"> 
               TOPページに戻る
             </button>

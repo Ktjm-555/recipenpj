@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					</form>
 				</div>
 				<div class="button5">
-					<form action="../toppage.php" method="post">
+					<form action="../index.php" method="post">
 						<button type="submit">TOPページに戻る</button>
 					</form>
 				</div>

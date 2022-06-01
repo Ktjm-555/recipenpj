@@ -7,7 +7,7 @@ $email = '';
 $password = '';
 
 if (isset($_SESSION['user_id']) && isset($_SESSION['name'])) {
-  header('Location: toppage.php');
+  header('Location: index.php');
   exit();
 } 
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {
       session_regenerate_id(); // Point セッションidを再発行して、乗っ取りを防ぐ。
       $_SESSION['user_id'] = $user_id;
       $_SESSION['name'] = $name;
-      header('Location: toppage.php');
+      header('Location: index.php');
       exit();
     } else {
       $error['login'] = 'failed';
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == "1") {
       <h1 class="title">Recipen ログイン</h1>
       <nav class="nav">
         <div class="button5">
-          <form action="toppage.php" method="post">
+          <form action="index.php" method="post">
             <button type="submit">TOPページに戻る</button>
           </form>
         </div>
