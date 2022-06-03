@@ -39,7 +39,7 @@ $count = $counts->fetch_assoc();
 $sql = "
   SELECT 
     distinct 
-    product, recipe_d_id 
+    * 
   FROM 
     buy 
   WHERE 
@@ -101,6 +101,11 @@ if (!$lists) {
               <div class="forms">
                 <div class="form_title2">
                   <pre><a href="../recipe/recipe.php?id=<?php echo $list['recipe_d_id']; ?>"><?php echo h($list['product']); ?></a></pre>
+                  <form action="buy_delete.php" method="post">
+                    <input type="hidden" name="buy_u_id" value="<?php echo $list['buy_u_id']; ?>">
+                    <input type="hidden" name="buy_id" value="<?php echo $list['id']; ?>">
+                    <button type="submit">削除</button>
+								  </form>
                 </div>
                 <?php $count+=1; ?>
               </div>
