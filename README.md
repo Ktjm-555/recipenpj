@@ -6,7 +6,7 @@
 # DEMO
 <img width="1438" alt="スクリーンショット 2022-05-25 17 24 54" src="https://user-images.githubusercontent.com/102650893/170217239-4ba25686-8a38-4638-88bb-3f347a2f1be9.png">
 
-* https://temp-application.herokuapp.com/(ダミー)
+* https://recipenpj.herokuapp.com/
 
 # アプリを作った理由
 毎週、休日のタイミングで夕ご飯を考えることがレパートリーも少なく、憂鬱に感じていました。
